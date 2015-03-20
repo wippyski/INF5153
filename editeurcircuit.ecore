@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="editeurcircuit" nsURI="http://www.example.org/editeurcircuit"
+    nsPrefix="editeurcircuit">
+  <eClassifiers xsi:type="ecore:EClass" name="Circuit">
+    <eOperations name="AjouterPorte"/>
+    <eOperations name="Valider"/>
+    <eOperations name="SupprimerPorte"/>
+    <eOperations name="AjouterSignal"/>
+    <eOperations name="SupprimerSignal"/>
+    <eOperations name="Fermer"/>
+    <eOperations name="Sauvegarder"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Valide" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Sauvegarder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="estDefinitPar" lowerBound="2"
+        upperBound="10" eType="#//Signal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="estCompose" upperBound="50"
+        eType="#//Porte" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Signal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//TypeSignal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Lien" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeSignal">
+    <eLiterals name="Entree" literal="ENTREE"/>
+    <eLiterals name="Sortie" literal="SORTIE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Porte">
+    <eOperations name="Ajouter"/>
+    <eOperations name="Supprimer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Porte_AND" eSuperTypes="#//Porte">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Entree1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Entree2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Sortie1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Porte_OR" eSuperTypes="#//Porte">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Entree1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Entree2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Sortie1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Porte_NOT" eSuperTypes="#//Porte">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Entree1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Sortie1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EditeurCircuit">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="affiche" eType="#//Circuit"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
