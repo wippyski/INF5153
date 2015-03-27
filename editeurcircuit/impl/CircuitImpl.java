@@ -128,6 +128,15 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 	 */
 	protected CircuitImpl() {
 		super();
+		
+		//Définition des listes
+		estDefinitPar = new EObjectContainmentEList<Signal>(Signal.class, this, EditeurcircuitPackage.CIRCUIT__EST_DEFINIT_PAR);
+		estCompose = new EObjectContainmentEList<Porte>(Porte.class, this, EditeurcircuitPackage.CIRCUIT__EST_COMPOSE);
+		
+		//Ajout des signals réglementaires
+		AjouterSignal(TypeSignal.ENTREE);
+		AjouterSignal(TypeSignal.ENTREE);
+		AjouterSignal(TypeSignal.SORTIE);
 	}
 
 	/**
@@ -298,12 +307,28 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void AjouterSignal(TypeSignal p_typeSignal) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+				
+				
+				
+		Signal v_SignalToAdd = EditeurcircuitFactory.eINSTANCE.createSignal();
+				
+		//SignalImpl.ID_EDEFAULT = SignalImpl.ID_EDEFAULT + 1; 
+				
+		v_SignalToAdd.setID(SignalImpl.ID_EDEFAULT);
+		v_SignalToAdd.setType(p_typeSignal);
+				
+		if(p_typeSignal == TypeSignal.ENTREE)
+				v_SignalToAdd.setNom("E"+v_SignalToAdd.getID());
+		else
+				v_SignalToAdd.setNom("S"+v_SignalToAdd.getID());
+			
+		estDefinitPar.add(v_SignalToAdd);
 	}
 
 	/**
