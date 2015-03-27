@@ -128,7 +128,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CircuitImpl() {
 		super();
@@ -339,7 +339,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void SupprimerSignal(int p_ID) {
 		
