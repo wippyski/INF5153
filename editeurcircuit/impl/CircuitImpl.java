@@ -41,6 +41,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit {
+	
+	private static int PORTE_COMPTEUR;
+	
 	/**
 	 * The default value of the '{@link #isValide() <em>Valide</em>}' attribute.
 	 * <!-- begin-user-doc -->
