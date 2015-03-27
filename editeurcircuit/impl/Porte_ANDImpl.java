@@ -94,6 +94,10 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 */
 	protected Porte_ANDImpl() {
 		super();
+		
+		entree1 = -1;
+		entree2 = -1;
+		sortie1 = -1; 
 	}
 
 	/**

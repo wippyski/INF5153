@@ -73,6 +73,9 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 */
 	protected Porte_NOTImpl() {
 		super();
+		
+		entree1 = -1;
+		sortie1 = -1; 
 	}
 
 	/**
@@ -92,6 +95,7 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 */
 	public int getEntree1() {
 		return entree1;
+	
 	}
 
 	/**

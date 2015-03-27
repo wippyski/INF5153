@@ -94,6 +94,10 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	 */
 	protected Porte_ORImpl() {
 		super();
+		
+		entree1 = -1;
+		entree2 = -1; 
+		sortie1 = -1; 
 	}
 
 	/**
