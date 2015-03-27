@@ -12,6 +12,7 @@ import editeurcircuit.TypeSignal;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -341,9 +342,14 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 	 * @generated
 	 */
 	public void SupprimerSignal(int p_ID) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		
+		for (Iterator<Signal> iter = estDefinitPar.listIterator(); iter.hasNext(); ) {
+		    Signal s = iter.next();
+		    if (s.getID() == p_ID) {
+		        iter.remove();
+		    }
+		}
+		//throw new UnsupportedOperationException();
 	}
 
 	/**
