@@ -3,6 +3,7 @@
 package editeurcircuit.impl;
 
 import editeurcircuit.Circuit;
+import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte;
 import editeurcircuit.Signal;
@@ -10,20 +11,15 @@ import editeurcircuit.TypePorte;
 import editeurcircuit.TypeSignal;
 
 import java.lang.reflect.InvocationTargetException;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -236,10 +232,45 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void AjouterPorte(TypePorte p_typePorte) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void AjouterPorte(TypePorte typePorte) {
+		if (this.getEstCompose().size() < 50) {
+			switch (typePorte) {
+			case AND:
+				Porte v_porte_and = EditeurcircuitFactory.eINSTANCE
+						.createPorte_AND();
+				v_porte_and.setID(PORTE_COMPTEUR);
+				v_porte_and.setNom("P_AND" + PORTE_COMPTEUR);
+				estCompose.add(v_porte_and);
+				PORTE_COMPTEUR++;
+				// System.out.println(v_porte_and.getNom());
+				break;
+			case OR:
+				Porte v_porte_or = EditeurcircuitFactory.eINSTANCE
+						.createPorte_OR();
+				v_porte_or.setID(PORTE_COMPTEUR);
+				v_porte_or.setNom("P_OR" + PORTE_COMPTEUR);
+				estCompose.add(v_porte_or);
+				PORTE_COMPTEUR++;
+				// System.out.println(v_porte_or.getNom());
+				break;
+			case NOT:
+				Porte v_porte_not = EditeurcircuitFactory.eINSTANCE
+						.createPorte_NOT();
+				v_porte_not.setID(PORTE_COMPTEUR);
+				v_porte_not.setNom("P_NOT" + PORTE_COMPTEUR);
+				estCompose.add(v_porte_not);
+				PORTE_COMPTEUR++;
+				// System.out.println(v_porte_not.getNom());
+				break;
+			}
+		} else {
+			System.out.println("Limite de portes atteintes.");
+		}
 	}
 
 	/**
