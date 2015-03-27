@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit {
 	
-	private static int PORTE_COMPTEUR;
+	private static int PORTE_COMPTEUR = 0;
 	
 	/**
 	 * The default value of the '{@link #isValide() <em>Valide</em>}' attribute.
@@ -321,8 +321,9 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 				
 		Signal v_SignalToAdd = EditeurcircuitFactory.eINSTANCE.createSignal();
 				
-		//SignalImpl.ID_EDEFAULT = SignalImpl.ID_EDEFAULT + 1; 
-				
+		v_SignalToAdd.setID(PORTE_COMPTEUR); 
+		PORTE_COMPTEUR++;
+		
 		v_SignalToAdd.setID(SignalImpl.ID_EDEFAULT);
 		v_SignalToAdd.setType(p_typeSignal);
 				
