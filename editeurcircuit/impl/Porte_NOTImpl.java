@@ -4,11 +4,8 @@ package editeurcircuit.impl;
 
 import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte_NOT;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -34,7 +31,7 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ENTREE1_EDEFAULT = 0;
+	protected static final int ENTREE1_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
@@ -54,7 +51,7 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SORTIE1_EDEFAULT = 0;
+	protected static final int SORTIE1_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getSortie1() <em>Sortie1</em>}' attribute.
@@ -73,9 +70,6 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 */
 	protected Porte_NOTImpl() {
 		super();
-		
-		entree1 = -1;
-		sortie1 = -1; 
 	}
 
 	/**
@@ -95,7 +89,6 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 */
 	public int getEntree1() {
 		return entree1;
-	
 	}
 
 	/**

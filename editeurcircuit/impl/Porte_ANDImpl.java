@@ -4,11 +4,8 @@ package editeurcircuit.impl;
 
 import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte_AND;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -35,7 +32,7 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ENTREE1_EDEFAULT = 0;
+	protected static final int ENTREE1_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
@@ -55,7 +52,7 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ENTREE2_EDEFAULT = 0;
+	protected static final int ENTREE2_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getEntree2() <em>Entree2</em>}' attribute.
@@ -75,7 +72,7 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SORTIE1_EDEFAULT = 0;
+	protected static final int SORTIE1_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getSortie1() <em>Sortie1</em>}' attribute.
@@ -94,10 +91,6 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 */
 	protected Porte_ANDImpl() {
 		super();
-		
-		entree1 = -1;
-		entree2 = -1;
-		sortie1 = -1; 
 	}
 
 	/**
