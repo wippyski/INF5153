@@ -317,23 +317,54 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		//throw new UnsupportedOperationException();
-				
-				
-				
-		Signal v_SignalToAdd = EditeurcircuitFactory.eINSTANCE.createSignal();
-				
-		v_SignalToAdd.setID(PORTE_COMPTEUR); 
-		PORTE_COMPTEUR++;
 		
-		v_SignalToAdd.setID(SignalImpl.ID_EDEFAULT);
-		v_SignalToAdd.setType(p_typeSignal);
-				
-		if(p_typeSignal == TypeSignal.ENTREE)
-				v_SignalToAdd.setNom("E"+v_SignalToAdd.getID());
-		else
-				v_SignalToAdd.setNom("S"+v_SignalToAdd.getID());
+		int v_nb_entree = 0;
+		int v_nb_sortie = 0; 
+		
+		for(Signal s : estDefinitPar){
+		
+			if(s.getType() == TypeSignal.ENTREE){
+				v_nb_entree++; 
+			} else if(s.getType() == TypeSignal.SORTIE){
+				v_nb_sortie++; 
+			} else {
+				System.out.println("ERREUR : Un signal a un type indéfini !");
+			}
 			
-		estDefinitPar.add(v_SignalToAdd);
+		}
+				
+		//Creation d'un signal entree
+		if(p_typeSignal == TypeSignal.ENTREE && v_nb_entree < 5){	
+			Signal v_SignalToAdd = EditeurcircuitFactory.eINSTANCE.createSignal();
+					
+			v_SignalToAdd.setID(PORTE_COMPTEUR); 
+			PORTE_COMPTEUR++;
+			
+			v_SignalToAdd.setType(TypeSignal.ENTREE);
+
+			v_SignalToAdd.setNom("E"+v_SignalToAdd.getID());
+
+			estDefinitPar.add(v_SignalToAdd);
+		}
+		//Creation d'un signal sortie
+		else if(p_typeSignal == TypeSignal.SORTIE && v_nb_sortie < 5){	
+			Signal v_SignalToAdd = EditeurcircuitFactory.eINSTANCE.createSignal();
+					
+			v_SignalToAdd.setID(PORTE_COMPTEUR); 
+			PORTE_COMPTEUR++;
+			
+			v_SignalToAdd.setType(TypeSignal.SORTIE);
+
+			v_SignalToAdd.setNom("S"+v_SignalToAdd.getID());
+
+			estDefinitPar.add(v_SignalToAdd);
+		} else {
+			
+			if(v_nb_sortie >= 5)
+				System.out.println("ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
+			if(v_nb_entree >= 5)
+				System.out.println("ERREUR : Nombre d'entrees limite atteint. L'ajout d'une entree est annulée.");
+		}
 	}
 
 	/**
