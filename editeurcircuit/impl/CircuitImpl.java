@@ -746,8 +746,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 		patternAND = Pattern.compile("(AND)");
 		patternOR = Pattern.compile("(OR)");
 		patternNOT = Pattern.compile("(NOT)");
-		patternEntree = Pattern.compile("(Entree)");
-		patternSortie = Pattern.compile("(Sortie)");
+		patternEntree = Pattern.compile("(E)");
+		patternSortie = Pattern.compile("(S)");
 		Matcher matcher;
 
 		matcher = patternAND.matcher(p_Nom);
