@@ -376,6 +376,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 
 			}
 		}
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
