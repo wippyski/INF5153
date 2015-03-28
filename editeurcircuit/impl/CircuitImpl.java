@@ -321,6 +321,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 		int v_nb_entree = 0;
 		int v_nb_sortie = 0; 
 		
+		//Comptage du nombre de signal Entree et Sortie
 		for(Signal s : estDefinitPar){
 		
 			if(s.getType() == TypeSignal.ENTREE){
@@ -358,7 +359,9 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 			v_SignalToAdd.setNom("S"+v_SignalToAdd.getID());
 
 			estDefinitPar.add(v_SignalToAdd);
-		} else {
+		}
+		// ERREUR : Il existe déjà 5 signal de type p_typeSignal
+		else {
 			
 			if(v_nb_sortie >= 5)
 				System.out.println("ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
