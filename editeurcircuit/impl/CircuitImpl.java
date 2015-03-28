@@ -6,13 +6,18 @@ import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte;
+import editeurcircuit.Porte_AND;
 import editeurcircuit.Signal;
 import editeurcircuit.TypePorte;
 import editeurcircuit.TypeSignal;
+import editeurcircuit.impl.Porte_NOTImpl;
+import editeurcircuit.impl.Porte_ORImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -254,31 +259,30 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 		if (this.getEstCompose().size() < 50) {
 			switch (typePorte) {
 			case AND:
+				PORTE_COMPTEUR++;	
 				Porte v_porte_and = EditeurcircuitFactory.eINSTANCE
 						.createPorte_AND();
 				v_porte_and.setID(PORTE_COMPTEUR);
 				v_porte_and.setNom("P_AND" + PORTE_COMPTEUR);
 				estCompose.add(v_porte_and);
-				PORTE_COMPTEUR++;
-				// System.out.println(v_porte_and.getNom());
+							
 				break;
 			case OR:
+				PORTE_COMPTEUR++;	
 				Porte v_porte_or = EditeurcircuitFactory.eINSTANCE
 						.createPorte_OR();
 				v_porte_or.setID(PORTE_COMPTEUR);
 				v_porte_or.setNom("P_OR" + PORTE_COMPTEUR);
 				estCompose.add(v_porte_or);
-				PORTE_COMPTEUR++;
-				// System.out.println(v_porte_or.getNom());
-				break;
+				
 			case NOT:
+				PORTE_COMPTEUR++;	
 				Porte v_porte_not = EditeurcircuitFactory.eINSTANCE
 						.createPorte_NOT();
 				v_porte_not.setID(PORTE_COMPTEUR);
 				v_porte_not.setNom("P_NOT" + PORTE_COMPTEUR);
 				estCompose.add(v_porte_not);
-				PORTE_COMPTEUR++;
-				// System.out.println(v_porte_not.getNom());
+				
 				break;
 			}
 		} else {
@@ -564,4 +568,234 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements Circuit
 		return result.toString();
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+
+	public void ajouterLien(String p_Gauche, String p_Droite) {
+		int type_gauche = this.getTypeObjet(p_Gauche);
+		int type_droite = this.getTypeObjet(p_Droite);
+
+		// Entree - Sortie
+		if ((type_gauche == 4) && (type_droite == 5)) {
+			Signal signal_gauche = (Signal) this
+					.RechercherSignalParNom(p_Gauche);
+			Signal signal_droite = (Signal) this
+					.RechercherSignalParNom(p_Droite);
+			signal_gauche.setLien(signal_droite.getID());
+			signal_droite.setLien(signal_gauche.getID());
+		}
+
+		// Entree - Porte
+		if ((type_gauche == 4)
+				&& ((type_droite == 1) || (type_droite == 2) || (type_droite == 3))) {
+			Signal signal_gauche = (Signal) this
+					.RechercherSignalParNom(p_Gauche);
+
+			switch (type_droite) {
+			case (3):
+				Porte_NOTImpl porte_droite_not = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Droite);
+				porte_droite_not.setEntree1(signal_gauche.getID());
+				break;
+			case (2):
+				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Droite);
+				porte_droite_or.setEntree1(signal_gauche.getID());
+				if (porte_droite_or.getEntree1() != 0) {
+					porte_droite_or.setEntree2(signal_gauche.getID());
+				} else {
+					porte_droite_or.setEntree1(signal_gauche.getID());
+				}
+				break;
+			case (1):
+				Porte_AND porte_droite_and = (Porte_AND) this
+						.RechercherPorteParNom(p_Droite);
+				porte_droite_and.setEntree1(signal_gauche.getID());
+				if (porte_droite_and.getEntree1() != 0) {
+					porte_droite_and.setEntree2(signal_gauche.getID());
+				} else {
+					porte_droite_and.setEntree1(signal_gauche.getID());
+				}
+				break;
+			}
+
+			Porte porte_droite = this.RechercherPorteParNom(p_Gauche);
+			signal_gauche.setLien(porte_droite.getID());
+
+		}
+
+		// Porte - Porte
+		if (((type_gauche == 1) || (type_gauche == 2) || (type_gauche == 3))
+				&& ((type_droite == 1) || (type_droite == 2) || (type_droite == 3))) {
+			Porte porte_gauche = this.RechercherPorteParNom(p_Gauche);
+
+			switch (type_droite) {
+			case (3):
+				Porte_NOTImpl porte_droite_not = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Droite);
+				porte_droite_not.setEntree1(porte_gauche.getID());
+				break;
+			case (2):
+				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Droite);
+				if (porte_droite_or.getEntree1() != 0) {
+					porte_droite_or.setEntree2(porte_gauche.getID());
+				} else {
+					porte_droite_or.setEntree1(porte_gauche.getID());
+				}
+				break;
+			case (1):
+				Porte_AND porte_droite_and = (Porte_AND) this
+						.RechercherPorteParNom(p_Droite);
+				if (porte_droite_and.getEntree1() != 0) {
+					porte_droite_and.setEntree2(porte_gauche.getID());
+				} else {
+					porte_droite_and.setEntree1(porte_gauche.getID());
+				}
+				break;
+			}
+
+			if ((type_gauche == 1)) {
+				Porte_AND porte_gauche1 = (Porte_AND) this
+						.RechercherPorteParNom(p_Gauche);
+				Porte porte_droite = this.RechercherPorteParNom(p_Droite);
+				porte_gauche1.setSortie1(porte_droite.getID());
+			}
+
+			if ((type_gauche == 2)) {
+				Porte_ORImpl porte_gauche1 = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Gauche);
+				Porte porte_droite = this.RechercherPorteParNom(p_Droite);
+				porte_gauche1.setSortie1(porte_droite.getID());
+			}
+
+			if ((type_gauche == 3)) {
+				Porte_NOTImpl porte_gauche1 = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Gauche);
+				Porte porte_droite = this.RechercherPorteParNom(p_Droite);
+				porte_gauche1.setSortie1(porte_droite.getID());
+			}
+		}
+
+		// Porte - Sortie
+		if (((type_gauche == 1) || (type_gauche == 2) || (type_gauche == 3))
+				&& (type_droite == 5)) {
+
+			Porte_AND porte_gauche = (Porte_AND) this
+					.RechercherPorteParNom(p_Gauche);
+			Signal signal_droite = (Signal) this
+					.RechercherSignalParNom(p_Droite);
+			porte_gauche.setSortie1(signal_droite.getID());
+			signal_droite.setLien(porte_gauche.getID());
+		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Porte RechercherPorteParID(int p_ID) {
+		for (int i = 0; i <= this.getEstCompose().size(); i++) {
+			if (this.getEstCompose().get(i).getID() == p_ID) {
+				return this.getEstCompose().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Porte RechercherPorteParNom(String p_Nom) {
+		for (int i = 0; i <= this.getEstCompose().size(); i++) {
+			if (this.getEstCompose().get(i).getNom().equals(p_Nom)) {
+				return this.getEstCompose().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Signal RechercherSignalParNom(String p_Nom) {
+		for (int i = 0; i <= this.getEstDefinitPar().size(); i++) {
+			if (this.getEstDefinitPar().get(i).getNom().equals(p_Nom)) {
+				return this.getEstDefinitPar().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public int getTypeObjet(String p_Nom) {
+		Pattern patternAND, patternOR, patternNOT, patternEntree, patternSortie;
+		patternAND = Pattern.compile("(AND)");
+		patternOR = Pattern.compile("(OR)");
+		patternNOT = Pattern.compile("(NOT)");
+		patternEntree = Pattern.compile("(Entree)");
+		patternSortie = Pattern.compile("(Sortie)");
+		Matcher matcher;
+
+		matcher = patternAND.matcher(p_Nom);
+		if (matcher.find()) {
+			return 1;
+		}
+		matcher = patternOR.matcher(p_Nom);
+		if (matcher.find()) {
+			return 2;
+		}
+		matcher = patternNOT.matcher(p_Nom);
+		if (matcher.find()) {
+			return 3;
+		}
+		matcher = patternEntree.matcher(p_Nom);
+		if (matcher.find()) {
+			return 4;
+		}
+		matcher = patternSortie.matcher(p_Nom);
+		if (matcher.find()) {
+			return 5;
+		}
+		return -1;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 } //CircuitImpl
