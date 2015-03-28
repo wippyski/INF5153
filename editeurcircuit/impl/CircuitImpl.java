@@ -376,6 +376,13 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 
 			}
 		}
+		// Suppression de la porte
+		for (Iterator<Porte> iter = estCompose.listIterator(); iter.hasNext();) {
+			Porte p = iter.next();
+			if (p.getID() == p_ID) {
+				iter.remove();
+			}
+		}
 	}
 
 	/**
