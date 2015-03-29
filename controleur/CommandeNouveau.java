@@ -1,4 +1,4 @@
-package editeurcircuit.vue;
+package controleur;
 
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
@@ -15,7 +15,7 @@ public class CommandeNouveau implements Commande{
 	@Override
 	public void execute() {
 		if(circuit.isSauvegarder()){
-			EditeurVue.v_circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
+			circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
 		} else {
 			System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
 		}		

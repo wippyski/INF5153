@@ -1,4 +1,4 @@
-package editeurcircuit.vue;
+package controleur;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class CommandeCharger implements Commande {
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 		  File file = fc.getSelectedFile();			  
 		  circuit = loadCircuit(file.getName());
-		  EditeurVue.v_circuit = circuit;
+		  //EditeurVue.v_circuit = circuit;
 		}			
 	}
 	

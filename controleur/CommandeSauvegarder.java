@@ -1,4 +1,4 @@
-package editeurcircuit.vue;
+package controleur;
 
 
 import java.io.File;

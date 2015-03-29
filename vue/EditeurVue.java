@@ -1,4 +1,4 @@
-package editeurcircuit.vue;
+package vue;
 
 /*    UQAM / Département d'informatique                           *
  *    INF5153 - Gr10  											  *
@@ -30,6 +30,9 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+
+
+import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;

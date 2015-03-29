@@ -1,4 +1,4 @@
-package editeurcircuit.vue;
+package controleur;
 
 
 public interface Commande {
