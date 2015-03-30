@@ -143,6 +143,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	protected CircuitImpl() {
 		super();
 
+		PORTE_COMPTEUR = 0; 
+		
 		// Définition des listes
 		estDefinitPar = new EObjectContainmentEList<Signal>(Signal.class, this,
 				EditeurcircuitPackage.CIRCUIT__EST_DEFINIT_PAR);

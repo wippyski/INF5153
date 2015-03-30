@@ -17,10 +17,18 @@ public class CommandeNouveau implements Commande{
 	public void execute() {
 		if(circuit.isSauvegarder()){
 			circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
-			circuit.setSauvegarder(true);				
+			circuit.setSauvegarder(true);	
+			System.out.println("Test");
 		} else {
 			System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
 		}		
 	}
 	
+	public Circuit execute2() {
+			circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
+			circuit.setSauvegarder(true);	
+			System.out.println("Test");
+			
+			return circuit; 
+	}
 }

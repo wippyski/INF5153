@@ -33,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
@@ -110,9 +111,17 @@ public class EditeurVue extends JFrame implements Serializable {
 		mnFichier.add(mntmNouveauCircuit);
 		mntmNouveauCircuit.addActionListener( new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
-				Commande command8 = new CommandeNouveau(v_circuit);
-				command8.execute();	
+			public void actionPerformed(ActionEvent e) {	
+				
+				if(v_circuit.isSauvegarder()){
+					CommandeNouveau command8 = new CommandeNouveau(v_circuit);
+					v_circuit = command8.execute2();
+					
+					updateScrollList(myCombo); 
+				} else {
+					System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
+					
+				}		
 			}
 
 		}
@@ -291,6 +300,23 @@ public class EditeurVue extends JFrame implements Serializable {
 			    	table.getColumn("Source").setCellEditor(new DefaultCellEditor(myCombo));
 				    
 				    scrollPane.setViewportView(table);
+	}
+	
+	void updateScrollList(JComboBox<String> p_myCombo){
+		
+		p_myCombo.removeAllItems();
+		
+		for(int i = 0; i < v_circuit.getEstCompose().size(); ++i){
+		
+			p_myCombo.addItem(v_circuit.getEstCompose().get(i).getNom()); 
+		}
+		
+		for(int i = 0; i < v_circuit.getEstDefinitPar().size(); ++i){
+			
+			p_myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom()); 
+		}
+	
+	
 	}
 
 }
