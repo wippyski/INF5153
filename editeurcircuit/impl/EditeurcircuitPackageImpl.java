@@ -205,6 +205,15 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCircuit_PORTE_COMPTEUR() {
+		return (EAttribute)circuitEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getCircuit__AjouterPorte__TypePorte() {
 		return circuitEClass.getEOperations().get(0);
 	}
@@ -486,6 +495,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		createEReference(circuitEClass, CIRCUIT__EST_DEFINIT_PAR);
 		createEReference(circuitEClass, CIRCUIT__EST_COMPOSE);
 		createEAttribute(circuitEClass, CIRCUIT__ID);
+		createEAttribute(circuitEClass, CIRCUIT__PORTE_COMPTEUR);
 		createEOperation(circuitEClass, CIRCUIT___AJOUTER_PORTE__TYPEPORTE);
 		createEOperation(circuitEClass, CIRCUIT___VALIDER);
 		createEOperation(circuitEClass, CIRCUIT___SUPPRIMER_PORTE__INT);
@@ -562,6 +572,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		initEReference(getCircuit_EstDefinitPar(), this.getSignal(), null, "estDefinitPar", null, 0, 10, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCircuit_EstCompose(), this.getPorte(), null, "estCompose", null, 0, 50, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCircuit_ID(), ecorePackage.getEInt(), "ID", null, 0, 1, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCircuit_PORTE_COMPTEUR(), ecorePackage.getEInt(), "PORTE_COMPTEUR", "0", 0, 1, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getCircuit__AjouterPorte__TypePorte(), null, "AjouterPorte", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getTypePorte(), "p_typePorte", 0, 1, IS_UNIQUE, IS_ORDERED);

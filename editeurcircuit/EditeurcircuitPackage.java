@@ -114,13 +114,22 @@ public interface EditeurcircuitPackage extends EPackage {
 	int CIRCUIT__ID = 4;
 
 	/**
+	 * The feature id for the '<em><b>PORTE COMPTEUR</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CIRCUIT__PORTE_COMPTEUR = 5;
+
+	/**
 	 * The number of structural features of the '<em>Circuit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CIRCUIT_FEATURE_COUNT = 5;
+	int CIRCUIT_FEATURE_COUNT = 6;
 
 	/**
 	 * The operation id for the '<em>Ajouter Porte</em>' operation.
@@ -628,6 +637,17 @@ public interface EditeurcircuitPackage extends EPackage {
 	EAttribute getCircuit_ID();
 
 	/**
+	 * Returns the meta object for the attribute '{@link editeurcircuit.Circuit#getPORTE_COMPTEUR <em>PORTE COMPTEUR</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>PORTE COMPTEUR</em>'.
+	 * @see editeurcircuit.Circuit#getPORTE_COMPTEUR()
+	 * @see #getCircuit()
+	 * @generated
+	 */
+	EAttribute getCircuit_PORTE_COMPTEUR();
+
+	/**
 	 * Returns the meta object for the '{@link editeurcircuit.Circuit#AjouterPorte(editeurcircuit.TypePorte) <em>Ajouter Porte</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -993,6 +1013,14 @@ public interface EditeurcircuitPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CIRCUIT__ID = eINSTANCE.getCircuit_ID();
+
+		/**
+		 * The meta object literal for the '<em><b>PORTE COMPTEUR</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CIRCUIT__PORTE_COMPTEUR = eINSTANCE.getCircuit_PORTE_COMPTEUR();
 
 		/**
 		 * The meta object literal for the '<em><b>Ajouter Porte</b></em>' operation.

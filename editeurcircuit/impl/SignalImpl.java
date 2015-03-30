@@ -117,9 +117,6 @@ public class SignalImpl extends MinimalEObjectImpl.Container implements Signal {
 	 */
 	protected SignalImpl() {
 		super();
-		
-		//Aucun lien à la création
-		lien = -1; 
 	}
 
 	/**
