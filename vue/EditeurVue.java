@@ -50,7 +50,8 @@ public class EditeurVue extends JFrame implements Serializable {
 	private JFrame frmEditeurDeCircuit;
 	private JTable table;	
 	
-	public Circuit v_circuit;	
+	public Circuit v_circuit;
+	JComboBox<String> myCombo = new JComboBox<String> ();
 
 
 	/**
@@ -178,7 +179,8 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {
 					Commande command1 = new CommandeAjouterEntree(v_circuit);								
-					command1.execute();				
+					command1.execute();	
+					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 
 			}
 
@@ -193,7 +195,8 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {
 					Commande command2 = new CommandeAjouterSortie(v_circuit);								
-					command2.execute();					
+					command2.execute();	
+					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 
 			}
 
@@ -213,8 +216,8 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {
 					Commande command3 = new CommandeAjouterPorteAnd(v_circuit);								
-					command3.execute();				
-
+					command3.execute();		
+					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 			}
 
 		}
@@ -228,8 +231,8 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {
 					Commande command4 = new CommandeAjouterPorteOr(v_circuit);								
-					command4.execute();					
-
+					command4.execute();	
+					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 			}
 
 		}
@@ -244,7 +247,7 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 					Commande command5 = new CommandeAjouterPorteNot(v_circuit);								
 					command5.execute();
-
+					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 			}
 
 		}
@@ -275,12 +278,15 @@ public class EditeurVue extends JFrame implements Serializable {
 				    		"Source", "Destination"
 				    	}
 				    ));
-				    JComboBox<String> myCombo = new JComboBox<String> ();
+				    //JComboBox<String> myCombo = new JComboBox<String> ();
 				    //pour test seulement
-			    	myCombo.addItem(v_circuit.getEstDefinitPar().get(0).getNom());			    	
-			    	myCombo.addItem(v_circuit.getEstDefinitPar().get(1).getNom());
-			    	myCombo.addItem(v_circuit.getEstDefinitPar().get(2).getNom());
-			    	//v_circuit.getEstCompose();
+				    for(int i = 0; i < v_circuit.getEstDefinitPar().size() ; ++i) {
+				    	myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom());
+				    }
+				    for(int i = 0; i < v_circuit.getEstCompose().size() ; ++i) {
+				    	myCombo.addItem(v_circuit.getEstCompose().get(i).getNom());
+				    }			    	
+			    	
 			    	table.getColumn("Destination").setCellEditor(new DefaultCellEditor(myCombo));
 			    	table.getColumn("Source").setCellEditor(new DefaultCellEditor(myCombo));
 				    
