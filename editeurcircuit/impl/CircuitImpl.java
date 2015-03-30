@@ -702,7 +702,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			case (2):
 				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
 						.RechercherPorteParNom(p_Droite);
-				porte_droite_or.setEntree1(signal_gauche.getID());
 				if (porte_droite_or.getEntree1() != -1) {
 					porte_droite_or.setEntree2(signal_gauche.getID());
 				} else {
@@ -712,7 +711,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			case (1):
 				Porte_AND porte_droite_and = (Porte_AND) this
 						.RechercherPorteParNom(p_Droite);
-				porte_droite_and.setEntree1(signal_gauche.getID());
 				if (porte_droite_and.getEntree1() != -1) {
 					porte_droite_and.setEntree2(signal_gauche.getID());
 				} else {
