@@ -37,10 +37,13 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
+
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;
+import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
 
 
@@ -144,6 +147,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					CommandeCharger command7 = new CommandeCharger(v_circuit);
 					v_circuit = command7.execute2(file);	
 					
+					
+					
 					updateScrollList(myCombo);
 				}			
 
@@ -197,14 +202,26 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterEntree.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				int v_nb_entree = 0;
+
+				// Comptage du nombre de signal Entree
+				for (Signal s : v_circuit.getEstDefinitPar()) {
+
+					if (s.getType() == TypeSignal.ENTREE)
+						v_nb_entree++;
+				}
+				
+				if(v_nb_entree < 5 ){
 					Commande command1 = new CommandeAjouterEntree(v_circuit);								
 					command1.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
+				} else {
+					System.out.println("ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
+				}
 
 			}
-
-		}
-		);
+		});
 		
 		//Bouton Ajouter Sortie
 		JButton btnAjouterSortie = new JButton("Ajouter Sortie");
@@ -213,10 +230,23 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterSortie.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				int v_nb_sortie = 0;
+
+				// Comptage du nombre de signal Sortie
+				for (Signal s : v_circuit.getEstDefinitPar()) {
+
+					if (s.getType() == TypeSignal.SORTIE)
+						v_nb_sortie++;
+				}
+				
+				if(v_nb_sortie < 5){
 					Commande command2 = new CommandeAjouterSortie(v_circuit);								
 					command2.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
-
+				} else {
+					System.out.println("ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
+				}
 			}
 
 		}
@@ -234,13 +264,17 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPorteAnd.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				if(v_circuit.getEstCompose().size() < 50){
 					Commande command3 = new CommandeAjouterPorteAnd(v_circuit);								
 					command3.execute();		
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
-			}
+				} else {
+					System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+				}
 
 		}
-		);
+		});
 		
 		//Bouton Ajouter Porte OR
 		JButton btnAjouterPorteOr = new JButton("Ajouter Porte OR");
