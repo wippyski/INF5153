@@ -314,15 +314,23 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnSupprimerPorte.setBounds(500, 203, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnSupprimerPorte);
 		
+		
 		JButton btnAjouterPortePerso = new JButton("Ajouter Porte Personnalis\u00E9e");
 		btnAjouterPortePerso.setBounds(500, 181, 178, 23);
 		btnAjouterPortePerso.setEnabled(false);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterPortePerso);
 		
-		JButton btnCalculerTable = new JButton("Calculer Table de v\u00E9rit\u00E9");
-		btnCalculerTable.setBounds(500, 245, 178, 23);
-		btnCalculerTable.setEnabled(false);
-		frmEditeurDeCircuit.getContentPane().add(btnCalculerTable);
+		JButton btnMiseAJour = new JButton("Mise a jour des liens");
+		btnMiseAJour.setBounds(500, 245, 178, 23);		
+		frmEditeurDeCircuit.getContentPane().add(btnMiseAJour);
+		btnMiseAJour.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+					faireLesLiens();
+			}
+
+		}
+		);
 		
 					    
 				    JScrollPane scrollPane = new JScrollPane();
@@ -362,9 +370,18 @@ public class EditeurVue extends JFrame implements Serializable {
 		for(int i = 0; i < v_circuit.getEstDefinitPar().size(); ++i){
 			
 			p_myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom()); 
-		}
+		}	
+	}
 	
-	
+	void faireLesLiens(){
+		for(int i = 0; i < table.getRowCount(); ++i){
+			if(table.getValueAt(i, 0) != null){
+				if(table.getValueAt(i, 1) != null){
+					Commande command10 = new CommandeAjouterLien(v_circuit, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
+					command10.execute();
+				}
+			}
+		}		
 	}
 
 }
