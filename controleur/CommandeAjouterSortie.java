@@ -16,5 +16,6 @@ public class CommandeAjouterSortie implements Commande {
 				
 		System.out.println("Ajouter sortie test");
 		circuit.AjouterSignal(TypeSignal.SORTIE);
+		circuit.setSauvegarder(false);
 	}
 }

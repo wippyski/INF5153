@@ -17,5 +17,6 @@ public class CommandeSupprimerPorte implements Commande {
 				
 		System.out.println("Supprimer Porte");
 		circuit.SupprimerPorte(porte_id);
+		circuit.setSauvegarder(false);
 	}
 }

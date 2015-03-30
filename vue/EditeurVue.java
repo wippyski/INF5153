@@ -32,10 +32,12 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;
+import editeurcircuit.TypeSignal;
 
 
 public class EditeurVue extends JFrame implements Serializable {
@@ -48,27 +50,18 @@ public class EditeurVue extends JFrame implements Serializable {
 	private JFrame frmEditeurDeCircuit;
 	private JTable table;	
 	
-	static Circuit v_circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
-	
-	Commande command1 = new CommandeAjouterEntree(v_circuit);
-	Commande command2 = new CommandeAjouterSortie(v_circuit);
-	Commande command3 = new CommandeAjouterPorteAnd(v_circuit);
-	Commande command4 = new CommandeAjouterPorteOr(v_circuit);
-	Commande command5 = new CommandeAjouterPorteNot(v_circuit);
-	Commande command6 = new CommandeSauvegarder(v_circuit);
-	Commande command7 = new CommandeCharger(v_circuit);
-	Commande command8 = new CommandeNouveau(v_circuit);
-	Commande command9 = new CommandeQuitter(v_circuit);
+	public Circuit v_circuit;	
+
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {			
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {				
 					EditeurcircuitPackage.eINSTANCE.eClass();
-					v_circuit.setSauvegarder(true);
+					//v_circuit.setSauvegarder(true);
 					EditeurVue window = new EditeurVue();
 					window.frmEditeurDeCircuit.setVisible(true);				
 				} catch (Exception e) {
@@ -89,6 +82,17 @@ public class EditeurVue extends JFrame implements Serializable {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		v_circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
+		v_circuit.setSauvegarder(true);
+/*		Commande command1 = new CommandeAjouterEntree(v_circuit);
+		Commande command2 = new CommandeAjouterSortie(v_circuit);
+		Commande command3 = new CommandeAjouterPorteAnd(v_circuit);
+		Commande command4 = new CommandeAjouterPorteOr(v_circuit);
+		Commande command5 = new CommandeAjouterPorteNot(v_circuit);
+		Commande command6 = new CommandeSauvegarder(v_circuit);
+		Commande command7 = new CommandeCharger(v_circuit);
+		Commande command8 = new CommandeNouveau(v_circuit);
+		Commande command9 = new CommandeQuitter(v_circuit);*/
 		frmEditeurDeCircuit = new JFrame();
 		frmEditeurDeCircuit.setTitle("\u00C9diteur de circuit");
 		frmEditeurDeCircuit.setBounds(100, 100, 694, 526);
@@ -106,10 +110,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		mntmNouveauCircuit.addActionListener( new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {				
-
-				command8.execute();
-				v_circuit.setSauvegarder(true);
-
+				Commande command8 = new CommandeNouveau(v_circuit);
+				command8.execute();	
 			}
 
 		}
@@ -122,9 +124,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		mntmChargerCircuit.addActionListener( new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {				
-
-				command7.execute();
-				v_circuit.setSauvegarder(true);
+				Commande command7 = new CommandeCharger(v_circuit);
+				command7.execute();				
 
 			}
 
@@ -137,9 +138,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		mntmSauvegarderCircuit.addActionListener( new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {				
-
-				command6.execute();
-				v_circuit.setSauvegarder(true);
+				Commande command6 = new CommandeSauvegarder(v_circuit);
+				command6.execute();				
 
 			}
 
@@ -152,7 +152,7 @@ public class EditeurVue extends JFrame implements Serializable {
 		mntmQuitter.addActionListener( new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {				
-
+				Commande command9 = new CommandeQuitter(v_circuit);
 				command9.execute();				
 
 			}
@@ -177,9 +177,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterEntree.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-													
-					command1.execute();
-					v_circuit.setSauvegarder(false);
+					Commande command1 = new CommandeAjouterEntree(v_circuit);								
+					command1.execute();				
 
 			}
 
@@ -193,9 +192,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterSortie.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-													
-					command2.execute();
-					v_circuit.setSauvegarder(false);
+					Commande command2 = new CommandeAjouterSortie(v_circuit);								
+					command2.execute();					
 
 			}
 
@@ -214,9 +212,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPorteAnd.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-													
-					command3.execute();
-					v_circuit.setSauvegarder(false);
+					Commande command3 = new CommandeAjouterPorteAnd(v_circuit);								
+					command3.execute();				
 
 			}
 
@@ -230,9 +227,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPorteOr.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-													
-					command4.execute();
-					v_circuit.setSauvegarder(false);
+					Commande command4 = new CommandeAjouterPorteOr(v_circuit);								
+					command4.execute();					
 
 			}
 
@@ -246,9 +242,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPorteNot.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-													
+					Commande command5 = new CommandeAjouterPorteNot(v_circuit);								
 					command5.execute();
-					v_circuit.setSauvegarder(false);
 
 			}
 
@@ -291,4 +286,5 @@ public class EditeurVue extends JFrame implements Serializable {
 				    
 				    scrollPane.setViewportView(table);
 	}
+
 }

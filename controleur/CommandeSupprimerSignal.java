@@ -17,5 +17,6 @@ public class CommandeSupprimerSignal implements Commande {
 				
 		System.out.println("Supprimer signal");
 		circuit.SupprimerSignal(signal_id);
+		circuit.setSauvegarder(false);
 	}
 }

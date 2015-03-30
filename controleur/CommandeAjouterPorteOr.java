@@ -16,5 +16,6 @@ public class CommandeAjouterPorteOr implements Commande {
 				
 		System.out.println("Ajouter porte OR");
 		circuit.AjouterPorte(TypePorte.OR);
+		circuit.setSauvegarder(false);
 	}
 }

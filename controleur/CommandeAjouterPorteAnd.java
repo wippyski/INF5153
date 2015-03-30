@@ -16,5 +16,6 @@ public class CommandeAjouterPorteAnd implements Commande {
 				
 		System.out.println("Ajouter porte AND");
 		circuit.AjouterPorte(TypePorte.AND);
+		circuit.setSauvegarder(false);
 	}
 }

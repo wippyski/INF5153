@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
+
+import vue.EditeurVue;
 import editeurcircuit.Circuit;
 
 public class CommandeSauvegarder implements Commande {
@@ -29,8 +31,7 @@ public class CommandeSauvegarder implements Commande {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 		  File file = fc.getSelectedFile();	
-		  try {
-			System.out.println(file.getName());			
+		  try {						
 			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String,Object> m = reg.getExtensionToFactoryMap();
 			m.put("editeurcircuit", new XMIResourceFactoryImpl());

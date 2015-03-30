@@ -16,5 +16,6 @@ public class CommandeAjouterPorteNot implements Commande {
 				
 		System.out.println("Ajouter porte NOT");
 		circuit.AjouterPorte(TypePorte.NOT);
+		circuit.setSauvegarder(false);
 	}
 }

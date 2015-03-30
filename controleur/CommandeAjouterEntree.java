@@ -16,5 +16,6 @@ public class CommandeAjouterEntree implements Commande {
 				
 		System.out.println("Ajouter entrée test");
 		circuit.AjouterSignal(TypeSignal.ENTREE);
+		circuit.setSauvegarder(false);
 	}
 }
