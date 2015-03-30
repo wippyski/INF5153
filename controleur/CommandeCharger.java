@@ -40,7 +40,7 @@ public class CommandeCharger implements Commande {
 	}
 	
 	public Circuit execute2(File file) {
-
+		
 		  	Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String,Object> m = reg.getExtensionToFactoryMap();
 			m.put("editeurcircuit", new XMIResourceFactoryImpl());

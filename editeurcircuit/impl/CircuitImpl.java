@@ -52,7 +52,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		Circuit {
 
-	private static int PORTE_COMPTEUR = 0;
+	private static int PORTE_COMPTEUR = 1;
 
 	/**
 	 * The default value of the '{@link #isValide() <em>Valide</em>}' attribute.
@@ -143,7 +143,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	protected CircuitImpl() {
 		super();
 
-		PORTE_COMPTEUR = 0; 
+		PORTE_COMPTEUR = 1; 
 		
 		// Définition des listes
 		estDefinitPar = new EObjectContainmentEList<Signal>(Signal.class, this,
@@ -151,10 +151,10 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		estCompose = new EObjectContainmentEList<Porte>(Porte.class, this,
 				EditeurcircuitPackage.CIRCUIT__EST_COMPOSE);
 
-		// Ajout des signals réglementaires
+		/*// Ajout des signals réglementaires
 		AjouterSignal(TypeSignal.ENTREE);
 		AjouterSignal(TypeSignal.ENTREE);
-		AjouterSignal(TypeSignal.SORTIE);
+		AjouterSignal(TypeSignal.SORTIE);*/
 	}
 
 	/**

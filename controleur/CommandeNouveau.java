@@ -3,6 +3,7 @@ package controleur;
 import vue.EditeurVue;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
+import editeurcircuit.TypeSignal;
 
 public class CommandeNouveau implements Commande{
 
@@ -27,7 +28,11 @@ public class CommandeNouveau implements Commande{
 	public Circuit execute2() {
 			circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
 			circuit.setSauvegarder(true);	
-			System.out.println("Test");
+
+			// Ajout des signals réglementaires
+			circuit.AjouterSignal(TypeSignal.ENTREE);
+			circuit.AjouterSignal(TypeSignal.ENTREE);
+			circuit.AjouterSignal(TypeSignal.SORTIE);
 			
 			return circuit; 
 	}

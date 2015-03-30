@@ -92,6 +92,11 @@ public class EditeurVue extends JFrame implements Serializable {
 	private void initialize() {
 		v_circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
 		v_circuit.setSauvegarder(true);
+		
+		// Ajout des signals réglementaires
+		v_circuit.AjouterSignal(TypeSignal.ENTREE);
+		v_circuit.AjouterSignal(TypeSignal.ENTREE);
+		v_circuit.AjouterSignal(TypeSignal.SORTIE);
 /*		Commande command1 = new CommandeAjouterEntree(v_circuit);
 		Commande command2 = new CommandeAjouterSortie(v_circuit);
 		Commande command3 = new CommandeAjouterPorteAnd(v_circuit);
@@ -142,12 +147,11 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {		
 				
 				JFileChooser fc = new JFileChooser();
+				
 				if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					CommandeCharger command7 = new CommandeCharger(v_circuit);
 					v_circuit = command7.execute2(file);	
-					
-					
 					
 					updateScrollList(myCombo);
 				}			
