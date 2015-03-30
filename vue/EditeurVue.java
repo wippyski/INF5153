@@ -93,19 +93,13 @@ public class EditeurVue extends JFrame implements Serializable {
 		v_circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
 		v_circuit.setSauvegarder(true);
 		
-		// Ajout des signals réglementaires
+		// Ajout des signaux réglementaires
 		v_circuit.AjouterSignal(TypeSignal.ENTREE);
 		v_circuit.AjouterSignal(TypeSignal.ENTREE);
 		v_circuit.AjouterSignal(TypeSignal.SORTIE);
-/*		Commande command1 = new CommandeAjouterEntree(v_circuit);
-		Commande command2 = new CommandeAjouterSortie(v_circuit);
-		Commande command3 = new CommandeAjouterPorteAnd(v_circuit);
-		Commande command4 = new CommandeAjouterPorteOr(v_circuit);
-		Commande command5 = new CommandeAjouterPorteNot(v_circuit);
-		Commande command6 = new CommandeSauvegarder(v_circuit);
-		Commande command7 = new CommandeCharger(v_circuit);
-		Commande command8 = new CommandeNouveau(v_circuit);
-		Commande command9 = new CommandeQuitter(v_circuit);*/
+		updateScrollList(myCombo); // Faire la liste déroulante
+		
+		
 		frmEditeurDeCircuit = new JFrame();
 		frmEditeurDeCircuit.setTitle("\u00C9diteur de circuit");
 		frmEditeurDeCircuit.setBounds(100, 100, 694, 526);
@@ -319,10 +313,17 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPortePerso.setEnabled(false);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterPortePerso);
 		
-		JButton btnCalculerTable = new JButton("Calculer Table de v\u00E9rit\u00E9");
-		btnCalculerTable.setBounds(500, 245, 178, 23);
-		btnCalculerTable.setEnabled(false);
-		frmEditeurDeCircuit.getContentPane().add(btnCalculerTable);
+		JButton btnMiseAJour = new JButton("Mise a jour des liens");
+		btnMiseAJour.setBounds(500, 245, 178, 23);		
+		frmEditeurDeCircuit.getContentPane().add(btnMiseAJour);
+		btnMiseAJour.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+					faireLesLiens();
+			}
+
+		}
+		);
 		
 					    
 				    JScrollPane scrollPane = new JScrollPane();
@@ -334,15 +335,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				    	new String[] {
 				    		"Source", "Destination"
 				    	}
-				    ));
-				    //JComboBox<String> myCombo = new JComboBox<String> ();
-				    //pour test seulement
-				    for(int i = 0; i < v_circuit.getEstDefinitPar().size() ; ++i) {
-				    	myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom());
-				    }
-				    for(int i = 0; i < v_circuit.getEstCompose().size() ; ++i) {
-				    	myCombo.addItem(v_circuit.getEstCompose().get(i).getNom());
-				    }			    	
+				    ));	    	
 			    	
 			    	table.getColumn("Destination").setCellEditor(new DefaultCellEditor(myCombo));
 			    	table.getColumn("Source").setCellEditor(new DefaultCellEditor(myCombo));
@@ -365,6 +358,17 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 	
 	
+	}
+	
+	void faireLesLiens(){
+		for(int i = 0; i < table.getRowCount(); ++i){
+			if(table.getValueAt(i, 0) != null){
+				if(table.getValueAt(i, 1) != null){
+					Commande command10 = new CommandeAjouterLien(v_circuit, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
+					command10.execute();
+				}
+			}
+		}		
 	}
 
 }
