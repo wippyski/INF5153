@@ -16,11 +16,13 @@ package vue;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -29,6 +31,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
 
 
 
@@ -133,9 +136,16 @@ public class EditeurVue extends JFrame implements Serializable {
 		mnFichier.add(mntmChargerCircuit);
 		mntmChargerCircuit.addActionListener( new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
-				Commande command7 = new CommandeCharger(v_circuit);
-				command7.execute();				
+			public void actionPerformed(ActionEvent e) {		
+				
+				JFileChooser fc = new JFileChooser();
+				if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+					CommandeCharger command7 = new CommandeCharger(v_circuit);
+					v_circuit = command7.execute2(file);	
+					
+					updateScrollList(myCombo);
+				}			
 
 			}
 
