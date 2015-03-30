@@ -30,27 +30,21 @@ public class CommandeSauvegarder implements Commande {
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 		  File file = fc.getSelectedFile();	
 		  try {
-			System.out.println(file.getName());
-			genererXMI(circuit, file.getName());		
-			
+			System.out.println(file.getName());			
+			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+			Map<String,Object> m = reg.getExtensionToFactoryMap();
+			m.put("editeurcircuit", new XMIResourceFactoryImpl());
+			ResourceSet resSet = new ResourceSetImpl();		
+			URI fileURI = URI.createFileURI(new File(file.getName()).getAbsolutePath());		
+			Resource v_circuitResource = resSet.createResource(fileURI);
+			v_circuitResource.getContents().add(circuit);
+			v_circuitResource.save(null);
+			circuit.setSauvegarder(true);
 		  } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		  }
 		}
 		
-	}
-	
-	public static void genererXMI(Circuit rootObj, String instanceFileName) throws IOException{		
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-		Map<String,Object> m = reg.getExtensionToFactoryMap();
-		m.put("editeurcircuit", new XMIResourceFactoryImpl());
-		ResourceSet resSet = new ResourceSetImpl();		
-		URI fileURI = URI.createFileURI(new File(instanceFileName).getAbsolutePath());		
-		Resource v_circuitResource = resSet.createResource(fileURI);
-		v_circuitResource.getContents().add(rootObj);
-		v_circuitResource.save(null);
-		
-	}
-	
+	}	
 }

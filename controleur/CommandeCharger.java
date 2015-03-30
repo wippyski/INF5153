@@ -26,21 +26,15 @@ public class CommandeCharger implements Commande {
 	public void execute() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-		  File file = fc.getSelectedFile();			  
-		  circuit = loadCircuit(file.getName());
-		  //EditeurVue.v_circuit = circuit;
-		}			
+			File file = fc.getSelectedFile();
+		  	Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+			Map<String,Object> m = reg.getExtensionToFactoryMap();
+			m.put("editeurcircuit", new XMIResourceFactoryImpl());
+			ResourceSet resSet = new ResourceSetImpl();
+			URI fileURI = URI.createFileURI(new File(file.getName()).getAbsolutePath());
+			Resource v_circuitResource = resSet.getResource(fileURI,true);
+			circuit = (Circuit)v_circuitResource.getContents().get(0);
+			circuit.setSauvegarder(true);		  
+		}		
 	}
-	
-	public static Circuit loadCircuit(String instanceFileName){
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-		Map<String,Object> m = reg.getExtensionToFactoryMap();
-		m.put("editeurcircuit", new XMIResourceFactoryImpl());
-		ResourceSet resSet = new ResourceSetImpl();
-		URI fileURI = URI.createFileURI(new File(instanceFileName).getAbsolutePath());
-		Resource v_circuitResource = resSet.getResource(fileURI,true);
-		Circuit v_circuit = (Circuit)v_circuitResource.getContents().get(0);
-		return v_circuit;
-	}
-
 }
