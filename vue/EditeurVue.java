@@ -42,12 +42,14 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
+import editeurcircuit.impl.Porte_ANDImpl;
 
 
 public class EditeurVue extends JFrame implements Serializable {
@@ -62,6 +64,7 @@ public class EditeurVue extends JFrame implements Serializable {
 	
 	public Circuit v_circuit;
 	JComboBox<String> myCombo = new JComboBox<String> ();
+	int caseVide;
 
 
 	/**
@@ -159,6 +162,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					v_circuit = command7.execute2(file);	
 					
 					updateScrollList(myCombo);
+					chargerTable();
 				}			
 
 			}
@@ -561,6 +565,38 @@ public class EditeurVue extends JFrame implements Serializable {
 		p_myCombo.addItem(null);
 	
 	
+	}
+	
+	private void chargerTable(){
+		int typePorte;
+		for(int i= 0; i < v_circuit.getEstCompose().size(); ++i){
+			typePorte = v_circuit.getTypeObjet(v_circuit.getEstCompose().get(i).getNom());
+			
+			if (typePorte == 1){
+				Porte_ANDImpl p = (Porte_ANDImpl) v_circuit.getEstCompose().get(i);
+				int id_entree1 = p.getEntree1();
+				int id_entree2 = p.getEntree2();
+				int id_sortie1 = p.getSortie1();
+				System.out.println(id_entree1);
+			}
+			
+			
+//			Porte p = v_circuit.getEstCompose().get(i);
+//			Porte_AND p2 = (Porte_ANDImpl) p;
+//			int id_entree1 = p2.getEntree1();
+//			int id_entree2 = p2.getEntree2();
+//			int id_sortie1 = p2.getSortie1();
+			//table.setValueAt(v_circuit.RechercherSignalParNom().getNom(), caseVide(), 0);
+		}	
+	
+		
+	}
+	
+	private int caseVide(){
+		for(caseVide = 0; table.getValueAt(caseVide, 0) != null; ++caseVide){
+			
+		}
+		return caseVide;
 	}
 	
 	private void faireLesLiens(){
