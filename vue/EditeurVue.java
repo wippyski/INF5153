@@ -28,9 +28,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+
 
 
 
@@ -250,9 +253,31 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		);
 		
+		//Bouton Supprimer Signal (entree ou sortie)
 		JButton btnSupprimerEntreeSortie = new JButton("Supprimer Entr\u00E9e/Sortie");
 		btnSupprimerEntreeSortie.setBounds(500, 69, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnSupprimerEntreeSortie);
+		btnSupprimerEntreeSortie.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+					int id;
+					String nomSignal = null;
+					if(table.getSelectedRow() != -1) {						
+						nomSignal = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+					}
+					
+					if(nomSignal != null && (v_circuit.getTypeObjet(nomSignal) == 4 || 
+											 v_circuit.getTypeObjet(nomSignal) == 5)){						
+						id = v_circuit.RechercherSignalParNom(nomSignal).getID();
+						supprimerSignal(id, nomSignal);
+					} else {
+						System.out.println("Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+					}					
+			}
+
+		}
+		);
+		
 		
 		
 		//Bouton Ajouter Porte AND
@@ -307,6 +332,14 @@ public class EditeurVue extends JFrame implements Serializable {
 		JButton btnSupprimerPorte = new JButton("Supprimer Porte");
 		btnSupprimerPorte.setBounds(500, 203, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnSupprimerPorte);
+		btnSupprimerPorte.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+					//supprimerPorte();
+			}
+
+		}
+		);
 		
 		JButton btnAjouterPortePerso = new JButton("Ajouter Porte Personnalis\u00E9e");
 		btnAjouterPortePerso.setBounds(500, 181, 178, 23);
@@ -343,7 +376,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				    scrollPane.setViewportView(table);
 	}
 	
-	void updateScrollList(JComboBox<String> p_myCombo){
+	private void updateScrollList(JComboBox<String> p_myCombo){
 		
 		p_myCombo.removeAllItems();
 		
@@ -356,11 +389,13 @@ public class EditeurVue extends JFrame implements Serializable {
 			
 			p_myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom()); 
 		}
+		
+		p_myCombo.addItem(null);
 	
 	
 	}
 	
-	void faireLesLiens(){
+	private void faireLesLiens(){
 		for(int i = 0; i < table.getRowCount(); ++i){
 			if(table.getValueAt(i, 0) != null){
 				if(table.getValueAt(i, 1) != null){
@@ -370,5 +405,24 @@ public class EditeurVue extends JFrame implements Serializable {
 			}
 		}		
 	}
+
+	private void supprimerSignal(int idSignal, String nomSignal){
+		Commande command11 = new CommandeSupprimerSignal(v_circuit, idSignal);						
+		command11.execute();
+		for(int i = 0; i < table.getRowCount(); ++i){
+			if(table.getValueAt(i, 0) !=null){
+				if(table.getValueAt(i, 0).toString() == nomSignal){
+					table.setValueAt(null, i, 0);
+				}
+			}
+			if(table.getValueAt(i, 1) !=null){
+				if(table.getValueAt(i, 1).toString() == nomSignal){
+					table.setValueAt(null, i, 1);	
+				}
+			}
+		}
+		updateScrollList(myCombo);		
+				
+	}	
 
 }
