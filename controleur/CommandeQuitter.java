@@ -13,10 +13,6 @@ public class CommandeQuitter implements Commande{
 		
 	@Override
 	public void execute() {
-		if(circuit.isSauvegarder()){
-			System.exit(0);
-		} else {
-			System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
-		}		
+		System.exit(0);	
 	}
 }	

@@ -121,15 +121,17 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {	
 				
-				if(v_circuit.isSauvegarder()){
-					CommandeNouveau command8 = new CommandeNouveau(v_circuit);
-					v_circuit = command8.execute2();
-					
-					updateScrollList(myCombo); 
-				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Sauvegarder d'abord le circuit en cours (à faire)");
-					//System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
-				}		
+				
+				if(!v_circuit.isSauvegarder()){
+					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
+							"alert", JOptionPane.OK_CANCEL_OPTION);
+					if(result != 0) return;
+				}
+				
+				CommandeNouveau command8 = new CommandeNouveau(v_circuit);
+				v_circuit = command8.execute2();
+				
+				updateScrollList(myCombo); 
 			}
 
 		}
@@ -142,6 +144,12 @@ public class EditeurVue extends JFrame implements Serializable {
 		mntmChargerCircuit.addActionListener( new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {		
+				
+				if(!v_circuit.isSauvegarder()){
+					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
+							"alert", JOptionPane.OK_CANCEL_OPTION);
+					if(result != 0) return;
+				}
 				
 				JFileChooser fc = new JFileChooser();
 				
@@ -177,7 +185,14 @@ public class EditeurVue extends JFrame implements Serializable {
 		mnFichier.add(mntmQuitter);
 		mntmQuitter.addActionListener( new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {	
+				
+				if(!v_circuit.isSauvegarder()){
+					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
+							"alert", JOptionPane.OK_CANCEL_OPTION);
+					if(result != 0) return;
+				}
+				
 				Commande command9 = new CommandeQuitter(v_circuit);
 				command9.execute();				
 
@@ -341,7 +356,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					command3.execute();		
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
-					System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					//System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 				}
 
 		}
@@ -354,9 +370,15 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPorteOr.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				if(v_circuit.getEstCompose().size() < 50){
 					Commande command4 = new CommandeAjouterPorteOr(v_circuit);								
 					command4.execute();	
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+				} else {
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					//System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+				}
 			}
 
 		}
@@ -369,9 +391,15 @@ public class EditeurVue extends JFrame implements Serializable {
 		btnAjouterPorteNot.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				if(v_circuit.getEstCompose().size() < 50){
 					Commande command5 = new CommandeAjouterPorteNot(v_circuit);								
 					command5.execute();
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+				} else {
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					//System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+				}
 			}
 
 		}
@@ -398,7 +426,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
 					supprimerPorte(id, nomPorte);
 				} else {
-					System.out.println("Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
+					//System.out.println("Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
 				}					
 			}
 

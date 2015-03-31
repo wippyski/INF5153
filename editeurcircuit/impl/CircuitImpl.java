@@ -338,8 +338,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		final int v_null_value = -1;
 
 		// Suppression des liens dans la porte
-		for (Iterator<Signal> iter = estDefinitPar.listIterator(); iter
-				.hasNext();) {
+		for (Iterator<Signal> iter = estDefinitPar.listIterator(); iter.hasNext();) {
 			Signal s = iter.next();
 			if (s.getLien() == p_ID) {
 				s.setLien(v_null_value);
