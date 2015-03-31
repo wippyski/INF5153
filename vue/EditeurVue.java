@@ -17,7 +17,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
 import javax.swing.DefaultCellEditor;
@@ -32,18 +31,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-
-
-
-
-
-
-
-
-
-
-
-
 
 import controleur.*;
 import editeurcircuit.Circuit;
@@ -138,7 +125,9 @@ public class EditeurVue extends JFrame implements Serializable {
 				CommandeNouveau command8 = new CommandeNouveau(v_circuit);
 				v_circuit = command8.execute2();
 				
+				clearTable();
 				updateScrollList(myCombo); 
+				
 			}
 
 		}
@@ -573,9 +562,11 @@ public class EditeurVue extends JFrame implements Serializable {
 	
 	private void chargerTable(){
 		int typePorte;
-		int id_entree1;
-		int id_entree2;
-		int id_sortie1;	
+		int id_entree1 = -2;
+		int id_entree2 = -2;
+		int id_sortie1 = -2;	
+		String nomPorte;
+		
 		for(int i= 0; i < v_circuit.getEstCompose().size(); ++i){
 			typePorte = v_circuit.getTypeObjet(v_circuit.getEstCompose().get(i).getNom());
 			
@@ -583,28 +574,36 @@ public class EditeurVue extends JFrame implements Serializable {
 				Porte_ANDImpl p = (Porte_ANDImpl) v_circuit.getEstCompose().get(i);
 				id_entree1 = p.getEntree1();
 				id_entree2 = p.getEntree2();
-				id_sortie1 = p.getSortie1();				
+				id_sortie1 = p.getSortie1();	
+				nomPorte = p.getNom();
 			} else if (typePorte == 2){
 				Porte_ORImpl p = (Porte_ORImpl) v_circuit.getEstCompose().get(i);
 				id_entree1 = p.getEntree1();
 				id_entree2 = p.getEntree2();
 				id_sortie1 = p.getSortie1();
+				nomPorte = p.getNom();
 			} else {
 				Porte_NOTImpl p = (Porte_NOTImpl) v_circuit.getEstCompose().get(i);
 				id_entree1 = p.getEntree1();				
 				id_sortie1 = p.getSortie1();
+				id_entree2 = -2;
+				nomPorte = p.getNom();
 			}
 			
-			
-//			Porte p = v_circuit.getEstCompose().get(i);
-//			Porte_AND p2 = (Porte_ANDImpl) p;
-//			int id_entree1 = p2.getEntree1();
-//			int id_entree2 = p2.getEntree2();
-//			int id_sortie1 = p2.getSortie1();
-			//table.setValueAt(v_circuit.RechercherSignalParNom().getNom(), caseVide(), 0);
-		}	
-	
-		
+			for(int j = 0; j < v_circuit.getEstDefinitPar().size(); ++j){
+				int caseVide = caseVide();
+				if(v_circuit.getEstDefinitPar().get(j).getID() == id_entree1){
+					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 0);
+					table.setValueAt(nomPorte, caseVide, 1);
+				} else if(v_circuit.getEstDefinitPar().get(j).getID() == id_entree2){
+					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 0);
+					table.setValueAt(nomPorte, caseVide, 1);
+				} else if(v_circuit.getEstDefinitPar().get(j).getID() == id_sortie1){
+					table.setValueAt(nomPorte, caseVide, 0);
+					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 1);
+				}
+			}
+		}			
 	}
 	
 	private int caseVide(){
@@ -612,6 +611,14 @@ public class EditeurVue extends JFrame implements Serializable {
 			
 		}
 		return caseVide;
+	}
+	
+	private void clearTable(){
+	    for (int i = 0; i < table.getRowCount(); i++) {
+	        for (int j = 0; j < table.getColumnCount(); j++) {
+	            table.setValueAt(null, i, j);
+	        }
+	    }
 	}
 	
 	private void faireLesLiens(){
