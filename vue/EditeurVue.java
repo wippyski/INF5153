@@ -43,6 +43,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
+
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
@@ -50,6 +52,8 @@ import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
 import editeurcircuit.impl.Porte_ANDImpl;
+import editeurcircuit.impl.Porte_NOTImpl;
+import editeurcircuit.impl.Porte_ORImpl;
 
 
 public class EditeurVue extends JFrame implements Serializable {
@@ -569,15 +573,26 @@ public class EditeurVue extends JFrame implements Serializable {
 	
 	private void chargerTable(){
 		int typePorte;
+		int id_entree1;
+		int id_entree2;
+		int id_sortie1;	
 		for(int i= 0; i < v_circuit.getEstCompose().size(); ++i){
 			typePorte = v_circuit.getTypeObjet(v_circuit.getEstCompose().get(i).getNom());
 			
 			if (typePorte == 1){
 				Porte_ANDImpl p = (Porte_ANDImpl) v_circuit.getEstCompose().get(i);
-				int id_entree1 = p.getEntree1();
-				int id_entree2 = p.getEntree2();
-				int id_sortie1 = p.getSortie1();
-				System.out.println(id_entree1);
+				id_entree1 = p.getEntree1();
+				id_entree2 = p.getEntree2();
+				id_sortie1 = p.getSortie1();				
+			} else if (typePorte == 2){
+				Porte_ORImpl p = (Porte_ORImpl) v_circuit.getEstCompose().get(i);
+				id_entree1 = p.getEntree1();
+				id_entree2 = p.getEntree2();
+				id_sortie1 = p.getSortie1();
+			} else {
+				Porte_NOTImpl p = (Porte_NOTImpl) v_circuit.getEstCompose().get(i);
+				id_entree1 = p.getEntree1();				
+				id_sortie1 = p.getSortie1();
 			}
 			
 			
