@@ -263,7 +263,9 @@ public class EditeurVue extends JFrame implements Serializable {
 					int id;
 					String nomSignal = null;
 					if(table.getSelectedRow() != -1) {						
-						nomSignal = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+						if(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != null){
+							nomSignal = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+						}
 					}
 					
 					if(nomSignal != null && (v_circuit.getTypeObjet(nomSignal) == 4 || 
@@ -339,7 +341,9 @@ public class EditeurVue extends JFrame implements Serializable {
 				int id;
 				String nomPorte = null;
 				if(table.getSelectedRow() != -1) {						
-					nomPorte = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+					if(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != null){
+						nomPorte = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+					}
 				}
 				
 				if(nomPorte != null && (v_circuit.getTypeObjet(nomPorte) == 1 || 
@@ -348,7 +352,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
 					supprimerPorte(id, nomPorte);
 				} else {
-					System.out.println("Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+					System.out.println("Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
 				}					
 			}
 
@@ -440,8 +444,8 @@ public class EditeurVue extends JFrame implements Serializable {
 	}
 	
 	private void supprimerPorte(int idPorte, String nomPorte){
-		Commande command11 = new CommandeSupprimerPorte(v_circuit, idPorte);						
-		command11.execute();
+		Commande command12 = new CommandeSupprimerPorte(v_circuit, idPorte);						
+		command12.execute();
 		for(int i = 0; i < table.getRowCount(); ++i){
 			if(table.getValueAt(i, 0) !=null){
 				if(table.getValueAt(i, 0).toString() == nomPorte){

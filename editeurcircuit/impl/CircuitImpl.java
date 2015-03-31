@@ -332,12 +332,74 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void SupprimerPorte(int p_ID) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		final int v_null_value = -1;
+
+		// Suppression des liens dans la porte
+		for (Iterator<Signal> iter = estDefinitPar.listIterator(); iter
+				.hasNext();) {
+			Signal s = iter.next();
+			if (s.getLien() == p_ID) {
+				s.setLien(v_null_value);
+			}
+		}
+
+		// Suppression des liens dans les portes
+		for (Iterator<Porte> iter = estCompose.listIterator(); iter.hasNext();) {
+
+			Porte p = iter.next();
+
+			if (p instanceof Porte_ANDImpl) {
+				if (((Porte_ANDImpl) p).getEntree1() == p_ID) {
+					((Porte_ANDImpl) p).setEntree1(v_null_value);
+				}
+
+				else if (((Porte_ANDImpl) p).getEntree2() == p_ID) {
+					((Porte_ANDImpl) p).setEntree2(v_null_value);
+				}
+
+				else if (((Porte_ANDImpl) p).getSortie1() == p_ID) {
+					((Porte_ANDImpl) p).setSortie1(v_null_value);
+				}
+			}
+
+			else if (p instanceof Porte_ORImpl) {
+
+				if (((Porte_ORImpl) p).getEntree1() == p_ID) {
+					((Porte_ORImpl) p).setEntree1(v_null_value);
+				}
+
+				if (((Porte_ORImpl) p).getEntree2() == p_ID) {
+					((Porte_ORImpl) p).setEntree2(v_null_value);
+				}
+
+				if (((Porte_ORImpl) p).getSortie1() == p_ID) {
+					((Porte_ORImpl) p).setSortie1(v_null_value);
+				}
+
+			}
+
+			else if (p instanceof Porte_NOTImpl) {
+
+				if (((Porte_NOTImpl) p).getEntree1() == p_ID) {
+					((Porte_NOTImpl) p).setEntree1(v_null_value);
+				}
+
+				if (((Porte_NOTImpl) p).getSortie1() == p_ID) {
+					((Porte_NOTImpl) p).setSortie1(v_null_value);
+				}
+
+			}
+		}
+		// Suppression de la porte
+		for (Iterator<Porte> iter = estCompose.listIterator(); iter.hasNext();) {
+			Porte p = iter.next();
+			if (p.getID() == p_ID) {
+				iter.remove();
+			}
+		}
 	}
 
 	/**
