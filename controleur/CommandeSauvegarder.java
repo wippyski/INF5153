@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
-
-import vue.EditeurVue;
 import editeurcircuit.Circuit;
 
 public class CommandeSauvegarder implements Commande {

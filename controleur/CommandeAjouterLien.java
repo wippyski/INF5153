@@ -18,7 +18,7 @@ public class CommandeAjouterLien implements Commande {
 	public void execute() {
 		System.out.println("Ajout lien!");
 		circuit.ajouterLien(aGauche, aDroite);	
-		circuit.setSauvegarder(false);
+		circuit.setSauvegarder(false);		
 	}
 
 }

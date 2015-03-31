@@ -1,6 +1,5 @@
 package controleur;
 
-import vue.EditeurVue;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.TypeSignal;
