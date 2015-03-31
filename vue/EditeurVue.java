@@ -168,7 +168,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		mnFichier.add(mntmSauvegarderCircuit);
 		mntmSauvegarderCircuit.addActionListener( new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {	
+				faireLesLiens();
 				Commande command6 = new CommandeSauvegarder(v_circuit);
 				command6.execute();				
 
