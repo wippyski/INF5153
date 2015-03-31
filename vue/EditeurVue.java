@@ -127,8 +127,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					
 					updateScrollList(myCombo); 
 				} else {
-					System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
-					
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Sauvegarder d'abord le circuit en cours (à faire)");
+					//System.out.println("Sauvegarder d'abord le circuit en cours (à faire)");
 				}		
 			}
 
@@ -218,7 +218,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					command1.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 				} else {
-					System.out.println("ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
+					//System.out.println("ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
 				}
 
 			}
@@ -246,7 +247,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					command2.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 				} else {
-					System.out.println("ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
+					//System.out.println("ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
 				}
 			}
 
@@ -269,11 +271,55 @@ public class EditeurVue extends JFrame implements Serializable {
 					}
 					
 					if(nomSignal != null && (v_circuit.getTypeObjet(nomSignal) == 4 || 
-											 v_circuit.getTypeObjet(nomSignal) == 5)){						
-						id = v_circuit.RechercherSignalParNom(nomSignal).getID();
-						supprimerSignal(id, nomSignal);
+											 v_circuit.getTypeObjet(nomSignal) == 5)){	
+						
+						//Validation qu'il reste plus d'une entree/sortie
+						Signal v_sig_to_del = v_circuit.RechercherSignalParNom(nomSignal); 
+						
+						//Sortie
+						if(v_sig_to_del.getType() == TypeSignal.SORTIE){
+							int v_nb_sortie = 0;
+							
+							// Comptage du nombre de signal Sortie
+							for (Signal s : v_circuit.getEstDefinitPar()) {
+	
+								if (s.getType() == TypeSignal.SORTIE)
+									v_nb_sortie++;
+							}
+							
+							if(v_nb_sortie > 1){
+								id = v_sig_to_del.getID();
+								supprimerSignal(id, nomSignal);
+							} else {
+								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une sortie dans le circuit.");
+							}
+						}
+						
+						//Entree
+						else {
+							int v_nb_entree = 0;
+							
+							// Comptage du nombre de signal Sortie
+							for (Signal s : v_circuit.getEstDefinitPar()) {
+	
+								if (s.getType() == TypeSignal.ENTREE)
+									v_nb_entree++;
+							}
+							
+							if(v_nb_entree > 1){
+								id = v_sig_to_del.getID();
+								supprimerSignal(id, nomSignal);
+							} else {
+								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une entree dans le circuit.");
+							}
+						}
+						
+						
+						//id = v_circuit.RechercherSignalParNom(nomSignal).getID();
+						//supprimerSignal(id, nomSignal);
 					} else {
-						System.out.println("Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+						//System.out.println("Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
 					}					
 			}
 
