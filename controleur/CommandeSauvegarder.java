@@ -44,7 +44,7 @@ public class CommandeSauvegarder implements Commande {
 			v_circuitResource.save(null);
 			circuit.setSauvegarder(true);
 		  } catch (Exception e) {
-			  JOptionPane.showMessageDialog( (Component) null,"ERREUR : Nom de fichier non valide. (Le fichier doit être de forme \"xxx.editeurcircuit\" ");
+			  JOptionPane.showMessageDialog( (Component) null,"ERREUR : Nom de fichier invalide. (Le fichier doit être de forme \"xxx.editeurcircuit\" ");
 		  }
 		}
 		
