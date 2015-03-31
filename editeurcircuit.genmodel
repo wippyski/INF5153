@@ -10,16 +10,31 @@
       <genEnumLiterals ecoreEnumLiteral="editeurcircuit.ecore#//TypeSignal/Entree"/>
       <genEnumLiterals ecoreEnumLiteral="editeurcircuit.ecore#//TypeSignal/Sortie"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="editeurcircuit.ecore#//TypePorte">
+      <genEnumLiterals ecoreEnumLiteral="editeurcircuit.ecore#//TypePorte/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="editeurcircuit.ecore#//TypePorte/OR"/>
+      <genEnumLiterals ecoreEnumLiteral="editeurcircuit.ecore#//TypePorte/NOT"/>
+    </genEnums>
     <genClasses ecoreClass="editeurcircuit.ecore#//Circuit">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Circuit/Valide"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Circuit/Sauvegarder.1"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/AjouterPorte"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Circuit/Sauvegarder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference editeurcircuit.ecore#//Circuit/estDefinitPar"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference editeurcircuit.ecore#//Circuit/estCompose"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Circuit/ID"/>
+      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/AjouterPorte">
+        <genParameters ecoreParameter="editeurcircuit.ecore#//Circuit/AjouterPorte/p_typePorte"/>
+      </genOperations>
       <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/Valider"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/SupprimerPorte"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/AjouterSignal"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/SupprimerSignal"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/Fermer"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/Sauvegarder"/>
+      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/SupprimerPorte">
+        <genParameters ecoreParameter="editeurcircuit.ecore#//Circuit/SupprimerPorte/p_ID"/>
+      </genOperations>
+      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/AjouterSignal">
+        <genParameters ecoreParameter="editeurcircuit.ecore#//Circuit/AjouterSignal/p_typeSignal"/>
+      </genOperations>
+      <genOperations ecoreOperation="editeurcircuit.ecore#//Circuit/SupprimerSignal">
+        <genParameters ecoreParameter="editeurcircuit.ecore#//Circuit/SupprimerSignal/p_ID"/>
+      </genOperations>
+      <genOperations/>
     </genClasses>
     <genClasses ecoreClass="editeurcircuit.ecore#//Signal">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Signal/ID"/>
@@ -29,9 +44,22 @@
     </genClasses>
     <genClasses ecoreClass="editeurcircuit.ecore#//Porte">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte/ID"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Porte/Ajouter"/>
-      <genOperations ecoreOperation="editeurcircuit.ecore#//Porte/Supprimer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte/Nom"/>
+      <genOperations/>
     </genClasses>
-    <genClasses ecoreClass="editeurcircuit.ecore#//Porte_AND"/>
+    <genClasses ecoreClass="editeurcircuit.ecore#//Porte_AND">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_AND/Entree2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_AND/Entree1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_AND/Sortie1"/>
+    </genClasses>
+    <genClasses ecoreClass="editeurcircuit.ecore#//Porte_OR">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_OR/Entree2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_OR/Entree1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_OR/Sortie1"/>
+    </genClasses>
+    <genClasses ecoreClass="editeurcircuit.ecore#//Porte_NOT">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_NOT/Entree1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editeurcircuit.ecore#//Porte_NOT/Sortie1"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
