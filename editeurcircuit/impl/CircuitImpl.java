@@ -17,8 +17,6 @@ import editeurcircuit.impl.Porte_ORImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;

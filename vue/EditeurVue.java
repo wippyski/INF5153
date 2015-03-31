@@ -190,7 +190,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					if(result != 0) return;
 				}
 				
-				Commande command9 = new CommandeQuitter(v_circuit);
+				Commande command9 = new CommandeQuitter();
 				command9.execute();				
 
 			}
@@ -230,8 +230,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					command1.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
-					//System.out.println("ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");					
 				}
 
 			}
@@ -260,7 +259,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
-					//System.out.println("ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
+					
 				}
 			}
 
@@ -324,14 +323,12 @@ public class EditeurVue extends JFrame implements Serializable {
 							} else {
 								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une entree dans le circuit.");
 							}
-						}
+						}				
 						
 						
-						//id = v_circuit.RechercherSignalParNom(nomSignal).getID();
-						//supprimerSignal(id, nomSignal);
 					} else {
 						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
-						//System.out.println("Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+						
 					}					
 			}
 
@@ -354,7 +351,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
-					//System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					
 				}
 
 		}
@@ -374,7 +371,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
-					//System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					
 				}
 			}
 
@@ -395,7 +392,6 @@ public class EditeurVue extends JFrame implements Serializable {
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
-					//System.out.println("ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 				}
 			}
 
@@ -423,8 +419,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
 					supprimerPorte(id, nomPorte);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
-					//System.out.println("Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
+					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");					
 				}					
 			}
 
@@ -602,6 +597,17 @@ public class EditeurVue extends JFrame implements Serializable {
 					table.setValueAt(nomPorte, caseVide, 0);
 					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 1);
 				}
+			}
+			
+			for(int j = 0; j < v_circuit.getEstCompose().size(); ++j){
+				int caseVide = caseVide();
+				if(v_circuit.getEstCompose().get(j).getID() == id_entree1){
+					table.setValueAt(v_circuit.getEstCompose().get(j).getNom(), caseVide, 0);
+					table.setValueAt(nomPorte, caseVide, 1);
+				} else if(v_circuit.getEstCompose().get(j).getID() == id_entree2){
+					table.setValueAt(v_circuit.getEstCompose().get(j).getNom(), caseVide, 0);
+					table.setValueAt(nomPorte, caseVide, 1);
+				} 
 			}
 		}			
 	}

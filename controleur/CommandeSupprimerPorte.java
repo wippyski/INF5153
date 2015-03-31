@@ -13,9 +13,7 @@ public class CommandeSupprimerPorte implements Commande {
 	}
 
 	@Override
-	public void execute() {
-				
-		System.out.println("Supprimer Porte");
+	public void execute() {		
 		circuit.SupprimerPorte(porte_id);
 		circuit.setSauvegarder(false);
 	}

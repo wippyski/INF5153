@@ -3,7 +3,6 @@ package controleur;
 
 import java.awt.Component;
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
@@ -31,8 +30,7 @@ public class CommandeSauvegarder implements Commande {
 	public void execute() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-		  File file = fc.getSelectedFile();	
-		  //System.out.println(file.getName());
+		  File file = fc.getSelectedFile();			  
 		  try {						
 			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String,Object> m = reg.getExtensionToFactoryMap();

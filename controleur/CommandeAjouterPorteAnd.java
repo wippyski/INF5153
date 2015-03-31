@@ -12,9 +12,8 @@ public class CommandeAjouterPorteAnd implements Commande {
 	}
 
 	@Override
-	public void execute() {
-				
-		System.out.println("Ajouter porte AND");
+	public void execute() {			
+		
 		circuit.AjouterPorte(TypePorte.AND);
 		circuit.setSauvegarder(false);
 	}

@@ -13,8 +13,7 @@ public class CommandeAjouterPorteOr implements Commande {
 
 	@Override
 	public void execute() {
-				
-		System.out.println("Ajouter porte OR");
+						
 		circuit.AjouterPorte(TypePorte.OR);
 		circuit.setSauvegarder(false);
 	}

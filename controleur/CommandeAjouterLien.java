@@ -15,8 +15,7 @@ public class CommandeAjouterLien implements Commande {
 	}
 	
 	@Override
-	public void execute() {
-		System.out.println("Ajout lien!");
+	public void execute() {		
 		circuit.ajouterLien(aGauche, aDroite);	
 		circuit.setSauvegarder(false);		
 	}

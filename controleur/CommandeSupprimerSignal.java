@@ -13,9 +13,8 @@ public class CommandeSupprimerSignal implements Commande {
 	}
 
 	@Override
-	public void execute() {
-				
-		System.out.println("Supprimer signal");
+	public void execute() {				
+		
 		circuit.SupprimerSignal(signal_id);
 		circuit.setSauvegarder(false);
 	}

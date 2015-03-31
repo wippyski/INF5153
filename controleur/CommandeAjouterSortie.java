@@ -12,9 +12,8 @@ public class CommandeAjouterSortie implements Commande {
 	}
 
 	@Override
-	public void execute() {
-				
-		System.out.println("Ajouter sortie test");
+	public void execute() {				
+	
 		circuit.AjouterSignal(TypeSignal.SORTIE);
 		circuit.setSauvegarder(false);
 	}

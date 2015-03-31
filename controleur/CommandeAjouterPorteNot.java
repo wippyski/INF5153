@@ -12,9 +12,8 @@ public class CommandeAjouterPorteNot implements Commande {
 	}
 
 	@Override
-	public void execute() {
-				
-		System.out.println("Ajouter porte NOT");
+	public void execute() {				
+		
 		circuit.AjouterPorte(TypePorte.NOT);
 		circuit.setSauvegarder(false);
 	}

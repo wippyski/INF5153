@@ -12,9 +12,8 @@ public class CommandeAjouterEntree implements Commande {
 	}
 
 	@Override
-	public void execute() {
-				
-		System.out.println("Ajouter entrée test");
+	public void execute() {				
+		
 		circuit.AjouterSignal(TypeSignal.ENTREE);
 		circuit.setSauvegarder(false);
 	}
