@@ -329,13 +329,27 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		);
 		
+		//Bouton Supprimer Porte
 		JButton btnSupprimerPorte = new JButton("Supprimer Porte");
 		btnSupprimerPorte.setBounds(500, 203, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnSupprimerPorte);
 		btnSupprimerPorte.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-					//supprimerPorte();
+				int id;
+				String nomPorte = null;
+				if(table.getSelectedRow() != -1) {						
+					nomPorte = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+				}
+				
+				if(nomPorte != null && (v_circuit.getTypeObjet(nomPorte) == 1 || 
+										 v_circuit.getTypeObjet(nomPorte) == 2 ||
+										 v_circuit.getTypeObjet(nomPorte) == 3)){						
+					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
+					supprimerPorte(id, nomPorte);
+				} else {
+					System.out.println("Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+				}					
 			}
 
 		}
@@ -423,6 +437,25 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		updateScrollList(myCombo);		
 				
-	}	
+	}
+	
+	private void supprimerPorte(int idPorte, String nomPorte){
+		Commande command11 = new CommandeSupprimerPorte(v_circuit, idPorte);						
+		command11.execute();
+		for(int i = 0; i < table.getRowCount(); ++i){
+			if(table.getValueAt(i, 0) !=null){
+				if(table.getValueAt(i, 0).toString() == nomPorte){
+					table.setValueAt(null, i, 0);
+				}
+			}
+			if(table.getValueAt(i, 1) !=null){
+				if(table.getValueAt(i, 1).toString() == nomPorte){
+					table.setValueAt(null, i, 1);	
+				}
+			}
+		}
+		updateScrollList(myCombo);		
+				
+	}
 
 }
