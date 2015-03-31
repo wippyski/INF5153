@@ -920,7 +920,38 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @generated NOT
 	 */
 	public int getTypeObjet(String p_Nom) {
-		Pattern patternAND, patternOR, patternNOT, patternEntree, patternSortie;
+		
+		for(Porte p : estCompose){
+			if(p.getNom().compareTo(p_Nom) == 0){
+				if(p instanceof Porte_ANDImpl){
+					return 1;
+				}
+				
+				if(p instanceof Porte_ORImpl){
+					return 2;
+				}
+				
+				if(p instanceof Porte_NOTImpl){
+					return 3;
+				}
+				
+			}
+		}
+		
+		for(Signal s : estDefinitPar){
+			if(s.getNom().compareTo(p_Nom) == 0){
+				
+				if(s.getType() == TypeSignal.ENTREE){
+					return 4;
+				}
+				
+				if(s.getType() == TypeSignal.SORTIE){
+					return 5;
+				}
+			}
+		}
+		
+		/*Pattern patternAND, patternOR, patternNOT, patternEntree, patternSortie;
 		patternAND = Pattern.compile("(AND)");
 		patternOR = Pattern.compile("(OR)");
 		patternNOT = Pattern.compile("(NOT)");
@@ -947,7 +978,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		matcher = patternSortie.matcher(p_Nom);
 		if (matcher.find()) {
 			return 5;
-		}
+		}*/
 		return -1;
 	}
 

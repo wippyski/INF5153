@@ -434,10 +434,85 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		);
 		
-		JButton btnAjouterPortePerso = new JButton("Ajouter Porte Personnalis\u00E9e");
-		btnAjouterPortePerso.setBounds(500, 181, 178, 23);
-		btnAjouterPortePerso.setEnabled(false);
-		frmEditeurDeCircuit.getContentPane().add(btnAjouterPortePerso);
+		JButton btnRenameSignal = new JButton("Renommer Entree/Sortie");
+		btnRenameSignal.setBounds(500, 181, 178, 23);
+		btnRenameSignal.setEnabled(true);
+		frmEditeurDeCircuit.getContentPane().add(btnRenameSignal);
+		btnRenameSignal.addActionListener( new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e){
+				
+				Signal v_Signal = null; 
+				String v_oldName = ""; 
+				String v_newName = ""; 
+				
+				boolean v_valideName = false; 
+				
+				while(!v_valideName){
+				
+					v_oldName = (String)JOptionPane.showInputDialog(
+		                    frmEditeurDeCircuit,
+		                    "Quelle porte souhaitez-vous renommé ?",
+		                    "Entree/Sortie a renommé",
+		                    JOptionPane.PLAIN_MESSAGE,
+		                    null,
+		                    null,
+		                    "");
+					
+					if(v_oldName == null) return; 
+					
+					for(Signal s : v_circuit.getEstDefinitPar()){
+						
+						if(s.getNom().compareTo(v_oldName) == 0){
+							v_valideName = true; 
+							v_Signal = s; 
+						}
+					}
+					
+					if(!v_valideName){
+						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nom d'entree/sortie introuvable");
+
+					}
+				}
+				
+				
+				v_valideName = false;
+				while(!v_valideName){
+					
+					v_valideName = true;
+					v_newName = (String)JOptionPane.showInputDialog(
+		                    frmEditeurDeCircuit,
+		                    "Quelle nouveau nom souhaitz-vous donner à " + v_oldName,
+		                    "Entree/Sortie a renommé",
+		                    JOptionPane.PLAIN_MESSAGE,
+		                    null,
+		                    null,
+		                    "");
+					
+					if(v_newName == null) return; 
+					
+					for(Signal s : v_circuit.getEstDefinitPar()){
+						
+						if(s.getNom().compareTo(v_newName) == 0){
+							v_valideName = false; 
+							JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Le nom " + v_newName + " existe déjà !");
+						}
+					}
+					
+					if(v_newName.length() > 5){
+						v_valideName = false; 
+						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Le nom d'une entree/sortie ne doit pas être de plus de 5 charactères alphanumériques.");
+
+					}
+				}
+				
+				v_Signal.setNom(v_newName);
+
+				updateScrollList(myCombo);
+			}
+			
+			
+		});
 		
 		JButton btnMiseAJour = new JButton("Mise a jour des liens");
 		btnMiseAJour.setBounds(500, 245, 178, 23);		
