@@ -31,6 +31,9 @@ public class CommandeCharger implements Commande {
 	@Override
 	public void execute() {
 		try{
+			
+			//ne modifie pas le circuit dans la vue ?!
+			
 		  	Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String,Object> m = reg.getExtensionToFactoryMap();
 			m.put("editeurcircuit", new XMIResourceFactoryImpl());
@@ -50,6 +53,7 @@ public class CommandeCharger implements Commande {
 	public Circuit execute2(File file) {
 		
 		try{
+			//Fonctionne, car on retourne un nouveau circuit
 		  	Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String,Object> m = reg.getExtensionToFactoryMap();
 			m.put("editeurcircuit", new XMIResourceFactoryImpl());
