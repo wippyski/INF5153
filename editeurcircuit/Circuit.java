@@ -5,6 +5,8 @@ package editeurcircuit;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import editeurcircuit.impl.CircuitImpl.typeObject;
+
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Circuit</b></em>'. <!-- end-user-doc -->
@@ -247,6 +249,6 @@ public interface Circuit extends EObject {
 	 * @model
 	 * @generated NOT
 	 */
-	int getTypeObjet(String p_Nom);
+	typeObject getTypeObjet(String p_Nom);
 
 } // Circuit

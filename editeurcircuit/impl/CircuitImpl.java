@@ -48,6 +48,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		Circuit {
 
+	public enum typeObject{Porte_AND, Porte_OR, Porte_NOT, Signal_ENTREE, Signal_SORTIE}
+	
 	/**
 	 * The default value of the '{@link #isValide() <em>Valide</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -733,11 +735,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 */
 
 	public void ajouterLien(String p_Gauche, String p_Droite) {
-		int type_gauche = this.getTypeObjet(p_Gauche);
-		int type_droite = this.getTypeObjet(p_Droite);
+		typeObject type_gauche = this.getTypeObjet(p_Gauche);
+		typeObject type_droite = this.getTypeObjet(p_Droite);
 
 		// Entree - Sortie
-		if ((type_gauche == 4) && (type_droite == 5)) {
+		if ((type_gauche == typeObject.Signal_ENTREE) && (type_droite == typeObject.Signal_SORTIE)) {
 			Signal signal_gauche = (Signal) this
 					.RechercherSignalParNom(p_Gauche);
 			Signal signal_droite = (Signal) this
@@ -747,18 +749,18 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		}
 
 		// Entree - Porte
-		if ((type_gauche == 4)
-				&& ((type_droite == 1) || (type_droite == 2) || (type_droite == 3))) {
+		if ((type_gauche == typeObject.Signal_ENTREE)
+				&& ((type_droite == typeObject.Porte_AND) || (type_droite == typeObject.Porte_OR) || (type_droite == typeObject.Porte_NOT))) {
 			Signal signal_gauche = (Signal) this
 					.RechercherSignalParNom(p_Gauche);
 
 			switch (type_droite) {
-			case (3):
+			case Porte_NOT:
 				Porte_NOTImpl porte_droite_not = (Porte_NOTImpl) this
 						.RechercherPorteParNom(p_Droite);
 				porte_droite_not.setEntree1(signal_gauche.getID());
 				break;
-			case (2):
+			case Porte_OR:
 				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
 						.RechercherPorteParNom(p_Droite);
 				if (porte_droite_or.getEntree1() != -1) {
@@ -767,7 +769,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 					porte_droite_or.setEntree1(signal_gauche.getID());
 				}
 				break;
-			case (1):
+			case Porte_AND:
 				Porte_AND porte_droite_and = (Porte_AND) this
 						.RechercherPorteParNom(p_Droite);
 				if (porte_droite_and.getEntree1() != -1) {
@@ -784,17 +786,17 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		}
 
 		// Porte - Porte
-		if (((type_gauche == 1) || (type_gauche == 2) || (type_gauche == 3))
-				&& ((type_droite == 1) || (type_droite == 2) || (type_droite == 3))) {
+		if (((type_gauche == typeObject.Porte_AND) || (type_gauche == typeObject.Porte_OR) || (type_gauche == typeObject.Porte_NOT))
+				&& ((type_droite == typeObject.Porte_AND) || (type_droite == typeObject.Porte_OR) || (type_droite == typeObject.Porte_NOT))) {
 			Porte porte_gauche = this.RechercherPorteParNom(p_Gauche);
 
 			switch (type_droite) {
-			case (3):
+			case Porte_NOT:
 				Porte_NOTImpl porte_droite_not = (Porte_NOTImpl) this
 						.RechercherPorteParNom(p_Droite);
 				porte_droite_not.setEntree1(porte_gauche.getID());
 				break;
-			case (2):
+			case Porte_OR:
 				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
 						.RechercherPorteParNom(p_Droite);
 				if (porte_droite_or.getEntree1() != -1) {
@@ -803,7 +805,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 					porte_droite_or.setEntree1(porte_gauche.getID());
 				}
 				break;
-			case (1):
+			case Porte_AND:
 				Porte_AND porte_droite_and = (Porte_AND) this
 						.RechercherPorteParNom(p_Droite);
 				if (porte_droite_and.getEntree1() != -1) {
@@ -814,21 +816,21 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				break;
 			}
 
-			if ((type_gauche == 1)) {
+			if ((type_gauche == typeObject.Porte_AND)) {
 				Porte_AND porte_gauche1 = (Porte_AND) this
 						.RechercherPorteParNom(p_Gauche);
 				Porte porte_droite = this.RechercherPorteParNom(p_Droite);
 				porte_gauche1.setSortie1(porte_droite.getID());
 			}
 
-			if ((type_gauche == 2)) {
+			if ((type_gauche == typeObject.Porte_OR)) {
 				Porte_ORImpl porte_gauche1 = (Porte_ORImpl) this
 						.RechercherPorteParNom(p_Gauche);
 				Porte porte_droite = this.RechercherPorteParNom(p_Droite);
 				porte_gauche1.setSortie1(porte_droite.getID());
 			}
 
-			if ((type_gauche == 3)) {
+			if ((type_gauche == typeObject.Porte_NOT)) {
 				Porte_NOTImpl porte_gauche1 = (Porte_NOTImpl) this
 						.RechercherPorteParNom(p_Gauche);
 				Porte porte_droite = this.RechercherPorteParNom(p_Droite);
@@ -837,10 +839,10 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		}
 
 		// Porte - Sortie
-		if (((type_gauche == 1) || (type_gauche == 2) || (type_gauche == 3))
-				&& (type_droite == 5)) {
+		if (((type_gauche == typeObject.Porte_AND) || (type_gauche == typeObject.Porte_OR) || (type_gauche == typeObject.Porte_NOT))
+				&& (type_droite == typeObject.Signal_SORTIE)) {
 			switch (type_gauche) {
-			case (1):
+			case Porte_AND:
 				Porte_AND porte_gauche_and = (Porte_AND) this
 						.RechercherPorteParNom(p_Gauche);
 				Signal signal_droite1 = (Signal) this
@@ -848,7 +850,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				porte_gauche_and.setSortie1(signal_droite1.getID());
 				signal_droite1.setLien(porte_gauche_and.getID());
 				break;
-			case (2):
+			case Porte_OR:
 				Porte_ORImpl porte_gauche_or = (Porte_ORImpl) this
 						.RechercherPorteParNom(p_Gauche);
 				Signal signal_droite2 = (Signal) this
@@ -856,7 +858,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				porte_gauche_or.setSortie1(signal_droite2.getID());
 				signal_droite2.setLien(porte_gauche_or.getID());
 				break;
-			case (3):
+			case Porte_NOT:
 				Porte_NOTImpl porte_gauche_not = (Porte_NOTImpl) this
 						.RechercherPorteParNom(p_Gauche);
 				Signal signal_droite3 = (Signal) this
@@ -917,20 +919,24 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * 
 	 * @generated NOT
 	 */
-	public int getTypeObjet(String p_Nom) {
+	public typeObject getTypeObjet(String p_Nom) {
 		
+		//Méthode réécrite car l'ancienne façon se basait
+		//sur le nom de la porte pour trouver le type 
+		//(nom qui peut être changer par l'utilisation)
+	
 		for(Porte p : estCompose){
 			if(p.getNom().compareTo(p_Nom) == 0){
 				if(p instanceof Porte_ANDImpl){
-					return 1;
+					return typeObject.Porte_AND;
 				}
 				
 				if(p instanceof Porte_ORImpl){
-					return 2;
+					return typeObject.Porte_OR;
 				}
 				
 				if(p instanceof Porte_NOTImpl){
-					return 3;
+					return typeObject.Porte_NOT;
 				}
 				
 			}
@@ -940,44 +946,15 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			if(s.getNom().compareTo(p_Nom) == 0){
 				
 				if(s.getType() == TypeSignal.ENTREE){
-					return 4;
+					return typeObject.Signal_ENTREE;
 				}
 				
 				if(s.getType() == TypeSignal.SORTIE){
-					return 5;
+					return typeObject.Signal_SORTIE;
 				}
 			}
 		}
-		
-		/*Pattern patternAND, patternOR, patternNOT, patternEntree, patternSortie;
-		patternAND = Pattern.compile("(AND)");
-		patternOR = Pattern.compile("(OR)");
-		patternNOT = Pattern.compile("(NOT)");
-		patternEntree = Pattern.compile("(E)");
-		patternSortie = Pattern.compile("(S)");
-		Matcher matcher;
-
-		matcher = patternAND.matcher(p_Nom);
-		if (matcher.find()) {
-			return 1;
-		}
-		matcher = patternOR.matcher(p_Nom);
-		if (matcher.find()) {
-			return 2;
-		}
-		matcher = patternNOT.matcher(p_Nom);
-		if (matcher.find()) {
-			return 3;
-		}
-		matcher = patternEntree.matcher(p_Nom);
-		if (matcher.find()) {
-			return 4;
-		}
-		matcher = patternSortie.matcher(p_Nom);
-		if (matcher.find()) {
-			return 5;
-		}*/
-		return -1;
+		return null;
 	}
 
 } // CircuitImpl
