@@ -38,6 +38,7 @@ import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
+import editeurcircuit.impl.CircuitImpl;
 import editeurcircuit.impl.Porte_ANDImpl;
 import editeurcircuit.impl.Porte_NOTImpl;
 import editeurcircuit.impl.Porte_ORImpl;
@@ -282,8 +283,8 @@ public class EditeurVue extends JFrame implements Serializable {
 						}
 					}
 					
-					if(nomSignal != null && (v_circuit.getTypeObjet(nomSignal) == 4 || 
-											 v_circuit.getTypeObjet(nomSignal) == 5)){	
+					if(nomSignal != null && (v_circuit.getTypeObjet(nomSignal) == CircuitImpl.typeObject.Signal_ENTREE || 
+											 v_circuit.getTypeObjet(nomSignal) == CircuitImpl.typeObject.Signal_SORTIE)){	
 						
 						//Validation qu'il reste plus d'une entree/sortie
 						Signal v_sig_to_del = v_circuit.RechercherSignalParNom(nomSignal); 
@@ -414,9 +415,9 @@ public class EditeurVue extends JFrame implements Serializable {
 					}
 				}
 				
-				if(nomPorte != null && (v_circuit.getTypeObjet(nomPorte) == 1 || 
-										 v_circuit.getTypeObjet(nomPorte) == 2 ||
-										 v_circuit.getTypeObjet(nomPorte) == 3)){						
+				if(nomPorte != null && (v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_AND || 
+										 v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_OR ||
+										 v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_NOT)){						
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
 					supprimerPorte(id, nomPorte);
 				} else {
@@ -557,7 +558,7 @@ public class EditeurVue extends JFrame implements Serializable {
 	}
 	
 	private void chargerTable(){
-		int typePorte;
+		CircuitImpl.typeObject typePorte;
 		int id_entree1 = -2;
 		int id_entree2 = -2;
 		int id_sortie1 = -2;	
@@ -566,13 +567,13 @@ public class EditeurVue extends JFrame implements Serializable {
 		for(int i= 0; i < v_circuit.getEstCompose().size(); ++i){
 			typePorte = v_circuit.getTypeObjet(v_circuit.getEstCompose().get(i).getNom());
 			
-			if (typePorte == 1){
+			if (typePorte == CircuitImpl.typeObject.Porte_AND){
 				Porte_ANDImpl p = (Porte_ANDImpl) v_circuit.getEstCompose().get(i);
 				id_entree1 = p.getEntree1();
 				id_entree2 = p.getEntree2();
 				id_sortie1 = p.getSortie1();	
 				nomPorte = p.getNom();
-			} else if (typePorte == 2){
+			} else if (typePorte == CircuitImpl.typeObject.Porte_OR){
 				Porte_ORImpl p = (Porte_ORImpl) v_circuit.getEstCompose().get(i);
 				id_entree1 = p.getEntree1();
 				id_entree2 = p.getEntree2();
