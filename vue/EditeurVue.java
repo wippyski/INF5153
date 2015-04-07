@@ -123,8 +123,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					if(result != 0) return;
 				}
 				
-				CommandeNouveau command8 = new CommandeNouveau(v_circuit);
-				v_circuit = command8.execute2();
+				CommandeNouveau command_new = new CommandeNouveau(v_circuit);
+				v_circuit = command_new.execute2();
 				
 				clearTable();
 				updateScrollList(myCombo); 
@@ -152,8 +152,8 @@ public class EditeurVue extends JFrame implements Serializable {
 				
 				if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
-					CommandeCharger command7 = new CommandeCharger(v_circuit);
-					v_circuit = command7.execute2(file);	
+					CommandeCharger command_load = new CommandeCharger(v_circuit);
+					v_circuit = command_load.execute2(file);	
 					
 					updateScrollList(myCombo);
 					chargerTable();
@@ -171,8 +171,8 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {	
 				faireLesLiens();
-				Commande command6 = new CommandeSauvegarder(v_circuit);
-				command6.execute();				
+				Commande command_save = new CommandeSauvegarder(v_circuit);
+				command_save.execute();				
 
 			}
 
@@ -192,8 +192,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					if(result != 0) return;
 				}
 				
-				Commande command9 = new CommandeQuitter();
-				command9.execute();				
+				Commande command_quit = new CommandeQuitter();
+				command_quit.execute();				
 
 			}
 
@@ -228,8 +228,8 @@ public class EditeurVue extends JFrame implements Serializable {
 				}
 				
 				if(v_nb_entree < 5 ){
-					Commande command1 = new CommandeAjouterEntree(v_circuit);								
-					command1.execute();	
+					Commande command_ajoutEntree = new CommandeAjouterEntree(v_circuit);								
+					command_ajoutEntree.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");					
@@ -256,8 +256,8 @@ public class EditeurVue extends JFrame implements Serializable {
 				}
 				
 				if(v_nb_sortie < 5){
-					Commande command2 = new CommandeAjouterSortie(v_circuit);								
-					command2.execute();	
+					Commande command_ajoutSortie = new CommandeAjouterSortie(v_circuit);								
+					command_ajoutSortie.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
@@ -348,8 +348,8 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(v_circuit.getEstCompose().size() < 50){
-					Commande command3 = new CommandeAjouterPorteAnd(v_circuit);								
-					command3.execute();		
+					Commande command_ajoutPorteAND = new CommandeAjouterPorteAnd(v_circuit);								
+					command_ajoutPorteAND.execute();		
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
@@ -368,8 +368,8 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(v_circuit.getEstCompose().size() < 50){
-					Commande command4 = new CommandeAjouterPorteOr(v_circuit);								
-					command4.execute();	
+					Commande command_ajoutPorteOR = new CommandeAjouterPorteOr(v_circuit);								
+					command_ajoutPorteOR.execute();	
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
@@ -389,8 +389,8 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(v_circuit.getEstCompose().size() < 50){
-					Commande command5 = new CommandeAjouterPorteNot(v_circuit);								
-					command5.execute();
+					Commande command_ajoutPorteNOT = new CommandeAjouterPorteNot(v_circuit);								
+					command_ajoutPorteNOT.execute();
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
@@ -446,7 +446,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				
 					v_oldName = (String)JOptionPane.showInputDialog(
 		                    frmEditeurDeCircuit,
-		                    "Quelle porte souhaitez-vous renommé ?",
+		                    "Quelle entree/sortie souhaitez-vous renommé ?",
 		                    "Entree/Sortie a renommé",
 		                    JOptionPane.PLAIN_MESSAGE,
 		                    null,
@@ -633,16 +633,16 @@ public class EditeurVue extends JFrame implements Serializable {
 		for(int i = 0; i < table.getRowCount(); ++i){
 			if(table.getValueAt(i, 0) != null){
 				if(table.getValueAt(i, 1) != null){
-					Commande command10 = new CommandeAjouterLien(v_circuit, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
-					command10.execute();
+					Commande command_ajoutLien = new CommandeAjouterLien(v_circuit, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
+					command_ajoutLien.execute();
 				}
 			}
 		}		
 	}
 
 	private void supprimerSignal(int idSignal, String nomSignal){
-		Commande command11 = new CommandeSupprimerSignal(v_circuit, idSignal);						
-		command11.execute();
+		Commande command_suppSignal = new CommandeSupprimerSignal(v_circuit, idSignal);						
+		command_suppSignal.execute();
 		for(int i = 0; i < table.getRowCount(); ++i){
 			if(table.getValueAt(i, 0) !=null){
 				if(table.getValueAt(i, 0).toString() == nomSignal){
@@ -660,8 +660,8 @@ public class EditeurVue extends JFrame implements Serializable {
 	}
 	
 	private void supprimerPorte(int idPorte, String nomPorte){
-		Commande command12 = new CommandeSupprimerPorte(v_circuit, idPorte);						
-		command12.execute();
+		Commande command_suppPorte = new CommandeSupprimerPorte(v_circuit, idPorte);						
+		command_suppPorte.execute();
 		for(int i = 0; i < table.getRowCount(); ++i){
 			if(table.getValueAt(i, 0) !=null){
 				if(table.getValueAt(i, 0).toString() == nomPorte){
