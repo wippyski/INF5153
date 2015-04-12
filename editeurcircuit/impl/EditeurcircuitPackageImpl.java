@@ -10,6 +10,8 @@ import editeurcircuit.Porte_AND;
 import editeurcircuit.Porte_NOT;
 import editeurcircuit.Porte_OR;
 import editeurcircuit.Signal;
+import editeurcircuit.TableVerite;
+import editeurcircuit.TableVeriteObserver;
 import editeurcircuit.TypePorte;
 import editeurcircuit.TypeSignal;
 
@@ -70,6 +72,20 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * @generated
 	 */
 	private EClass porte_NOTEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tableVeriteObserverEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tableVeriteEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,8 +221,8 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCircuit_PORTE_COMPTEUR() {
-		return (EAttribute)circuitEClass.getEStructuralFeatures().get(5);
+	public EReference getCircuit_NewEReference3() {
+		return (EReference)circuitEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -252,15 +268,6 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 */
 	public EOperation getCircuit__SupprimerSignal__int() {
 		return circuitEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getCircuit__Sauvegarder() {
-		return circuitEClass.getEOperations().get(5);
 	}
 
 	/**
@@ -340,15 +347,6 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getPorte__Supprimer() {
-		return porteEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPorte_AND() {
 		return porte_ANDEClass;
 	}
@@ -359,7 +357,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * @generated
 	 */
 	public EAttribute getPorte_AND_Entree1() {
-		return (EAttribute)porte_ANDEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)porte_ANDEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -368,7 +366,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * @generated
 	 */
 	public EAttribute getPorte_AND_Entree2() {
-		return (EAttribute)porte_ANDEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)porte_ANDEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -395,7 +393,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * @generated
 	 */
 	public EAttribute getPorte_OR_Entree1() {
-		return (EAttribute)porte_OREClass.getEStructuralFeatures().get(0);
+		return (EAttribute)porte_OREClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -404,7 +402,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 * @generated
 	 */
 	public EAttribute getPorte_OR_Entree2() {
-		return (EAttribute)porte_OREClass.getEStructuralFeatures().get(1);
+		return (EAttribute)porte_OREClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -441,6 +439,78 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 	 */
 	public EAttribute getPorte_NOT_Sortie1() {
 		return (EAttribute)porte_NOTEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTableVeriteObserver() {
+		return tableVeriteObserverEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTableVeriteObserver_Liste() {
+		return (EAttribute)tableVeriteObserverEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getTableVeriteObserver__Attacher() {
+		return tableVeriteObserverEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getTableVeriteObserver__Detacher() {
+		return tableVeriteObserverEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getTableVeriteObserver__Notifier() {
+		return tableVeriteObserverEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTableVerite() {
+		return tableVeriteEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTableVerite_Table() {
+		return (EAttribute)tableVeriteEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getTableVerite__Calculer() {
+		return tableVeriteEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -495,13 +565,12 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		createEReference(circuitEClass, CIRCUIT__EST_DEFINIT_PAR);
 		createEReference(circuitEClass, CIRCUIT__EST_COMPOSE);
 		createEAttribute(circuitEClass, CIRCUIT__ID);
-		createEAttribute(circuitEClass, CIRCUIT__PORTE_COMPTEUR);
+		createEReference(circuitEClass, CIRCUIT__NEW_EREFERENCE3);
 		createEOperation(circuitEClass, CIRCUIT___AJOUTER_PORTE__TYPEPORTE);
 		createEOperation(circuitEClass, CIRCUIT___VALIDER);
 		createEOperation(circuitEClass, CIRCUIT___SUPPRIMER_PORTE__INT);
 		createEOperation(circuitEClass, CIRCUIT___AJOUTER_SIGNAL__TYPESIGNAL);
 		createEOperation(circuitEClass, CIRCUIT___SUPPRIMER_SIGNAL__INT);
-		createEOperation(circuitEClass, CIRCUIT___SAUVEGARDER);
 
 		signalEClass = createEClass(SIGNAL);
 		createEAttribute(signalEClass, SIGNAL__ID);
@@ -512,21 +581,30 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		porteEClass = createEClass(PORTE);
 		createEAttribute(porteEClass, PORTE__ID);
 		createEAttribute(porteEClass, PORTE__NOM);
-		createEOperation(porteEClass, PORTE___SUPPRIMER);
 
 		porte_ANDEClass = createEClass(PORTE_AND);
-		createEAttribute(porte_ANDEClass, PORTE_AND__ENTREE1);
 		createEAttribute(porte_ANDEClass, PORTE_AND__ENTREE2);
+		createEAttribute(porte_ANDEClass, PORTE_AND__ENTREE1);
 		createEAttribute(porte_ANDEClass, PORTE_AND__SORTIE1);
 
 		porte_OREClass = createEClass(PORTE_OR);
-		createEAttribute(porte_OREClass, PORTE_OR__ENTREE1);
 		createEAttribute(porte_OREClass, PORTE_OR__ENTREE2);
+		createEAttribute(porte_OREClass, PORTE_OR__ENTREE1);
 		createEAttribute(porte_OREClass, PORTE_OR__SORTIE1);
 
 		porte_NOTEClass = createEClass(PORTE_NOT);
 		createEAttribute(porte_NOTEClass, PORTE_NOT__ENTREE1);
 		createEAttribute(porte_NOTEClass, PORTE_NOT__SORTIE1);
+
+		tableVeriteObserverEClass = createEClass(TABLE_VERITE_OBSERVER);
+		createEAttribute(tableVeriteObserverEClass, TABLE_VERITE_OBSERVER__LISTE);
+		createEOperation(tableVeriteObserverEClass, TABLE_VERITE_OBSERVER___ATTACHER);
+		createEOperation(tableVeriteObserverEClass, TABLE_VERITE_OBSERVER___DETACHER);
+		createEOperation(tableVeriteObserverEClass, TABLE_VERITE_OBSERVER___NOTIFIER);
+
+		tableVeriteEClass = createEClass(TABLE_VERITE);
+		createEAttribute(tableVeriteEClass, TABLE_VERITE__TABLE);
+		createEOperation(tableVeriteEClass, TABLE_VERITE___CALCULER);
 
 		// Create enums
 		typeSignalEEnum = createEEnum(TYPE_SIGNAL);
@@ -564,6 +642,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		porte_ANDEClass.getESuperTypes().add(this.getPorte());
 		porte_OREClass.getESuperTypes().add(this.getPorte());
 		porte_NOTEClass.getESuperTypes().add(this.getPorte());
+		tableVeriteEClass.getESuperTypes().add(this.getTableVeriteObserver());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(circuitEClass, Circuit.class, "Circuit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -572,7 +651,7 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		initEReference(getCircuit_EstDefinitPar(), this.getSignal(), null, "estDefinitPar", null, 0, 10, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCircuit_EstCompose(), this.getPorte(), null, "estCompose", null, 0, 50, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCircuit_ID(), ecorePackage.getEInt(), "ID", null, 0, 1, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCircuit_PORTE_COMPTEUR(), ecorePackage.getEInt(), "PORTE_COMPTEUR", "0", 0, 1, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCircuit_NewEReference3(), this.getTableVeriteObserver(), null, "newEReference3", null, 0, 1, Circuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getCircuit__AjouterPorte__TypePorte(), null, "AjouterPorte", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getTypePorte(), "p_typePorte", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -588,8 +667,6 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		op = initEOperation(getCircuit__SupprimerSignal__int(), null, "SupprimerSignal", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "p_ID", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getCircuit__Sauvegarder(), null, "Sauvegarder", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSignal_ID(), ecorePackage.getEInt(), "ID", null, 0, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSignal_Type(), this.getTypeSignal(), "Type", null, 0, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -600,21 +677,33 @@ public class EditeurcircuitPackageImpl extends EPackageImpl implements Editeurci
 		initEAttribute(getPorte_ID(), ecorePackage.getEInt(), "ID", null, 0, 1, Porte.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPorte_Nom(), ecorePackage.getEString(), "Nom", null, 0, 1, Porte.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getPorte__Supprimer(), null, "Supprimer", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(porte_ANDEClass, Porte_AND.class, "Porte_AND", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPorte_AND_Entree1(), ecorePackage.getEInt(), "Entree1", null, 0, 1, Porte_AND.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPorte_AND_Entree2(), ecorePackage.getEInt(), "Entree2", null, 0, 1, Porte_AND.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPorte_AND_Sortie1(), ecorePackage.getEInt(), "Sortie1", null, 0, 1, Porte_AND.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPorte_AND_Entree1(), ecorePackage.getEInt(), "Entree1", null, 0, 1, Porte_AND.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPorte_AND_Sortie1(), ecorePackage.getEInt(), "Sortie1", "0", 0, 1, Porte_AND.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(porte_OREClass, Porte_OR.class, "Porte_OR", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPorte_OR_Entree1(), ecorePackage.getEInt(), "Entree1", null, 0, 1, Porte_OR.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPorte_OR_Entree2(), ecorePackage.getEInt(), "Entree2", null, 0, 1, Porte_OR.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPorte_OR_Sortie1(), ecorePackage.getEInt(), "Sortie1", null, 0, 1, Porte_OR.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPorte_OR_Entree1(), ecorePackage.getEInt(), "Entree1", "0", 0, 1, Porte_OR.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPorte_OR_Sortie1(), ecorePackage.getEInt(), "Sortie1", "0", 0, 1, Porte_OR.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(porte_NOTEClass, Porte_NOT.class, "Porte_NOT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPorte_NOT_Entree1(), ecorePackage.getEInt(), "Entree1", null, 0, 1, Porte_NOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPorte_NOT_Sortie1(), ecorePackage.getEInt(), "Sortie1", null, 0, 1, Porte_NOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPorte_NOT_Entree1(), ecorePackage.getEInt(), "Entree1", "0", 0, 1, Porte_NOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPorte_NOT_Sortie1(), ecorePackage.getEInt(), "Sortie1", "0", 0, 1, Porte_NOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tableVeriteObserverEClass, TableVeriteObserver.class, "TableVeriteObserver", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTableVeriteObserver_Liste(), ecorePackage.getEEList(), "liste", null, 0, 1, TableVeriteObserver.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getTableVeriteObserver__Attacher(), null, "attacher", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getTableVeriteObserver__Detacher(), null, "detacher", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getTableVeriteObserver__Notifier(), null, "notifier", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(tableVeriteEClass, TableVerite.class, "TableVerite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTableVerite_Table(), ecorePackage.getEMap(), "table", null, 0, 1, TableVerite.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getTableVerite__Calculer(), null, "calculer", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(typeSignalEEnum, TypeSignal.class, "TypeSignal");

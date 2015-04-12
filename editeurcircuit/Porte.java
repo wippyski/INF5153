@@ -74,12 +74,4 @@ public interface Porte extends EObject {
 	 */
 	void setNom(String value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void Supprimer();
-
 } // Porte

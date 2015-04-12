@@ -76,6 +76,15 @@ public interface EditeurcircuitFactory extends EFactory {
 	Porte_NOT createPorte_NOT();
 
 	/**
+	 * Returns a new object of class '<em>Table Verite</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Table Verite</em>'.
+	 * @generated
+	 */
+	TableVerite createTableVerite();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

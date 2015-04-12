@@ -36,7 +36,7 @@ public enum TypePorte implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	OR(0, "OR", "OR"),
+	OR(1, "OR", "OR"),
 
 	/**
 	 * The '<em><b>NOT</b></em>' literal object.
@@ -46,7 +46,7 @@ public enum TypePorte implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT(0, "NOT", "NOT");
+	NOT(2, "NOT", "NOT");
 
 	/**
 	 * The '<em><b>AND</b></em>' literal value.
@@ -76,7 +76,7 @@ public enum TypePorte implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OR_VALUE = 0;
+	public static final int OR_VALUE = 1;
 
 	/**
 	 * The '<em><b>NOT</b></em>' literal value.
@@ -91,7 +91,7 @@ public enum TypePorte implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NOT_VALUE = 0;
+	public static final int NOT_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Type Porte</b></em>' enumerators.
@@ -155,6 +155,8 @@ public enum TypePorte implements Enumerator {
 	public static TypePorte get(int value) {
 		switch (value) {
 			case AND_VALUE: return AND;
+			case OR_VALUE: return OR;
+			case NOT_VALUE: return NOT;
 		}
 		return null;
 	}

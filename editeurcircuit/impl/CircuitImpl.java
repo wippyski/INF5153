@@ -8,6 +8,7 @@ import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte;
 import editeurcircuit.Porte_AND;
 import editeurcircuit.Signal;
+import editeurcircuit.TableVeriteObserver;
 import editeurcircuit.TypePorte;
 import editeurcircuit.TypeSignal;
 import editeurcircuit.impl.Porte_ANDImpl;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link editeurcircuit.impl.CircuitImpl#getEstCompose <em>Est Compose</em>}</li>
  *   <li>{@link editeurcircuit.impl.CircuitImpl#getID <em>ID</em>}</li>
  *   <li>{@link editeurcircuit.impl.CircuitImpl#getPORTE_COMPTEUR <em>PORTE COMPTEUR</em>}</li>
+ *   <li>{@link editeurcircuit.impl.CircuitImpl#getNewEReference3 <em>New EReference3</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,7 +127,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected int id = ID_EDEFAULT;
-
+	
 	/**
 	 * The default value of the '{@link #getPORTE_COMPTEUR() <em>PORTE COMPTEUR</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -145,6 +147,17 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected int portE_COMPTEUR = PORTE_COMPTEUR_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getNewEReference3() <em>New EReference3</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewEReference3()
+	 * @generated
+	 * @ordered
+	 */
+	
+	protected TableVeriteObserver newEReference3;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -261,8 +274,16 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getPORTE_COMPTEUR() {
-		return portE_COMPTEUR;
+	public TableVeriteObserver getNewEReference3() {
+		if (newEReference3 != null && newEReference3.eIsProxy()) {
+			InternalEObject oldNewEReference3 = (InternalEObject)newEReference3;
+			newEReference3 = (TableVeriteObserver)eResolveProxy(oldNewEReference3);
+			if (newEReference3 != oldNewEReference3) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3, oldNewEReference3, newEReference3));
+			}
+		}
+		return newEReference3;
 	}
 
 	/**
@@ -270,11 +291,20 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPORTE_COMPTEUR(int newPORTE_COMPTEUR) {
-		int oldPORTE_COMPTEUR = portE_COMPTEUR;
-		portE_COMPTEUR = newPORTE_COMPTEUR;
+	public TableVeriteObserver basicGetNewEReference3() {
+		return newEReference3;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNewEReference3(TableVeriteObserver newNewEReference3) {
+		TableVeriteObserver oldNewEReference3 = newEReference3;
+		newEReference3 = newNewEReference3;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditeurcircuitPackage.CIRCUIT__PORTE_COMPTEUR, oldPORTE_COMPTEUR, portE_COMPTEUR));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3, oldNewEReference3, newEReference3));
 	}
 
 	/**
@@ -548,16 +578,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void Sauvegarder() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -587,8 +607,9 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				return getEstCompose();
 			case EditeurcircuitPackage.CIRCUIT__ID:
 				return getID();
-			case EditeurcircuitPackage.CIRCUIT__PORTE_COMPTEUR:
-				return getPORTE_COMPTEUR();
+			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
+				if (resolve) return getNewEReference3();
+				return basicGetNewEReference3();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -618,8 +639,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			case EditeurcircuitPackage.CIRCUIT__ID:
 				setID((Integer)newValue);
 				return;
-			case EditeurcircuitPackage.CIRCUIT__PORTE_COMPTEUR:
-				setPORTE_COMPTEUR((Integer)newValue);
+			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
+				setNewEReference3((TableVeriteObserver)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -647,8 +668,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			case EditeurcircuitPackage.CIRCUIT__ID:
 				setID(ID_EDEFAULT);
 				return;
-			case EditeurcircuitPackage.CIRCUIT__PORTE_COMPTEUR:
-				setPORTE_COMPTEUR(PORTE_COMPTEUR_EDEFAULT);
+			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
+				setNewEReference3((TableVeriteObserver)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -671,8 +692,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				return estCompose != null && !estCompose.isEmpty();
 			case EditeurcircuitPackage.CIRCUIT__ID:
 				return id != ID_EDEFAULT;
-			case EditeurcircuitPackage.CIRCUIT__PORTE_COMPTEUR:
-				return portE_COMPTEUR != PORTE_COMPTEUR_EDEFAULT;
+			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
+				return newEReference3 != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -700,9 +721,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			case EditeurcircuitPackage.CIRCUIT___SUPPRIMER_SIGNAL__INT:
 				SupprimerSignal((Integer)arguments.get(0));
 				return null;
-			case EditeurcircuitPackage.CIRCUIT___SAUVEGARDER:
-				Sauvegarder();
-				return null;
 		}
 		return super.eInvoke(operationID, arguments);
 	}
@@ -722,8 +740,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		result.append(sauvegarder);
 		result.append(", ID: ");
 		result.append(id);
-		result.append(", PORTE_COMPTEUR: ");
-		result.append(portE_COMPTEUR);
 		result.append(')');
 		return result.toString();
 	}

@@ -114,13 +114,13 @@ public interface EditeurcircuitPackage extends EPackage {
 	int CIRCUIT__ID = 4;
 
 	/**
-	 * The feature id for the '<em><b>PORTE COMPTEUR</b></em>' attribute.
+	 * The feature id for the '<em><b>New EReference3</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CIRCUIT__PORTE_COMPTEUR = 5;
+	int CIRCUIT__NEW_EREFERENCE3 = 5;
 
 	/**
 	 * The number of structural features of the '<em>Circuit</em>' class.
@@ -177,22 +177,13 @@ public interface EditeurcircuitPackage extends EPackage {
 	int CIRCUIT___SUPPRIMER_SIGNAL__INT = 4;
 
 	/**
-	 * The operation id for the '<em>Sauvegarder</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CIRCUIT___SAUVEGARDER = 5;
-
-	/**
 	 * The number of operations of the '<em>Circuit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CIRCUIT_OPERATION_COUNT = 6;
+	int CIRCUIT_OPERATION_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link editeurcircuit.impl.SignalImpl <em>Signal</em>}' class.
@@ -296,22 +287,13 @@ public interface EditeurcircuitPackage extends EPackage {
 	int PORTE_FEATURE_COUNT = 2;
 
 	/**
-	 * The operation id for the '<em>Supprimer</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTE___SUPPRIMER = 0;
-
-	/**
 	 * The number of operations of the '<em>Porte</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORTE_OPERATION_COUNT = 1;
+	int PORTE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link editeurcircuit.impl.Porte_ANDImpl <em>Porte AND</em>}' class.
@@ -342,22 +324,22 @@ public interface EditeurcircuitPackage extends EPackage {
 	int PORTE_AND__NOM = PORTE__NOM;
 
 	/**
-	 * The feature id for the '<em><b>Entree1</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTE_AND__ENTREE1 = PORTE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Entree2</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORTE_AND__ENTREE2 = PORTE_FEATURE_COUNT + 1;
+	int PORTE_AND__ENTREE2 = PORTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Entree1</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTE_AND__ENTREE1 = PORTE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Sortie1</b></em>' attribute.
@@ -376,15 +358,6 @@ public interface EditeurcircuitPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTE_AND_FEATURE_COUNT = PORTE_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Supprimer</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTE_AND___SUPPRIMER = PORTE___SUPPRIMER;
 
 	/**
 	 * The number of operations of the '<em>Porte AND</em>' class.
@@ -424,22 +397,22 @@ public interface EditeurcircuitPackage extends EPackage {
 	int PORTE_OR__NOM = PORTE__NOM;
 
 	/**
-	 * The feature id for the '<em><b>Entree1</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTE_OR__ENTREE1 = PORTE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Entree2</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORTE_OR__ENTREE2 = PORTE_FEATURE_COUNT + 1;
+	int PORTE_OR__ENTREE2 = PORTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Entree1</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTE_OR__ENTREE1 = PORTE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Sortie1</b></em>' attribute.
@@ -458,15 +431,6 @@ public interface EditeurcircuitPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTE_OR_FEATURE_COUNT = PORTE_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Supprimer</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTE_OR___SUPPRIMER = PORTE___SUPPRIMER;
 
 	/**
 	 * The number of operations of the '<em>Porte OR</em>' class.
@@ -533,15 +497,6 @@ public interface EditeurcircuitPackage extends EPackage {
 	int PORTE_NOT_FEATURE_COUNT = PORTE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Supprimer</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTE_NOT___SUPPRIMER = PORTE___SUPPRIMER;
-
-	/**
 	 * The number of operations of the '<em>Porte NOT</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -551,6 +506,152 @@ public interface EditeurcircuitPackage extends EPackage {
 	int PORTE_NOT_OPERATION_COUNT = PORTE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link editeurcircuit.TableVeriteObserver <em>Table Verite Observer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see editeurcircuit.TableVeriteObserver
+	 * @see editeurcircuit.impl.EditeurcircuitPackageImpl#getTableVeriteObserver()
+	 * @generated
+	 */
+	int TABLE_VERITE_OBSERVER = 6;
+
+	/**
+	 * The feature id for the '<em><b>Liste</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OBSERVER__LISTE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Table Verite Observer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OBSERVER_FEATURE_COUNT = 1;
+
+	/**
+	 * The operation id for the '<em>Attacher</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OBSERVER___ATTACHER = 0;
+
+	/**
+	 * The operation id for the '<em>Detacher</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OBSERVER___DETACHER = 1;
+
+	/**
+	 * The operation id for the '<em>Notifier</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OBSERVER___NOTIFIER = 2;
+
+	/**
+	 * The number of operations of the '<em>Table Verite Observer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OBSERVER_OPERATION_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link editeurcircuit.impl.TableVeriteImpl <em>Table Verite</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see editeurcircuit.impl.TableVeriteImpl
+	 * @see editeurcircuit.impl.EditeurcircuitPackageImpl#getTableVerite()
+	 * @generated
+	 */
+	int TABLE_VERITE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Liste</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE__LISTE = TABLE_VERITE_OBSERVER__LISTE;
+
+	/**
+	 * The feature id for the '<em><b>Table</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE__TABLE = TABLE_VERITE_OBSERVER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Table Verite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_FEATURE_COUNT = TABLE_VERITE_OBSERVER_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Attacher</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE___ATTACHER = TABLE_VERITE_OBSERVER___ATTACHER;
+
+	/**
+	 * The operation id for the '<em>Detacher</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE___DETACHER = TABLE_VERITE_OBSERVER___DETACHER;
+
+	/**
+	 * The operation id for the '<em>Notifier</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE___NOTIFIER = TABLE_VERITE_OBSERVER___NOTIFIER;
+
+	/**
+	 * The operation id for the '<em>Calculer</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE___CALCULER = TABLE_VERITE_OBSERVER_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Table Verite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_VERITE_OPERATION_COUNT = TABLE_VERITE_OBSERVER_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link editeurcircuit.TypeSignal <em>Type Signal</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,7 +659,7 @@ public interface EditeurcircuitPackage extends EPackage {
 	 * @see editeurcircuit.impl.EditeurcircuitPackageImpl#getTypeSignal()
 	 * @generated
 	 */
-	int TYPE_SIGNAL = 6;
+	int TYPE_SIGNAL = 8;
 
 	/**
 	 * The meta object id for the '{@link editeurcircuit.TypePorte <em>Type Porte</em>}' enum.
@@ -568,7 +669,7 @@ public interface EditeurcircuitPackage extends EPackage {
 	 * @see editeurcircuit.impl.EditeurcircuitPackageImpl#getTypePorte()
 	 * @generated
 	 */
-	int TYPE_PORTE = 7;
+	int TYPE_PORTE = 9;
 
 
 	/**
@@ -637,15 +738,15 @@ public interface EditeurcircuitPackage extends EPackage {
 	EAttribute getCircuit_ID();
 
 	/**
-	 * Returns the meta object for the attribute '{@link editeurcircuit.Circuit#getPORTE_COMPTEUR <em>PORTE COMPTEUR</em>}'.
+	 * Returns the meta object for the reference '{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>PORTE COMPTEUR</em>'.
-	 * @see editeurcircuit.Circuit#getPORTE_COMPTEUR()
+	 * @return the meta object for the reference '<em>New EReference3</em>'.
+	 * @see editeurcircuit.Circuit#getNewEReference3()
 	 * @see #getCircuit()
 	 * @generated
 	 */
-	EAttribute getCircuit_PORTE_COMPTEUR();
+	EReference getCircuit_NewEReference3();
 
 	/**
 	 * Returns the meta object for the '{@link editeurcircuit.Circuit#AjouterPorte(editeurcircuit.TypePorte) <em>Ajouter Porte</em>}' operation.
@@ -696,16 +797,6 @@ public interface EditeurcircuitPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getCircuit__SupprimerSignal__int();
-
-	/**
-	 * Returns the meta object for the '{@link editeurcircuit.Circuit#Sauvegarder() <em>Sauvegarder</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Sauvegarder</em>' operation.
-	 * @see editeurcircuit.Circuit#Sauvegarder()
-	 * @generated
-	 */
-	EOperation getCircuit__Sauvegarder();
 
 	/**
 	 * Returns the meta object for class '{@link editeurcircuit.Signal <em>Signal</em>}'.
@@ -792,16 +883,6 @@ public interface EditeurcircuitPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPorte_Nom();
-
-	/**
-	 * Returns the meta object for the '{@link editeurcircuit.Porte#Supprimer() <em>Supprimer</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Supprimer</em>' operation.
-	 * @see editeurcircuit.Porte#Supprimer()
-	 * @generated
-	 */
-	EOperation getPorte__Supprimer();
 
 	/**
 	 * Returns the meta object for class '{@link editeurcircuit.Porte_AND <em>Porte AND</em>}'.
@@ -922,6 +1003,88 @@ public interface EditeurcircuitPackage extends EPackage {
 	EAttribute getPorte_NOT_Sortie1();
 
 	/**
+	 * Returns the meta object for class '{@link editeurcircuit.TableVeriteObserver <em>Table Verite Observer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Table Verite Observer</em>'.
+	 * @see editeurcircuit.TableVeriteObserver
+	 * @generated
+	 */
+	EClass getTableVeriteObserver();
+
+	/**
+	 * Returns the meta object for the attribute '{@link editeurcircuit.TableVeriteObserver#getListe <em>Liste</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Liste</em>'.
+	 * @see editeurcircuit.TableVeriteObserver#getListe()
+	 * @see #getTableVeriteObserver()
+	 * @generated
+	 */
+	EAttribute getTableVeriteObserver_Liste();
+
+	/**
+	 * Returns the meta object for the '{@link editeurcircuit.TableVeriteObserver#attacher() <em>Attacher</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Attacher</em>' operation.
+	 * @see editeurcircuit.TableVeriteObserver#attacher()
+	 * @generated
+	 */
+	EOperation getTableVeriteObserver__Attacher();
+
+	/**
+	 * Returns the meta object for the '{@link editeurcircuit.TableVeriteObserver#detacher() <em>Detacher</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Detacher</em>' operation.
+	 * @see editeurcircuit.TableVeriteObserver#detacher()
+	 * @generated
+	 */
+	EOperation getTableVeriteObserver__Detacher();
+
+	/**
+	 * Returns the meta object for the '{@link editeurcircuit.TableVeriteObserver#notifier() <em>Notifier</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Notifier</em>' operation.
+	 * @see editeurcircuit.TableVeriteObserver#notifier()
+	 * @generated
+	 */
+	EOperation getTableVeriteObserver__Notifier();
+
+	/**
+	 * Returns the meta object for class '{@link editeurcircuit.TableVerite <em>Table Verite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Table Verite</em>'.
+	 * @see editeurcircuit.TableVerite
+	 * @generated
+	 */
+	EClass getTableVerite();
+
+	/**
+	 * Returns the meta object for the attribute '{@link editeurcircuit.TableVerite#getTable <em>Table</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Table</em>'.
+	 * @see editeurcircuit.TableVerite#getTable()
+	 * @see #getTableVerite()
+	 * @generated
+	 */
+	EAttribute getTableVerite_Table();
+
+	/**
+	 * Returns the meta object for the '{@link editeurcircuit.TableVerite#calculer() <em>Calculer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Calculer</em>' operation.
+	 * @see editeurcircuit.TableVerite#calculer()
+	 * @generated
+	 */
+	EOperation getTableVerite__Calculer();
+
+	/**
 	 * Returns the meta object for enum '{@link editeurcircuit.TypeSignal <em>Type Signal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1015,12 +1178,12 @@ public interface EditeurcircuitPackage extends EPackage {
 		EAttribute CIRCUIT__ID = eINSTANCE.getCircuit_ID();
 
 		/**
-		 * The meta object literal for the '<em><b>PORTE COMPTEUR</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>New EReference3</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CIRCUIT__PORTE_COMPTEUR = eINSTANCE.getCircuit_PORTE_COMPTEUR();
+		EReference CIRCUIT__NEW_EREFERENCE3 = eINSTANCE.getCircuit_NewEReference3();
 
 		/**
 		 * The meta object literal for the '<em><b>Ajouter Porte</b></em>' operation.
@@ -1061,14 +1224,6 @@ public interface EditeurcircuitPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation CIRCUIT___SUPPRIMER_SIGNAL__INT = eINSTANCE.getCircuit__SupprimerSignal__int();
-
-		/**
-		 * The meta object literal for the '<em><b>Sauvegarder</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CIRCUIT___SAUVEGARDER = eINSTANCE.getCircuit__Sauvegarder();
 
 		/**
 		 * The meta object literal for the '{@link editeurcircuit.impl.SignalImpl <em>Signal</em>}' class.
@@ -1137,14 +1292,6 @@ public interface EditeurcircuitPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PORTE__NOM = eINSTANCE.getPorte_Nom();
-
-		/**
-		 * The meta object literal for the '<em><b>Supprimer</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PORTE___SUPPRIMER = eINSTANCE.getPorte__Supprimer();
 
 		/**
 		 * The meta object literal for the '{@link editeurcircuit.impl.Porte_ANDImpl <em>Porte AND</em>}' class.
@@ -1239,6 +1386,74 @@ public interface EditeurcircuitPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PORTE_NOT__SORTIE1 = eINSTANCE.getPorte_NOT_Sortie1();
+
+		/**
+		 * The meta object literal for the '{@link editeurcircuit.TableVeriteObserver <em>Table Verite Observer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see editeurcircuit.TableVeriteObserver
+		 * @see editeurcircuit.impl.EditeurcircuitPackageImpl#getTableVeriteObserver()
+		 * @generated
+		 */
+		EClass TABLE_VERITE_OBSERVER = eINSTANCE.getTableVeriteObserver();
+
+		/**
+		 * The meta object literal for the '<em><b>Liste</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TABLE_VERITE_OBSERVER__LISTE = eINSTANCE.getTableVeriteObserver_Liste();
+
+		/**
+		 * The meta object literal for the '<em><b>Attacher</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TABLE_VERITE_OBSERVER___ATTACHER = eINSTANCE.getTableVeriteObserver__Attacher();
+
+		/**
+		 * The meta object literal for the '<em><b>Detacher</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TABLE_VERITE_OBSERVER___DETACHER = eINSTANCE.getTableVeriteObserver__Detacher();
+
+		/**
+		 * The meta object literal for the '<em><b>Notifier</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TABLE_VERITE_OBSERVER___NOTIFIER = eINSTANCE.getTableVeriteObserver__Notifier();
+
+		/**
+		 * The meta object literal for the '{@link editeurcircuit.impl.TableVeriteImpl <em>Table Verite</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see editeurcircuit.impl.TableVeriteImpl
+		 * @see editeurcircuit.impl.EditeurcircuitPackageImpl#getTableVerite()
+		 * @generated
+		 */
+		EClass TABLE_VERITE = eINSTANCE.getTableVerite();
+
+		/**
+		 * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TABLE_VERITE__TABLE = eINSTANCE.getTableVerite_Table();
+
+		/**
+		 * The meta object literal for the '<em><b>Calculer</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TABLE_VERITE___CALCULER = eINSTANCE.getTableVerite__Calculer();
 
 		/**
 		 * The meta object literal for the '{@link editeurcircuit.TypeSignal <em>Type Signal</em>}' enum.

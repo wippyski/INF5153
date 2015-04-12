@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link editeurcircuit.impl.Porte_ORImpl#getEntree1 <em>Entree1</em>}</li>
  *   <li>{@link editeurcircuit.impl.Porte_ORImpl#getEntree2 <em>Entree2</em>}</li>
+ *   <li>{@link editeurcircuit.impl.Porte_ORImpl#getEntree1 <em>Entree1</em>}</li>
  *   <li>{@link editeurcircuit.impl.Porte_ORImpl#getSortie1 <em>Sortie1</em>}</li>
  * </ul>
  * </p>
@@ -25,26 +25,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	/**
-	 * The default value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEntree1()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int ENTREE1_EDEFAULT = -1;
-
-	/**
-	 * The cached value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEntree1()
-	 * @generated
-	 * @ordered
-	 */
-	protected int entree1 = ENTREE1_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getEntree2() <em>Entree2</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -52,7 +32,7 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ENTREE2_EDEFAULT = -1;
+	protected static final int ENTREE2_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getEntree2() <em>Entree2</em>}' attribute.
@@ -65,6 +45,26 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	protected int entree2 = ENTREE2_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntree1()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int ENTREE1_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntree1()
+	 * @generated
+	 * @ordered
+	 */
+	protected int entree1 = ENTREE1_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getSortie1() <em>Sortie1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +72,7 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SORTIE1_EDEFAULT = -1;
+	protected static final int SORTIE1_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getSortie1() <em>Sortie1</em>}' attribute.
@@ -174,10 +174,10 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
-				return getEntree1();
 			case EditeurcircuitPackage.PORTE_OR__ENTREE2:
 				return getEntree2();
+			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
+				return getEntree1();
 			case EditeurcircuitPackage.PORTE_OR__SORTIE1:
 				return getSortie1();
 		}
@@ -192,11 +192,11 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
-				setEntree1((Integer)newValue);
-				return;
 			case EditeurcircuitPackage.PORTE_OR__ENTREE2:
 				setEntree2((Integer)newValue);
+				return;
+			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
+				setEntree1((Integer)newValue);
 				return;
 			case EditeurcircuitPackage.PORTE_OR__SORTIE1:
 				setSortie1((Integer)newValue);
@@ -213,11 +213,11 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
-				setEntree1(ENTREE1_EDEFAULT);
-				return;
 			case EditeurcircuitPackage.PORTE_OR__ENTREE2:
 				setEntree2(ENTREE2_EDEFAULT);
+				return;
+			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
+				setEntree1(ENTREE1_EDEFAULT);
 				return;
 			case EditeurcircuitPackage.PORTE_OR__SORTIE1:
 				setSortie1(SORTIE1_EDEFAULT);
@@ -234,10 +234,10 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
-				return entree1 != ENTREE1_EDEFAULT;
 			case EditeurcircuitPackage.PORTE_OR__ENTREE2:
 				return entree2 != ENTREE2_EDEFAULT;
+			case EditeurcircuitPackage.PORTE_OR__ENTREE1:
+				return entree1 != ENTREE1_EDEFAULT;
 			case EditeurcircuitPackage.PORTE_OR__SORTIE1:
 				return sortie1 != SORTIE1_EDEFAULT;
 		}
@@ -254,10 +254,10 @@ public class Porte_ORImpl extends PorteImpl implements Porte_OR {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (Entree1: ");
-		result.append(entree1);
-		result.append(", Entree2: ");
+		result.append(" (Entree2: ");
 		result.append(entree2);
+		result.append(", Entree1: ");
+		result.append(entree1);
 		result.append(", Sortie1: ");
 		result.append(sortie1);
 		result.append(')');

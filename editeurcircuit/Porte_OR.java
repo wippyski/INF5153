@@ -11,8 +11,8 @@ package editeurcircuit;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link editeurcircuit.Porte_OR#getEntree1 <em>Entree1</em>}</li>
  *   <li>{@link editeurcircuit.Porte_OR#getEntree2 <em>Entree2</em>}</li>
+ *   <li>{@link editeurcircuit.Porte_OR#getEntree1 <em>Entree1</em>}</li>
  *   <li>{@link editeurcircuit.Porte_OR#getSortie1 <em>Sortie1</em>}</li>
  * </ul>
  * </p>
@@ -24,6 +24,7 @@ package editeurcircuit;
 public interface Porte_OR extends Porte {
 	/**
 	 * Returns the value of the '<em><b>Entree1</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Entree1</em>' attribute isn't clear,
@@ -33,7 +34,7 @@ public interface Porte_OR extends Porte {
 	 * @return the value of the '<em>Entree1</em>' attribute.
 	 * @see #setEntree1(int)
 	 * @see editeurcircuit.EditeurcircuitPackage#getPorte_OR_Entree1()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	int getEntree1();
@@ -76,6 +77,7 @@ public interface Porte_OR extends Porte {
 
 	/**
 	 * Returns the value of the '<em><b>Sortie1</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sortie1</em>' attribute isn't clear,
@@ -85,7 +87,7 @@ public interface Porte_OR extends Porte {
 	 * @return the value of the '<em>Sortie1</em>' attribute.
 	 * @see #setSortie1(int)
 	 * @see editeurcircuit.EditeurcircuitPackage#getPorte_OR_Sortie1()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	int getSortie1();

@@ -63,6 +63,7 @@ public class EditeurcircuitFactoryImpl extends EFactoryImpl implements Editeurci
 			case EditeurcircuitPackage.PORTE_AND: return createPorte_AND();
 			case EditeurcircuitPackage.PORTE_OR: return createPorte_OR();
 			case EditeurcircuitPackage.PORTE_NOT: return createPorte_NOT();
+			case EditeurcircuitPackage.TABLE_VERITE: return createTableVerite();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -160,6 +161,16 @@ public class EditeurcircuitFactoryImpl extends EFactoryImpl implements Editeurci
 	public Porte_NOT createPorte_NOT() {
 		Porte_NOTImpl porte_NOT = new Porte_NOTImpl();
 		return porte_NOT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TableVerite createTableVerite() {
+		TableVeriteImpl tableVerite = new TableVeriteImpl();
+		return tableVerite;
 	}
 
 	/**

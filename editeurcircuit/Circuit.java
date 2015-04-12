@@ -19,7 +19,7 @@ import editeurcircuit.impl.CircuitImpl.typeObject;
  *   <li>{@link editeurcircuit.Circuit#getEstDefinitPar <em>Est Definit Par</em>}</li>
  *   <li>{@link editeurcircuit.Circuit#getEstCompose <em>Est Compose</em>}</li>
  *   <li>{@link editeurcircuit.Circuit#getID <em>ID</em>}</li>
- *   <li>{@link editeurcircuit.Circuit#getPORTE_COMPTEUR <em>PORTE COMPTEUR</em>}</li>
+ *   <li>{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}</li>
  * </ul>
  * </p>
  *
@@ -143,31 +143,30 @@ public interface Circuit extends EObject {
 	void setID(int value);
 
 	/**
-	 * Returns the value of the '<em><b>PORTE COMPTEUR</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
+	 * Returns the value of the '<em><b>New EReference3</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>PORTE COMPTEUR</em>' attribute isn't clear,
+	 * If the meaning of the '<em>New EReference3</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>PORTE COMPTEUR</em>' attribute.
-	 * @see #setPORTE_COMPTEUR(int)
-	 * @see editeurcircuit.EditeurcircuitPackage#getCircuit_PORTE_COMPTEUR()
-	 * @model default="0"
+	 * @return the value of the '<em>New EReference3</em>' reference.
+	 * @see #setNewEReference3(TableVeriteObserver)
+	 * @see editeurcircuit.EditeurcircuitPackage#getCircuit_NewEReference3()
+	 * @model
 	 * @generated
 	 */
-	int getPORTE_COMPTEUR();
+	TableVeriteObserver getNewEReference3();
 
 	/**
-	 * Sets the value of the '{@link editeurcircuit.Circuit#getPORTE_COMPTEUR <em>PORTE COMPTEUR</em>}' attribute.
+	 * Sets the value of the '{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>PORTE COMPTEUR</em>' attribute.
-	 * @see #getPORTE_COMPTEUR()
+	 * @param value the new value of the '<em>New EReference3</em>' reference.
+	 * @see #getNewEReference3()
 	 * @generated
 	 */
-	void setPORTE_COMPTEUR(int value);
+	void setNewEReference3(TableVeriteObserver value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -203,13 +202,6 @@ public interface Circuit extends EObject {
 	 * @generated
 	 */
 	void SupprimerSignal(int p_ID);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void Sauvegarder();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

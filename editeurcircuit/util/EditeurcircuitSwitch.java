@@ -105,6 +105,19 @@ public class EditeurcircuitSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EditeurcircuitPackage.TABLE_VERITE_OBSERVER: {
+				TableVeriteObserver tableVeriteObserver = (TableVeriteObserver)theEObject;
+				T result = caseTableVeriteObserver(tableVeriteObserver);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EditeurcircuitPackage.TABLE_VERITE: {
+				TableVerite tableVerite = (TableVerite)theEObject;
+				T result = caseTableVerite(tableVerite);
+				if (result == null) result = caseTableVeriteObserver(tableVerite);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -196,6 +209,36 @@ public class EditeurcircuitSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePorte_NOT(Porte_NOT object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Table Verite Observer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Table Verite Observer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTableVeriteObserver(TableVeriteObserver object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Table Verite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Table Verite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTableVerite(TableVerite object) {
 		return null;
 	}
 

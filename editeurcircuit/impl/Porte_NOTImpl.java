@@ -31,7 +31,7 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ENTREE1_EDEFAULT = -1;
+	protected static final int ENTREE1_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
@@ -51,7 +51,7 @@ public class Porte_NOTImpl extends PorteImpl implements Porte_NOT {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SORTIE1_EDEFAULT = -1;
+	protected static final int SORTIE1_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getSortie1() <em>Sortie1</em>}' attribute.

@@ -11,8 +11,8 @@ package editeurcircuit;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link editeurcircuit.Porte_AND#getEntree1 <em>Entree1</em>}</li>
  *   <li>{@link editeurcircuit.Porte_AND#getEntree2 <em>Entree2</em>}</li>
+ *   <li>{@link editeurcircuit.Porte_AND#getEntree1 <em>Entree1</em>}</li>
  *   <li>{@link editeurcircuit.Porte_AND#getSortie1 <em>Sortie1</em>}</li>
  * </ul>
  * </p>
@@ -76,6 +76,7 @@ public interface Porte_AND extends Porte {
 
 	/**
 	 * Returns the value of the '<em><b>Sortie1</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sortie1</em>' attribute isn't clear,
@@ -85,7 +86,7 @@ public interface Porte_AND extends Porte {
 	 * @return the value of the '<em>Sortie1</em>' attribute.
 	 * @see #setSortie1(int)
 	 * @see editeurcircuit.EditeurcircuitPackage#getPorte_AND_Sortie1()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	int getSortie1();

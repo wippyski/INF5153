@@ -24,6 +24,7 @@
         eType="#//Porte" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newEReference3" eType="#//TableVeriteObserver"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Signal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -64,5 +65,18 @@
     <eLiterals name="AND"/>
     <eLiterals name="OR" value="1"/>
     <eLiterals name="NOT" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableVeriteObserver" abstract="true"
+      interface="true">
+    <eOperations name="attacher"/>
+    <eOperations name="detacher"/>
+    <eOperations name="notifier"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="liste" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"
+        transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableVerite" eSuperTypes="#//TableVeriteObserver">
+    <eOperations name="calculer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"
+        transient="true"/>
   </eClassifiers>
 </ecore:EPackage>

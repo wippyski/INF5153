@@ -23,6 +23,7 @@ package editeurcircuit;
 public interface Porte_NOT extends Porte {
 	/**
 	 * Returns the value of the '<em><b>Entree1</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Entree1</em>' attribute isn't clear,
@@ -32,7 +33,7 @@ public interface Porte_NOT extends Porte {
 	 * @return the value of the '<em>Entree1</em>' attribute.
 	 * @see #setEntree1(int)
 	 * @see editeurcircuit.EditeurcircuitPackage#getPorte_NOT_Entree1()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	int getEntree1();
@@ -49,6 +50,7 @@ public interface Porte_NOT extends Porte {
 
 	/**
 	 * Returns the value of the '<em><b>Sortie1</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sortie1</em>' attribute isn't clear,
@@ -58,7 +60,7 @@ public interface Porte_NOT extends Porte {
 	 * @return the value of the '<em>Sortie1</em>' attribute.
 	 * @see #setSortie1(int)
 	 * @see editeurcircuit.EditeurcircuitPackage#getPorte_NOT_Sortie1()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	int getSortie1();
