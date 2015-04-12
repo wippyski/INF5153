@@ -1,19 +1,7 @@
 package vue;
 
-/*    UQAM / Département d'informatique                           *
- *    INF5153 - Gr10  											  *
- *    Hiver 2015 / TP1 - Prototype                                *
- *    										                      * 
- * 	  Identifiant d'équipe: Gr07								  *
- *    Auteurs:	 												  *
- *    Maxime GAGNON (GAGM29038801)								  *
- *    Steeve SCHAWANN (SCHS25048606)							  *
- *    Jonathan MILOT (MILJ28019308)								  *
- * 	  Martin OUIMET (OUIM25097904) 								  *
- *    															  *									  
- * 																  */
 
-import java.awt.EventQueue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -35,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
-import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
 import editeurcircuit.impl.CircuitImpl;
@@ -51,31 +38,13 @@ public class EditeurVue extends JFrame implements Serializable {
 	 */
 	private static final long serialVersionUID = 593727486073662800L;
 
-	private JFrame frmEditeurDeCircuit;
+	public JFrame frmEditeurDeCircuit;
 	private JTable table;	
 	
 	public Circuit v_circuit;
 	JComboBox<String> myCombo = new JComboBox<String> ();
 	int caseVide;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {			
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {				
-					EditeurcircuitPackage.eINSTANCE.eClass();
-					//v_circuit.setSauvegarder(true);
-					EditeurVue window = new EditeurVue();
-					window.frmEditeurDeCircuit.setVisible(true);				
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
