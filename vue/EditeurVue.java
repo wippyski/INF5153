@@ -87,7 +87,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				
 				
 				if(!v_circuit.isSauvegarder()){
-					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
+					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continuer ?",
 							"alert", JOptionPane.OK_CANCEL_OPTION);
 					if(result != 0) return;
 				}
@@ -112,7 +112,7 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {		
 				
 				if(!v_circuit.isSauvegarder()){
-					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
+					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continuer ?",
 							"alert", JOptionPane.OK_CANCEL_OPTION);
 					if(result != 0) return;
 				}
@@ -171,6 +171,7 @@ public class EditeurVue extends JFrame implements Serializable {
 		
 		JMenu mnEditer = new JMenu("\u00C9diter");
 		menuBar.add(mnEditer);
+		
 		
 		JMenuItem mntmAnnuler = new JMenuItem("Annuler");
 		mnEditer.add(mntmAnnuler);
@@ -397,6 +398,7 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		);
 		
+		//Renommer un signal
 		JButton btnRenameSignal = new JButton("Renommer Entree/Sortie");
 		btnRenameSignal.setBounds(500, 181, 178, 23);
 		btnRenameSignal.setEnabled(true);
@@ -477,6 +479,7 @@ public class EditeurVue extends JFrame implements Serializable {
 			
 		});
 		
+		//Mettre à jour les liens du circuit
 		JButton btnMiseAJour = new JButton("Mise a jour des liens");
 		btnMiseAJour.setBounds(500, 245, 178, 23);		
 		frmEditeurDeCircuit.getContentPane().add(btnMiseAJour);
@@ -489,13 +492,29 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		);
 		
+		//Calculer la table de vérité
+		JButton btnCalculer = new JButton("Calculer la table");
+		btnCalculer.setBounds(500, 290, 178, 23);		
+		frmEditeurDeCircuit.getContentPane().add(btnCalculer);
+		btnCalculer.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+					faireLesLiens();
+					CommandeCalculer command_calcul = new CommandeCalculer(v_circuit);
+					command_calcul.execute();
+					
+			}
+
+		}
+		);
+		
 					    
 				    JScrollPane scrollPane = new JScrollPane();
 				    scrollPane.setBounds(22, 11, 452, 427);
 				    frmEditeurDeCircuit.getContentPane().add(scrollPane);
 				    table = new JTable();				   
 				    table.setModel(new DefaultTableModel(
-				    	new Object[50][50],
+				    	new Object[100][100],
 				    	new String[] {
 				    		"Source", "Destination"
 				    	}
