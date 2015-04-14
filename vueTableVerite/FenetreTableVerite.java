@@ -4,9 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import editeurcircuit.TableVeriteObserver;
 
 
-public class FenetreTableVerite extends JFrame {
+public class FenetreTableVerite extends JFrame implements Observeur {
 
 	/**
 	 * 
@@ -53,5 +54,13 @@ public class FenetreTableVerite extends JFrame {
 		));
 		scrollPane.setViewportView(table);
 	}
+	
+	public void update(TableVeriteObserver p_table){
+		/* Mettre à jour la JTable avec les valeurs de p_table */
+		throw new UnsupportedOperationException();	
+	
+	
+	}
+	
 }
 

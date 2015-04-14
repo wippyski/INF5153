@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import vueTableVerite.Observeur;
+
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
  * <em><b>Circuit</b></em>'. <!-- end-user-doc -->
