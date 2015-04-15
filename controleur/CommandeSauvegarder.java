@@ -46,5 +46,11 @@ public class CommandeSauvegarder implements Commande {
 		  }
 		}
 		
+	}
+
+	@Override
+	public void unexecute() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

@@ -29,4 +29,10 @@ public class CommandeNouveau implements Commande{
 			
 			return circuit; 
 	}
+
+
+	@Override
+	public void unexecute() {		
+		
+	}
 }

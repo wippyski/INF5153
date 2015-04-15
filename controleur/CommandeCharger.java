@@ -69,4 +69,9 @@ public class CommandeCharger implements Commande {
 			return circuit; 
 	}
 
+	@Override
+	public void unexecute() {		
+		
+	}
+
 }
