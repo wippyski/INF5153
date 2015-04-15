@@ -173,7 +173,7 @@ public interface Circuit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void AjouterPorte(TypePorte p_typePorte);
+	int AjouterPorte(TypePorte p_typePorte);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -194,7 +194,7 @@ public interface Circuit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void AjouterSignal(TypeSignal p_typeSignal);
+	int AjouterSignal(TypeSignal p_typeSignal);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -319,7 +319,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * 
 	 * @generated NOT
 	 */
-	public void AjouterPorte(TypePorte typePorte) {
+	public int AjouterPorte(TypePorte typePorte) {
 		if (this.getEstCompose().size() < 50) {
 			switch (typePorte) {
 			case AND:
@@ -329,7 +329,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				v_porte_and.setNom("P_AND" + portE_COMPTEUR);
 				estCompose.add(v_porte_and);
 				portE_COMPTEUR++;
-				break;
+				return v_porte_and.getID();
 			case OR:
 				Porte v_porte_or = EditeurcircuitFactory.eINSTANCE
 						.createPorte_OR();
@@ -337,7 +337,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				v_porte_or.setNom("P_OR" + portE_COMPTEUR);
 				estCompose.add(v_porte_or);
 				portE_COMPTEUR++;
-				break;
+				return v_porte_or.getID();
 			case NOT:
 				Porte v_porte_not = EditeurcircuitFactory.eINSTANCE
 						.createPorte_NOT();
@@ -345,11 +345,13 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				v_porte_not.setNom("P_NOT" + portE_COMPTEUR);
 				estCompose.add(v_porte_not);
 				portE_COMPTEUR++;
-				break;
+				return v_porte_not.getID();
 			}
 		} else {
 			System.out.println("Limite de portes atteintes.");
+			return -1;
 		}
+		return -1;
 	}
 
 	/**
@@ -438,11 +440,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * 
 	 * @generated NOT
 	 */
-	public void AjouterSignal(TypeSignal p_typeSignal) {
+	public int AjouterSignal(TypeSignal p_typeSignal) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		// throw new UnsupportedOperationException();
-
+int id = 0;
 		int v_nb_entree = 0;
 		int v_nb_sortie = 0;
 
@@ -472,6 +474,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			v_SignalToAdd.setNom("E" + v_SignalToAdd.getID());
 
 			estDefinitPar.add(v_SignalToAdd);
+			id = v_SignalToAdd.getID();
 		}
 		// Creation d'un signal sortie
 		else if (p_typeSignal == TypeSignal.SORTIE && v_nb_sortie < 5) {
@@ -486,6 +489,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			v_SignalToAdd.setNom("S" + v_SignalToAdd.getID());
 
 			estDefinitPar.add(v_SignalToAdd);
+			id = v_SignalToAdd.getID();
 		}
 		// ERREUR : Il existe déjà 5 signal de type p_typeSignal
 		else {
@@ -497,6 +501,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				System.out
 						.println("ERREUR : Nombre d'entrees limite atteint. L'ajout d'une entree est annulée.");
 		}
+		return id;
 	}
 
 	/**
