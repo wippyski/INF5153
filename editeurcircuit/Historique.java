@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class Historique {
 
-	private Stack<MementoCommande> pileUndo;
+	private Stack<MementoCommande> pileUndo;	
 	private Stack<MementoCommande> pileRedo;
 
 	public Historique() {
