@@ -159,7 +159,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	
-	protected TableVeriteObserver newEReference3;
+	protected TableVeriteObserver tableDeVerite;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -274,18 +274,18 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public TableVeriteObserver getNewEReference3() {
-		if (newEReference3 != null && newEReference3.eIsProxy()) {
-			InternalEObject oldNewEReference3 = (InternalEObject)newEReference3;
-			newEReference3 = (TableVeriteObserver)eResolveProxy(oldNewEReference3);
-			if (newEReference3 != oldNewEReference3) {
+	public TableVeriteObserver getTableDeVerite() {
+		if (tableDeVerite != null && tableDeVerite.eIsProxy()) {
+			InternalEObject oldNewEReference3 = (InternalEObject)tableDeVerite;
+			tableDeVerite = (TableVeriteObserver)eResolveProxy(oldNewEReference3);
+			if (tableDeVerite != oldNewEReference3) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3, oldNewEReference3, newEReference3));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3, oldNewEReference3, tableDeVerite));
 			}
 		}
-		return newEReference3;
+		return tableDeVerite;
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	public TableVeriteObserver basicGetNewEReference3() {
-		return newEReference3;
+		return tableDeVerite;
 	}
 
 	/**
@@ -302,11 +302,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNewEReference3(TableVeriteObserver newNewEReference3) {
-		TableVeriteObserver oldNewEReference3 = newEReference3;
-		newEReference3 = newNewEReference3;
+	public void setTableDeVerite(TableVeriteObserver newNewEReference3) {
+		TableVeriteObserver oldNewEReference3 = tableDeVerite;
+		tableDeVerite = newNewEReference3;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3, oldNewEReference3, newEReference3));
+			eNotify(new ENotificationImpl(this, Notification.SET, EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3, oldNewEReference3, tableDeVerite));
 	}
 
 	/**
@@ -615,7 +615,7 @@ int id = 0;
 			case EditeurcircuitPackage.CIRCUIT__ID:
 				return getID();
 			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
-				if (resolve) return getNewEReference3();
+				if (resolve) return getTableDeVerite();
 				return basicGetNewEReference3();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -647,7 +647,7 @@ int id = 0;
 				setID((Integer)newValue);
 				return;
 			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
-				setNewEReference3((TableVeriteObserver)newValue);
+				setTableDeVerite((TableVeriteObserver)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -676,7 +676,7 @@ int id = 0;
 				setID(ID_EDEFAULT);
 				return;
 			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
-				setNewEReference3((TableVeriteObserver)null);
+				setTableDeVerite((TableVeriteObserver)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -700,7 +700,7 @@ int id = 0;
 			case EditeurcircuitPackage.CIRCUIT__ID:
 				return id != ID_EDEFAULT;
 			case EditeurcircuitPackage.CIRCUIT__NEW_EREFERENCE3:
-				return newEReference3 != null;
+				return tableDeVerite != null;
 		}
 		return super.eIsSet(featureID);
 	}

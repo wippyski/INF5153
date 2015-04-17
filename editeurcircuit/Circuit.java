@@ -156,7 +156,7 @@ public interface Circuit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	TableVeriteObserver getNewEReference3();
+	TableVeriteObserver getTableDeVerite();
 
 	/**
 	 * Sets the value of the '{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}' reference.
@@ -166,7 +166,7 @@ public interface Circuit extends EObject {
 	 * @see #getNewEReference3()
 	 * @generated
 	 */
-	void setNewEReference3(TableVeriteObserver value);
+	void setTableDeVerite(TableVeriteObserver value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
