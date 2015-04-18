@@ -10,6 +10,7 @@ public class CommandeAjouterPorteNot implements Commande {
 	private Circuit circuit;
 	private Historique historique;
 	private int id;
+	private String nom;
 
 	public CommandeAjouterPorteNot(Circuit v_circuit, Historique v_historique) {
 		this.circuit = v_circuit;
@@ -18,11 +19,19 @@ public class CommandeAjouterPorteNot implements Commande {
 
 	@Override
 	public void execute() {
-		this.id = circuit.AjouterPorte(TypePorte.NOT);
+		int tempid;
+		if (this.id == 0) {
+			this.id = circuit.AjouterPorte(TypePorte.NOT);
+			this.nom = circuit.RechercherPorteParID(this.id).getNom();
+			MementoCommande memento = new MementoCommande();
+			memento.setAction(this);
+			historique.getPileUndo().add(memento);
+		} else {
+			tempid = circuit.AjouterPorte(TypePorte.NOT);
+			circuit.RechercherPorteParID(tempid).setID(this.id);
+			circuit.RechercherPorteParID(this.id).setNom(this.nom);
+		}
 		circuit.setSauvegarder(false);
-		MementoCommande memento = new MementoCommande();
-		memento.setAction(this);
-		historique.getPileUndo().add(memento);
 	}
 
 	@Override

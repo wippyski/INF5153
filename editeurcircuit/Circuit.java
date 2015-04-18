@@ -14,12 +14,13 @@ import editeurcircuit.impl.CircuitImpl.typeObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link editeurcircuit.Circuit#isValide <em>Valide</em>}</li>
- *   <li>{@link editeurcircuit.Circuit#isSauvegarder <em>Sauvegarder</em>}</li>
- *   <li>{@link editeurcircuit.Circuit#getEstDefinitPar <em>Est Definit Par</em>}</li>
- *   <li>{@link editeurcircuit.Circuit#getEstCompose <em>Est Compose</em>}</li>
- *   <li>{@link editeurcircuit.Circuit#getID <em>ID</em>}</li>
- *   <li>{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}</li>
+ * <li>{@link editeurcircuit.Circuit#isValide <em>Valide</em>}</li>
+ * <li>{@link editeurcircuit.Circuit#isSauvegarder <em>Sauvegarder</em>}</li>
+ * <li>{@link editeurcircuit.Circuit#getEstDefinitPar <em>Est Definit Par</em>}</li>
+ * <li>{@link editeurcircuit.Circuit#getEstCompose <em>Est Compose</em>}</li>
+ * <li>{@link editeurcircuit.Circuit#getID <em>ID</em>}</li>
+ * <li>{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}
+ * </li>
  * </ul>
  * </p>
  *
@@ -75,25 +76,29 @@ public interface Circuit extends EObject {
 	boolean isSauvegarder();
 
 	/**
-	 * Sets the value of the '{@link editeurcircuit.Circuit#isSauvegarder <em>Sauvegarder</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link editeurcircuit.Circuit#isSauvegarder
+	 * <em>Sauvegarder</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @param value the new value of the '<em>Sauvegarder</em>' attribute.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Sauvegarder</em>' attribute.
 	 * @see #isSauvegarder()
 	 * @generated
 	 */
 	void setSauvegarder(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Est Definit Par</b></em>' containment reference list.
-	 * The list contents are of type {@link editeurcircuit.Signal}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Est Definit Par</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link editeurcircuit.Signal}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Est Definit Par</em>' containment reference
 	 * list isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Est Definit Par</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Est Definit Par</em>' containment reference
+	 *         list.
 	 * @see editeurcircuit.EditeurcircuitPackage#getCircuit_EstDefinitPar()
 	 * @model containment="true" upper="10"
 	 * @generated
@@ -101,15 +106,17 @@ public interface Circuit extends EObject {
 	EList<Signal> getEstDefinitPar();
 
 	/**
-	 * Returns the value of the '<em><b>Est Compose</b></em>' containment reference list.
-	 * The list contents are of type {@link editeurcircuit.Porte}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Est Compose</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link editeurcircuit.Porte}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Est Compose</em>' containment reference list
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Est Compose</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Est Compose</em>' containment reference
+	 *         list.
 	 * @see editeurcircuit.EditeurcircuitPackage#getCircuit_EstCompose()
 	 * @model containment="true" upper="50"
 	 * @generated
@@ -134,9 +141,11 @@ public interface Circuit extends EObject {
 	int getID();
 
 	/**
-	 * Sets the value of the '{@link editeurcircuit.Circuit#getID <em>ID</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>ID</em>' attribute.
+	 * Sets the value of the '{@link editeurcircuit.Circuit#getID <em>ID</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>ID</em>' attribute.
 	 * @see #getID()
 	 * @generated
 	 */
@@ -150,26 +159,30 @@ public interface Circuit extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>New EReference3</em>' reference.
 	 * @see #setNewEReference3(TableVeriteObserver)
 	 * @see editeurcircuit.EditeurcircuitPackage#getCircuit_NewEReference3()
 	 * @model
 	 * @generated
 	 */
-	TableVeriteObserver getTableDeVerite();
+	TableVeriteObserver getNewEReference3();
 
 	/**
-	 * Sets the value of the '{@link editeurcircuit.Circuit#getNewEReference3 <em>New EReference3</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>New EReference3</em>' reference.
+	 * Sets the value of the '{@link editeurcircuit.Circuit#getNewEReference3
+	 * <em>New EReference3</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>New EReference3</em>' reference.
 	 * @see #getNewEReference3()
 	 * @generated
 	 */
-	void setTableDeVerite(TableVeriteObserver value);
+	void setNewEReference3(TableVeriteObserver value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -177,6 +190,7 @@ public interface Circuit extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -184,13 +198,15 @@ public interface Circuit extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	void SupprimerPorte(int p_ID);
 
-		/**
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -198,6 +214,7 @@ public interface Circuit extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -210,6 +227,14 @@ public interface Circuit extends EObject {
 	 * @generated NOT
 	 */
 	Porte RechercherPorteParID(int p_ID);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated NOT
+	 */
+	Signal RechercherSignalParID(int p_ID);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
