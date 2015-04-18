@@ -273,9 +273,10 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		return result.toString();
 	}
 	
+	//Construit la table
 	public void construct(int nbEntre, int nbSortie){
-
-		System.out.print("=============================================\n");
+		
+		table.clear(); 
 		
 		int nbLines = (int) Math.pow(2, nbEntre);
 		
@@ -295,14 +296,13 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		
 	}
 	
+	//Génère les valeurs par défaut dans la table 
 	public void setEntree(int nbEntree, int nbLignes){
 		
 		for(int i = 0; i < nbLignes; ++i){
 			
 			String bin = Integer.toBinaryString(i);
 			int k = bin.length() - 1; 
-			
-			System.out.println(bin);
 			
 			for(int j = nbEntree - 1; j >= 0 ; --j){
 				
@@ -317,16 +317,19 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 				k--;
 			}
 		}
+		
 		afficheTable(); 
 	}
 	
+	//affiche la table dans la console
 	void afficheTable(){
+		
+		System.out.println("---------------------NEW TABLE---------------------");
 		
 		for(int i = 0; i < table.size(); ++i){
 			for(int j = 0; j < table.get(i).size() ; ++j){
 				if(table.get(i).get(j) == true) System.out.print("1 ");
 				else System.out.print("0 ");
-				//System.out.print(table.get(i).get(j) + " ");
 			}
 				System.out.println("\n");
 		}

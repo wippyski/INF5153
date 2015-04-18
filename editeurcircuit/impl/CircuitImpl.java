@@ -624,6 +624,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				iter.remove();
 			}
 		}
+		
+		tableVerite.construct(getNbEntree(), getNbSortie());
 		// throw new UnsupportedOperationException();
 	}
 
