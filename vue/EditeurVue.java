@@ -674,7 +674,7 @@ public class EditeurVue extends JFrame implements Serializable {
 	}
 	
 	private void supprimerPorte(int idPorte, String nomPorte){
-		Commande command_suppPorte = new CommandeSupprimerPorte(v_circuit, idPorte, historique);						
+		Commande command_suppPorte = new CommandeSupprimerPorte(v_circuit, historique, idPorte);						
 		command_suppPorte.execute();
 		for(int i = 0; i < table.getRowCount(); ++i){
 			if(table.getValueAt(i, 0) !=null){

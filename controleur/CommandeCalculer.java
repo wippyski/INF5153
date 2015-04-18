@@ -14,4 +14,10 @@ public class CommandeCalculer implements Commande {
 	public void execute() {				
 				
 	}
+
+	@Override
+	public void unexecute() {
+		// TODO Auto-generated method stub
+		
+	}
 }

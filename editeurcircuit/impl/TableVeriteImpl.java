@@ -3,20 +3,21 @@
 package editeurcircuit.impl;
 
 import editeurcircuit.EditeurcircuitPackage;
+import editeurcircuit.Signal;
 import editeurcircuit.TableVerite;
 
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +42,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * @generated
 	 * @ordered
 	 */
-	protected EList liste;
+	protected EList<ArrayList<Boolean>> liste;
 
 	/**
 	 * The cached value of the '{@link #getTable() <em>Table</em>}' attribute.
@@ -51,7 +52,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * @generated
 	 * @ordered
 	 */
-	protected Map table;
+	protected Map<Integer, ArrayList<Boolean>> table;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -60,6 +61,10 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 */
 	protected TableVeriteImpl() {
 		super();
+		liste = new EObjectContainmentEList<ArrayList<Boolean>>(ArrayList.class, this,
+				EditeurcircuitPackage.TABLE_VERITE__LISTE);
+		
+		table = new TreeMap<Integer, ArrayList<Boolean>>(); 
 	}
 
 	/**
@@ -267,5 +272,67 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		result.append(')');
 		return result.toString();
 	}
+	
+	public void construct(int nbEntre, int nbSortie){
+
+		System.out.print("=============================================\n");
+		
+		int nbLines = (int) Math.pow(2, nbEntre);
+		
+		for(int i = 0; i < nbLines; ++i){
+			
+			table.put(i, new ArrayList<Boolean>());  
+			
+			for(int j = 0; j < nbEntre + nbSortie; ++j){
+				table.get(i).add(false);
+			}
+		}
+	
+		
+
+		
+		setEntree(nbEntre, nbLines);
+		
+	}
+	
+	public void setEntree(int nbEntree, int nbLignes){
+		
+		for(int i = 0; i < nbLignes; ++i){
+			
+			String bin = Integer.toBinaryString(i);
+			int k = bin.length() - 1; 
+			
+			System.out.println(bin);
+			
+			for(int j = nbEntree - 1; j >= 0 ; --j){
+				
+				if(k < 0 ){
+					break; 
+				}
+				
+				if(bin.charAt(k) == '1'){
+					table.get(i).set(j, true);
+				}
+
+				k--;
+			}
+		}
+		afficheTable(); 
+	}
+	
+	void afficheTable(){
+		
+		for(int i = 0; i < table.size(); ++i){
+			for(int j = 0; j < table.get(i).size() ; ++j){
+				if(table.get(i).get(j) == true) System.out.print("1 ");
+				else System.out.print("0 ");
+				//System.out.print(table.get(i).get(j) + " ");
+			}
+				System.out.println("\n");
+		}
+		
+	}
+		
+
 
 } //TableVeriteImpl

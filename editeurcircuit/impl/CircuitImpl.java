@@ -8,6 +8,7 @@ import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte;
 import editeurcircuit.Porte_AND;
 import editeurcircuit.Signal;
+import editeurcircuit.TableVerite;
 import editeurcircuit.TableVeriteObserver;
 import editeurcircuit.TypePorte;
 import editeurcircuit.TypeSignal;
@@ -176,6 +177,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 
 	protected TableVeriteObserver newEReference3;
 
+	protected TableVeriteImpl tableVerite;
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -191,6 +194,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				EditeurcircuitPackage.CIRCUIT__EST_DEFINIT_PAR);
 		estCompose = new EObjectContainmentEList<Porte>(Porte.class, this,
 				EditeurcircuitPackage.CIRCUIT__EST_COMPOSE);
+		
+		tableVerite = new TableVeriteImpl(); 
 
 		/*
 		 * // Ajout des signals réglementaires AjouterSignal(TypeSignal.ENTREE);
@@ -538,6 +543,10 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				System.out
 						.println("ERREUR : Nombre d'entrees limite atteint. L'ajout d'une entree est annulée.");
 		}
+		
+		
+		tableVerite.construct(getNbEntree(), getNbSortie());
+		
 		return id;
 	}
 
@@ -1045,6 +1054,36 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			}
 		}
 		return null;
+	}
+	
+	public int getNbEntree(){
+	
+			int v_nb_entree = 0;
+	
+			// Comptage du nombre de signal Entree
+			for (Signal s : getEstDefinitPar()) {
+	
+				if (s.getType() == TypeSignal.ENTREE)
+					v_nb_entree++;
+			}
+			
+			return v_nb_entree; 
+	
+	}
+
+	public int getNbSortie(){
+			
+			int v_nb_sortie = 0;
+		
+			// Comptage du nombre de signal Entree
+			for (Signal s : getEstDefinitPar()) {
+		
+				if (s.getType() == TypeSignal.SORTIE)
+					v_nb_sortie++;
+			}
+			
+			return v_nb_sortie; 
+		
 	}
 
 } // CircuitImpl
