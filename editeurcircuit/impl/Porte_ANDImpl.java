@@ -29,17 +29,17 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEntree2()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final int ENTREE2_EDEFAULT = 0;
+	protected static final int ENTREE2_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getEntree2() <em>Entree2</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEntree2()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
 	protected int entree2 = ENTREE2_EDEFAULT;
@@ -49,17 +49,17 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEntree1()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final int ENTREE1_EDEFAULT = 0;
+	protected static final int ENTREE1_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getEntree1() <em>Entree1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEntree1()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
 	protected int entree1 = ENTREE1_EDEFAULT;
@@ -69,17 +69,17 @@ public class Porte_ANDImpl extends PorteImpl implements Porte_AND {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSortie1()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final int SORTIE1_EDEFAULT = 0;
+	protected static final int SORTIE1_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getSortie1() <em>Sortie1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSortie1()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
 	protected int sortie1 = SORTIE1_EDEFAULT;

@@ -24,6 +24,7 @@ import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.Historique;
+import editeurcircuit.Porte;
 import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
 import editeurcircuit.impl.CircuitImpl;
@@ -518,6 +519,8 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		);
 		
+		//Afficherlien
+		
 		//Calculer la table de vérité
 		JButton btnCalculer = new JButton("Calculer la table");
 		btnCalculer.setBounds(500, 290, 178, 23);		
@@ -651,7 +654,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					command_ajoutLien.execute();
 				}
 			}
-		}		
+		}	
 	}
 
 	private void supprimerSignal(int idSignal, String nomSignal){

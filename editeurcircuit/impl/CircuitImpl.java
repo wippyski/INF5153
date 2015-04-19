@@ -545,7 +545,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		}
 		
 		
-		tableVerite.construct(getNbEntree(), getNbSortie());
+		tableVerite.construct(getNbEntree(), getNbSortie(), estDefinitPar);
 		
 		return id;
 	}
@@ -625,7 +625,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			}
 		}
 		
-		tableVerite.construct(getNbEntree(), getNbSortie());
+		tableVerite.construct(getNbEntree(), getNbSortie(), estDefinitPar);
 		// throw new UnsupportedOperationException();
 	}
 
@@ -953,6 +953,9 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				porte_gauche_not.setSortie1(signal_droite3.getID());
 				signal_droite3.setLien(porte_gauche_not.getID());
 				break;
+			default:
+				System.out.println("DEBUG");
+				break;
 			}
 
 		}
@@ -1086,6 +1089,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			
 			return v_nb_sortie; 
 		
+	}
+	
+	public void calculerTable(){
+		
+		tableVerite.calculer(estDefinitPar, estCompose, this.getNbEntree(), this.getNbSortie()); 
 	}
 
 } // CircuitImpl

@@ -32,7 +32,7 @@ public class PorteImpl extends MinimalEObjectImpl.Container implements Porte {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ID_EDEFAULT = 0;
+	protected static final int ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.

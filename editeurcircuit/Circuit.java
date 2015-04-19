@@ -268,4 +268,6 @@ public interface Circuit extends EObject {
 	 */
 	typeObject getTypeObjet(String p_Nom);
 
+	void calculerTable();
+
 } // Circuit

@@ -12,7 +12,7 @@ public class CommandeCalculer implements Commande {
 
 	@Override
 	public void execute() {				
-				
+				circuit.calculerTable(); 
 	}
 
 	@Override

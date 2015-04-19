@@ -3,8 +3,10 @@
 package editeurcircuit.impl;
 
 import editeurcircuit.EditeurcircuitPackage;
+import editeurcircuit.Porte;
 import editeurcircuit.Signal;
 import editeurcircuit.TableVerite;
+import editeurcircuit.TypeSignal;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -39,17 +41,17 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getListe()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected EList<ArrayList<Boolean>> liste;
+	protected EList<String> liste;
 
 	/**
 	 * The cached value of the '{@link #getTable() <em>Table</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTable()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
 	protected Map<Integer, ArrayList<Boolean>> table;
@@ -57,14 +59,18 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
+	
+	protected ArrayList<String> nomColonne; 
 	protected TableVeriteImpl() {
 		super();
-		liste = new EObjectContainmentEList<ArrayList<Boolean>>(ArrayList.class, this,
-				EditeurcircuitPackage.TABLE_VERITE__LISTE);
-		
+		nomColonne = new ArrayList<String>(); 
 		table = new TreeMap<Integer, ArrayList<Boolean>>(); 
+	}
+	
+	public ArrayList<String> getNomColonne(){
+		return nomColonne; 
 	}
 
 	/**
@@ -122,13 +128,113 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void calculer() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public void calculer(EList<Signal> p_signals, EList<Porte> p_portes, int nbEntree, int nbSortie ) {
+		
+		TreeMap<Integer, Boolean> mapID = new TreeMap<Integer, Boolean>(); 
+		
+		//Map<ID, valeur boolean>
+		for(Signal s : p_signals){
+			mapID.put(s.getID(), null);
+		}
+		
+		for(Porte p : p_portes){
+			mapID.put(p.getID(), null);
+		}
+		
+		for(int i = 0; i < table.size(); ++i){
+			calculerLigne(table.get(i), mapID, nbEntree, nbSortie, p_signals, p_portes);
+			
+			for(Map.Entry<Integer, Boolean> it : mapID.entrySet()){
+				it.setValue(null); 
+			}
+		}
+		
+		afficheTable(); 
 	}
+	
+	private void calculerLigne(ArrayList<Boolean> ligne, Map<Integer, Boolean> mapID, int nbEntree, int nbSortie, EList<Signal> p_signals, EList<Porte> p_portes){
+		
+		//Mettre entree dans mapID aux bonnes valeurs selon la ligne
+		int i = 0; 
+			
+		for(Signal s : p_signals){
+				
+			if(s.getType() == TypeSignal.ENTREE){
+
+				if(ligne.get(i) == true){
+					mapID.put(s.getID(), true);
+				}
+				else {
+					mapID.put(s.getID(), false); 
+				}
+				i++; 
+			}
+		}
+		
+		//Trouver la valeur de chacune des sorties pour la ligne
+		for(Signal s : p_signals){
+			
+			if(s.getType() == TypeSignal.SORTIE){
+				
+				int precedentID = s.getLien(); 
+				mapID.put(s.getID(), getPrecedentValue(precedentID, p_signals, p_portes, mapID));
+				
+			}
+			
+		}
+		
+		int j = nbEntree; 
+		
+		//Mettre la valeur des sorties dans la ligne de table
+		for(Map.Entry<Integer, Boolean> it : mapID.entrySet()){
+			int id = it.getKey(); 
+			
+			for(Signal s : p_signals){
+				if( id == s.getID()){
+					ligne.set(j, it.getValue());
+				}
+			}
+		}
+	}
+	
+	private boolean getPrecedentValue(int precedentID, EList<Signal> p_signals, EList<Porte> p_portes, Map<Integer, Boolean> mapID){
+		
+		Boolean temp_bool = null;
+		
+		//Cas où precedentId est un signal
+		
+		for(Signal s : p_signals){
+			if(s.getID() == precedentID){
+				temp_bool =  mapID.get(s.getID()); 
+			}
+		}
+		
+		
+		//Cas où precedentID est une porte
+		for(Porte p : p_portes){
+			if(p.getID() == precedentID){
+				if(p instanceof Porte_ANDImpl){
+					boolean value1 = getPrecedentValue( ((Porte_ANDImpl) p).getEntree1(), p_signals, p_portes, mapID);
+					boolean value2 = getPrecedentValue( ((Porte_ANDImpl) p).getEntree2(), p_signals, p_portes, mapID);  
+					temp_bool = (value1 && value2); 
+				}
+				if(p instanceof Porte_ORImpl){
+					boolean value1 = getPrecedentValue( ((Porte_ORImpl) p).getEntree1(), p_signals, p_portes, mapID);  
+					boolean value2 = getPrecedentValue( ((Porte_ORImpl) p).getEntree2(), p_signals, p_portes, mapID);  
+					temp_bool = (value1 || value2); 
+				}
+				if(p instanceof Porte_NOTImpl){
+					boolean value1 = getPrecedentValue( ((Porte_NOTImpl) p).getEntree1(), p_signals, p_portes, mapID);   
+					temp_bool = !value1;  
+				}
+			}
+		}
+		
+		return temp_bool;
+	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -274,9 +380,14 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	}
 	
 	//Construit la table
-	public void construct(int nbEntre, int nbSortie){
+	public void construct(int nbEntre, int nbSortie, EList<Signal> p_signals){
 		
 		table.clear(); 
+		nomColonne.clear(); 
+		
+		for(Signal s : p_signals){
+			nomColonne.add(s.getNom());
+		}
 		
 		int nbLines = (int) Math.pow(2, nbEntre);
 		
@@ -301,9 +412,12 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		
 		for(int i = 0; i < nbLignes; ++i){
 			
+			//On convertit la numéro de la ligne en binaire
 			String bin = Integer.toBinaryString(i);
 			int k = bin.length() - 1; 
 			
+			//On entre le numéro de la ligne en binaire dans la ligne 
+			//en partant de la droite
 			for(int j = nbEntree - 1; j >= 0 ; --j){
 				
 				if(k < 0 ){
@@ -326,6 +440,12 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		
 		System.out.println("---------------------NEW TABLE---------------------");
 		
+		for(String s : nomColonne){
+			System.out.print(s + " ");
+		}
+		
+		System.out.println();
+		
 		for(int i = 0; i < table.size(); ++i){
 			for(int j = 0; j < table.get(i).size() ; ++j){
 				if(table.get(i).get(j) == true) System.out.print("1 ");
@@ -335,7 +455,10 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		}
 		
 	}
+
+	public void calculer() {
+		// TODO Auto-generated method stub
 		
-
-
+	}
+	
 } //TableVeriteImpl
