@@ -63,6 +63,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 */
 	
 	protected ArrayList<String> nomColonne; 
+	
 	protected TableVeriteImpl() {
 		super();
 		nomColonne = new ArrayList<String>(); 
@@ -188,7 +189,15 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		int j = nbEntree; 
 		
 		//Mettre la valeur des sorties dans la ligne de table
-		for(Map.Entry<Integer, Boolean> it : mapID.entrySet()){
+		
+		for(Signal s : p_signals){
+			if(s.getType() == TypeSignal.SORTIE){
+				ligne.set(j, mapID.get(s.getID())); 
+				j++; 
+			}
+		}
+		
+		/*for(Map.Entry<Integer, Boolean> it : mapID.entrySet()){
 			int id = it.getKey(); 
 			
 			for(Signal s : p_signals){
@@ -196,7 +205,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 					ligne.set(j, it.getValue());
 				}
 			}
-		}
+		}*/
 	}
 	
 	private boolean getPrecedentValue(int precedentID, EList<Signal> p_signals, EList<Porte> p_portes, Map<Integer, Boolean> mapID){
@@ -443,6 +452,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		for(String s : nomColonne){
 			System.out.print(s + " ");
 		}
+
 		
 		System.out.println();
 		

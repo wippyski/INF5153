@@ -228,6 +228,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					Commande command_ajoutEntree = new CommandeAjouterEntree(v_circuit, historique);								
 					command_ajoutEntree.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
+					updateScrollList(myCombo);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");					
 				}

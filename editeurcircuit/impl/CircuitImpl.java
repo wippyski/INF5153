@@ -196,11 +196,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				EditeurcircuitPackage.CIRCUIT__EST_COMPOSE);
 		
 		tableVerite = new TableVeriteImpl(); 
-
-		/*
-		 * // Ajout des signals réglementaires AjouterSignal(TypeSignal.ENTREE);
-		 * AjouterSignal(TypeSignal.ENTREE); AjouterSignal(TypeSignal.SORTIE);
-		 */
 	}
 
 	/**
@@ -514,8 +509,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			v_SignalToAdd.setType(TypeSignal.ENTREE);
 
 			v_SignalToAdd.setNom("E" + v_SignalToAdd.getID());
-
-			estDefinitPar.add(v_SignalToAdd);
+			
+			estDefinitPar.add(v_nb_entree, v_SignalToAdd);
 			id = v_SignalToAdd.getID();
 		}
 		// Creation d'un signal sortie
