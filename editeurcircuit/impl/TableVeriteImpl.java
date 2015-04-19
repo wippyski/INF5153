@@ -89,7 +89,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * @generated
 	 */
 	public EList getListe() {
-		return liste;
+		return liste ;
 	}
 
 	/**
