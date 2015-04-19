@@ -10,7 +10,6 @@ import editeurcircuit.TypeSignal;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import vueTableVerite.Observeur;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +35,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
  * @generated
  */
 public class TableVeriteImpl extends MinimalEObjectImpl.Container implements TableVerite {
+	protected ArrayList<Observeur> listeObs = new ArrayList<Observeur>();
+	
 	/**
 	 * The cached value of the '{@link #getListe() <em>Liste</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -248,34 +249,34 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void attacher() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public void attacher(Observeur p_observeur) {
+		if( listeObs.contains( p_observeur ) == false )
+		{
+		   listeObs.add(p_observeur);
+		}
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void detacher() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public boolean detacher(Observeur p_observeur) {
+		return listeObs.remove( p_observeur );
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void notifier() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		  for( Observeur o : listeObs )
+		  {
+		   o.update(this);
+		  }
 	}
 
 	/**
@@ -355,13 +356,13 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case EditeurcircuitPackage.TABLE_VERITE___CALCULER:
-				calculer();
+				calculer(null, null, operationID, operationID);
 				return null;
 			case EditeurcircuitPackage.TABLE_VERITE___ATTACHER:
-				attacher();
+				attacher(null);
 				return null;
 			case EditeurcircuitPackage.TABLE_VERITE___DETACHER:
-				detacher();
+				detacher(null);
 				return null;
 			case EditeurcircuitPackage.TABLE_VERITE___NOTIFIER:
 				notifier();
@@ -466,9 +467,6 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		
 	}
 
-	public void calculer() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 } //TableVeriteImpl

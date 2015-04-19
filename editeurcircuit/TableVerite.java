@@ -4,6 +4,8 @@ package editeurcircuit;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Table Verite</b></em>'.
@@ -53,6 +55,6 @@ public interface TableVerite extends TableVeriteObserver {
 	 * @model
 	 * @generated
 	 */
-	void calculer();
+	void calculer(EList<Signal> p_signals, EList<Porte> p_portes, int nbEntree, int nbSortie);
 
 } // TableVerite

@@ -2,9 +2,12 @@
  */
 package editeurcircuit;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.ArrayList;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+
+import vueTableVerite.Observeur;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface TableVeriteObserver extends EObject {
+	
+	
 	/**
 	 * Returns the value of the '<em><b>Liste</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,7 +60,7 @@ public interface TableVeriteObserver extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void attacher();
+	void attacher(Observeur p_observeur);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,7 +68,7 @@ public interface TableVeriteObserver extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void detacher();
+	boolean detacher(Observeur p_observeur);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -18,12 +18,27 @@ public class CommandeRedo implements Commande {
 	@Override
 	public void execute() {
 		MementoCommande nextMemento = historique.getPileRedo().pop();
-		Commande nextCommande = nextMemento.getAction();		
-		nextCommande.execute();
+		Commande nextCommande = nextMemento.getAction();
+
+		if (nextCommande instanceof CommandeModifierNom) {
+			CommandeModifierNom nextCommande1 = (CommandeModifierNom) nextCommande;
+			nextCommande1.redo();
+		} else {
+			if (nextCommande instanceof CommandeAjouterLien) {
+				CommandeAjouterLien nextCommande1 = (CommandeAjouterLien) nextCommande;
+				nextCommande1.redo();
+			} else {
+				nextCommande.execute();
+			}
+		}
+
+		historique.getPileUndo().add(nextMemento);
+
 	}
 
 	@Override
 	public void unexecute() {
+
 	}
 
 }

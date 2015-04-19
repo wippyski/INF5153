@@ -30,6 +30,13 @@ public class CommandeModifierNom implements Commande {
 		historique.getPileUndo().add(memento);
 		circuit.setSauvegarder(false);
 	}
+	
+	
+	public void redo() {
+		this.oldnom = circuit.RechercherSignalParID(this.id).getNom();
+		circuit.RechercherSignalParID(this.id).setNom(this.newnom);			
+		circuit.setSauvegarder(false);
+	}
 
 	@Override
 	public void unexecute() {
