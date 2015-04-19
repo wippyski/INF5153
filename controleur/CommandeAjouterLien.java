@@ -28,10 +28,15 @@ public class CommandeAjouterLien implements Commande {
 		historique.getPileUndo().add(memento);
 	}
 
+	public void redo() {
+		circuit.ajouterLien(aGauche, aDroite);
+		circuit.setSauvegarder(false);
+	}
+
 	@Override
 	public void unexecute() {
-		// TODO Auto-generated method stub
-		
+		circuit.supprimerLien(aGauche, aDroite);
+		circuit.setSauvegarder(false);
 	}
 
 }
