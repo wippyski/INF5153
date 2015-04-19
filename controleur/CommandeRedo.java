@@ -17,15 +17,13 @@ public class CommandeRedo implements Commande {
 
 	@Override
 	public void execute() {
-		MementoCommande nextMemento = historique.getPileRedo().pop();		
+		MementoCommande nextMemento = historique.getPileRedo().pop();
 		Commande nextCommande = nextMemento.getAction();		
 		nextCommande.execute();
 	}
 
 	@Override
 	public void unexecute() {
-		
-
 	}
 
 }
