@@ -35,7 +35,10 @@ import vueTableVerite.Observeur;
  * @generated
  */
 public class TableVeriteImpl extends MinimalEObjectImpl.Container implements TableVerite {
-	protected ArrayList<Observeur> listeObs = new ArrayList<Observeur>();
+	
+	private static volatile TableVeriteImpl instance = null;
+	
+	protected ArrayList<Observeur> listeObs;
 	
 	/**
 	 * The cached value of the '{@link #getListe() <em>Liste</em>}' attribute.
@@ -65,11 +68,23 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	
 	protected ArrayList<String> nomColonne; 
 	
-	protected TableVeriteImpl() {
+	private TableVeriteImpl() {
 		super();
 		nomColonne = new ArrayList<String>(); 
 		table = new TreeMap<Integer, ArrayList<Boolean>>(); 
+		listeObs = new ArrayList<Observeur>();
 	}
+	
+	public final static TableVeriteImpl getInstance() {        
+        if (TableVeriteImpl.instance == null) {           
+           synchronized(TableVeriteImpl.class) {
+             if (TableVeriteImpl.instance == null) {
+            	 TableVeriteImpl.instance = new TableVeriteImpl();
+             }
+           }
+        }
+        return TableVeriteImpl.instance;
+    }
 	
 	public ArrayList<String> getNomColonne(){
 		return nomColonne; 
@@ -154,6 +169,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		}
 		
 		afficheTable(); 
+		notifier(); 
 	}
 	
 	private void calculerLigne(ArrayList<Boolean> ligne, Map<Integer, Boolean> mapID, int nbEntree, int nbSortie, EList<Signal> p_signals, EList<Porte> p_portes){
@@ -273,10 +289,11 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * @generated NOT
 	 */
 	public void notifier() {
-		  for( Observeur o : listeObs )
-		  {
-		   o.update(this);
-		  }
+		System.out.println(listeObs.isEmpty());
+		for( Observeur o : listeObs )
+		{		
+			o.update(this);		   
+		}
 	}
 
 	/**
@@ -442,7 +459,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 			}
 		}
 		
-		afficheTable(); 
+		//afficheTable(); 		
 	}
 	
 	//affiche la table dans la console

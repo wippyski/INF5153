@@ -8,9 +8,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
@@ -168,16 +166,6 @@ public class EditeurcircuitFactoryImpl extends EFactoryImpl implements Editeurci
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TableVerite createTableVerite() {
-		TableVeriteImpl tableVerite = new TableVeriteImpl();
-		return tableVerite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TypeSignal createTypeSignalFromString(EDataType eDataType, String initialValue) {
 		TypeSignal result = TypeSignal.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -231,6 +219,12 @@ public class EditeurcircuitFactoryImpl extends EFactoryImpl implements Editeurci
 	@Deprecated
 	public static EditeurcircuitPackage getPackage() {
 		return EditeurcircuitPackage.eINSTANCE;
+	}
+
+	@Override
+	public TableVerite createTableVerite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 } //EditeurcircuitFactoryImpl

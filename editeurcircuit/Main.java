@@ -15,23 +15,26 @@ package editeurcircuit;
 
 import java.awt.EventQueue;
 
+import editeurcircuit.impl.TableVeriteImpl;
 import vue.EditeurVue;
 import vueTableVerite.FenetreTableVerite;
 
-public class Main {
+public class Main {		
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {			
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {				
+				try {						
 					EditeurcircuitPackage.eINSTANCE.eClass();					
 					EditeurVue window = new EditeurVue();
 					window.frmEditeurDeCircuit.setVisible(true);
-					FenetreTableVerite window2 = new FenetreTableVerite();
-					window2.setVisible(true);
+					FenetreTableVerite affichage = new FenetreTableVerite();
+					TableVeriteImpl tableVerite = TableVeriteImpl.getInstance(); 						
+					tableVerite.attacher(affichage); //l'affichage de la table de vérité sera avertie des changements à la table					
+					affichage.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

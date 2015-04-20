@@ -8,7 +8,6 @@ import editeurcircuit.EditeurcircuitPackage;
 import editeurcircuit.Porte;
 import editeurcircuit.Porte_AND;
 import editeurcircuit.Signal;
-import editeurcircuit.TableVerite;
 import editeurcircuit.TableVeriteObserver;
 import editeurcircuit.TypePorte;
 import editeurcircuit.TypeSignal;
@@ -30,7 +29,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import vueTableVerite.Observeur;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -176,8 +174,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 */
 
 	protected TableVeriteObserver newEReference3;
-
-	protected TableVeriteImpl tableVerite;
+	
 	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -194,8 +191,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				EditeurcircuitPackage.CIRCUIT__EST_DEFINIT_PAR);
 		estCompose = new EObjectContainmentEList<Porte>(Porte.class, this,
 				EditeurcircuitPackage.CIRCUIT__EST_COMPOSE);
-		
-		tableVerite = new TableVeriteImpl(); 
+				
+			
 	}
 
 	/**
@@ -540,7 +537,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 		}
 		
 		
-		tableVerite.construct(getNbEntree(), getNbSortie(), estDefinitPar);
+		TableVeriteImpl.getInstance().construct(getNbEntree(), getNbSortie(), estDefinitPar);
 		
 		return id;
 	}
@@ -620,7 +617,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			}
 		}
 		
-		tableVerite.construct(getNbEntree(), getNbSortie(), estDefinitPar);
+		TableVeriteImpl.getInstance().construct(getNbEntree(), getNbSortie(), estDefinitPar);
 		// throw new UnsupportedOperationException();
 	}
 
@@ -1088,7 +1085,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	
 	public void calculerTable(){
 		
-		tableVerite.calculer(estDefinitPar, estCompose, this.getNbEntree(), this.getNbSortie()); 
+		TableVeriteImpl.getInstance().calculer(estDefinitPar, estCompose, this.getNbEntree(), this.getNbSortie()); 
 	}
 
 } // CircuitImpl
