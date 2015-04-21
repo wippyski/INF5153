@@ -678,6 +678,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					Commande command_ajoutLien = new CommandeAjouterLien(v_circuit, historique, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
 					command_ajoutLien.execute();
 					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
 				}
 			}
 		}	
