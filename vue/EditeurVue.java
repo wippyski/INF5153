@@ -327,7 +327,7 @@ public class EditeurVue extends JFrame implements Serializable {
 						if (v_nb_sortie > 1) {
 							id = v_sig_to_del.getID();
 							Commande command_supprSortie = new CommandeSupprimerSignal(
-									v_circuit, id);
+									v_circuit, historique, id);
 							command_supprSortie.execute();
 							FenetreTableVerite.getInstance()
 									.changementCircuit();
@@ -353,7 +353,7 @@ public class EditeurVue extends JFrame implements Serializable {
 						if (v_nb_entree > 1) {
 							id = v_sig_to_del.getID();
 							Commande command_supprEntree = new CommandeSupprimerSignal(
-									v_circuit, id);
+									v_circuit, historique, id);
 							command_supprEntree.execute();
 							FenetreTableVerite.getInstance()
 									.changementCircuit();
@@ -474,7 +474,7 @@ public class EditeurVue extends JFrame implements Serializable {
 								|| v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_OR || v_circuit
 								.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_NOT)) {
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
-					Commande command_supprimerPorte = new CommandeSupprimerPorteNot(
+					Commande command_supprimerPorte = new CommandeSupprimerPorte(
 							v_circuit, historique, id);
 					command_supprimerPorte.execute();
 					FenetreTableVerite.getInstance().changementCircuit();
@@ -562,10 +562,10 @@ public class EditeurVue extends JFrame implements Serializable {
 					}
 				}
 
-				v_id = s.getID();
+				v_id = v_Signal.getID();
 				Commande command_renommerSignal = new CommandeModifierNom(
 						v_circuit, historique, v_id, v_newName);
-				command_supprimerPorte.execute();
+				command_renommerSignal.execute();
 				v_Signal.setNom(v_newName);
 
 				updateScrollList(myCombo);
