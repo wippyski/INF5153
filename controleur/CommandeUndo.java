@@ -17,10 +17,13 @@ public class CommandeUndo implements Commande {
 
 	@Override
 	public void execute() {
-		MementoCommande lastMemento = historique.getPileUndo().pop();
-		Commande lastCommande = lastMemento.getAction();
-		historique.getPileRedo().add(lastMemento);
-		lastCommande.unexecute();
+		
+		if(historique.getPileUndo().size() > 0){
+			MementoCommande lastMemento = historique.getPileUndo().pop();
+			Commande lastCommande = lastMemento.getAction();
+			historique.getPileRedo().add(lastMemento);
+			lastCommande.unexecute();
+		}
 	}
 
 	@Override

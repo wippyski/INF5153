@@ -190,6 +190,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				command_undo.execute();	
 				FenetreTableVerite.getInstance().changementCircuit();
 				estValide(v_circuit);
+				updateScrollList(myCombo); 
 
 			}
 
@@ -206,6 +207,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				command_redo.execute();	
 				FenetreTableVerite.getInstance().changementCircuit();	
 				estValide(v_circuit);
+				updateScrollList(myCombo); 
 
 			}
 
@@ -542,9 +544,7 @@ public class EditeurVue extends JFrame implements Serializable {
 
 		}
 		);
-		
-		//Afficherlien
-		
+
 		//Calculer la table de vérité
 		btnCalculer = new JButton("Calculer la table");
 		btnCalculer.setBounds(500, 290, 178, 23);		

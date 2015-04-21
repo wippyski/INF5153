@@ -37,7 +37,7 @@ public class CommandeAjouterLien implements Commande {
 
 	@Override
 	public void unexecute() {
-		circuit.supprimerLien(aGauche, aDroite);
+		//circuit.supprimerLien(aGauche, aDroite);
 		circuit.setSauvegarder(false);
 		circuit.Valider();
 	}
