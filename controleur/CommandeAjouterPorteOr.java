@@ -32,11 +32,13 @@ public class CommandeAjouterPorteOr implements Commande {
 			circuit.RechercherPorteParID(this.id).setNom(this.nom);
 		}
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 	}
 
 	@Override
 	public void unexecute() {
 		circuit.SupprimerPorte(this.id);
+		circuit.Valider();
 	}
 
 	

@@ -33,11 +33,13 @@ public class CommandeAjouterEntree implements Commande {
 			circuit.RechercherSignalParID(this.id).setNom(this.nom);
 		}
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 	}
 
 	@Override
 	public void unexecute() {
 		circuit.SupprimerSignal(this.id);
+		circuit.Valider();
 	}
 
 

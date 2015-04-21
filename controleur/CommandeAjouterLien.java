@@ -23,6 +23,7 @@ public class CommandeAjouterLien implements Commande {
 	public void execute() {
 		circuit.ajouterLien(aGauche, aDroite);
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 		MementoCommande memento = new MementoCommande();
 		memento.setAction(this);
 		historique.getPileUndo().add(memento);
@@ -31,12 +32,14 @@ public class CommandeAjouterLien implements Commande {
 	public void redo() {
 		circuit.ajouterLien(aGauche, aDroite);
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 	}
 
 	@Override
 	public void unexecute() {
 		circuit.supprimerLien(aGauche, aDroite);
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 	}
 
 }

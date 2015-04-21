@@ -32,11 +32,13 @@ public class CommandeAjouterPorteAnd implements Commande {
 		memento.setAction(this);
 		historique.getPileUndo().add(memento);
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 	}
 
 	@Override
 	public void unexecute() {
 		circuit.SupprimerPorte(this.id);
+		circuit.Valider();
 
 	}
 

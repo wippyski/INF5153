@@ -33,6 +33,7 @@ public class CommandeSupprimerSignal implements Commande {
 		memento.setAction(this);
 		historique.getPileUndo().add(memento);
 		circuit.setSauvegarder(false);
+		circuit.Valider();
 	}
 
 	@Override
@@ -61,6 +62,7 @@ public class CommandeSupprimerSignal implements Commande {
 				circuit.ajouterLien(this.nom, lien);
 			}
 		}
+		circuit.Valider();
 	}
 
 	

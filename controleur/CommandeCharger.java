@@ -42,6 +42,7 @@ public class CommandeCharger implements Commande {
 			Resource v_circuitResource = resSet.getResource(fileURI,true);
 			circuit = (Circuit)v_circuitResource.getContents().get(0);			
 			circuit.setSauvegarder(true);	
+			circuit.Valider();
 			for(int i = 0; i<circuit.getEstDefinitPar().size(); ++i){
 				System.out.println(circuit.getEstDefinitPar().get(i).toString());
 			}
@@ -62,6 +63,7 @@ public class CommandeCharger implements Commande {
 			Resource v_circuitResource = resSet.getResource(fileURI,true);
 			circuit = (Circuit)v_circuitResource.getContents().get(0);			
 			circuit.setSauvegarder(true);	
+			circuit.Valider();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog( (Component) null,"ERREUR : Nom de fichier invalide.");
 		}
