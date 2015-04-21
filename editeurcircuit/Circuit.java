@@ -251,7 +251,15 @@ public interface Circuit extends EObject {
 	 * @generated NOT
 	 */
 	void ajouterLien(String p_Sortie, String p_Entree);
-
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated NOT
+	 */
+	void supprimerLien(String p_Gauche, String p_Droite);	
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -267,7 +275,5 @@ public interface Circuit extends EObject {
 	 * @generated NOT
 	 */
 	typeObject getTypeObjet(String p_Nom);
-
-	void calculerTable();
 
 } // Circuit
