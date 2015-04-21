@@ -1,13 +1,20 @@
 package vueTableVerite;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
 import editeurcircuit.TableVeriteObserver;
+import editeurcircuit.impl.TableVeriteImpl;
 
 
 public class FenetreTableVerite extends JFrame implements Observeur {
+	
+	
 
 	/**
 	 * 
@@ -41,6 +48,8 @@ public class FenetreTableVerite extends JFrame implements Observeur {
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		
+		// À l'ouverture de l'application, par défaut
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"0", "0", "ND"},
@@ -57,9 +66,34 @@ public class FenetreTableVerite extends JFrame implements Observeur {
 	
 	public void update(TableVeriteObserver p_table){
 		/* Mettre à jour la JTable avec les valeurs de p_table */
-		throw new UnsupportedOperationException();	
-	
-	
+		
+		if(p_table instanceof TableVeriteImpl)
+        {       
+			TableVeriteImpl t = (TableVeriteImpl) p_table;	
+			int nbCol = t.getNomColonne().size();
+			Map<Integer, ArrayList<Boolean>> tablemap = t.getTable();
+			String[] nomCol = new String[nbCol];
+			Object[][] data = new Object[(int) Math.pow(2, t.getNbEntrees())][nbCol];			
+						
+			
+			//Set les noms des colonnes du tableau
+			for(int i = 0; i < nbCol ; ++i){
+				nomCol[i] = t.getNomColonne().get(i);
+			}			
+			
+			//Remplit le tableau 			
+			for(int i = 0; i < tablemap.size(); ++i){
+				for(int j = 0; j < tablemap.get(i).size() ; ++j){
+					if(tablemap.get(i).get(j) == true){
+						data[i][j]= "1";
+					} else {
+						data[i][j]= "0";
+					}
+				}					
+			}
+			
+			table.setModel(new DefaultTableModel(data, nomCol));    
+        }      
 	}
 	
 }

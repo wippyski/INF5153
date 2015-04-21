@@ -40,6 +40,9 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	
 	protected ArrayList<Observeur> listeObs;
 	
+	private int nbEntrees;
+	private int nbSorties;
+	
 	/**
 	 * The cached value of the '{@link #getListe() <em>Liste</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,7 +75,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 		super();
 		nomColonne = new ArrayList<String>(); 
 		table = new TreeMap<Integer, ArrayList<Boolean>>(); 
-		listeObs = new ArrayList<Observeur>();
+		listeObs = new ArrayList<Observeur>();		
 	}
 	
 	public final static TableVeriteImpl getInstance() {        
@@ -88,6 +91,14 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	
 	public ArrayList<String> getNomColonne(){
 		return nomColonne; 
+	}
+	
+	public int getNbEntrees(){
+		return nbEntrees; 
+	}
+	
+	public int getNbSorties(){
+		return nbSorties; 
 	}
 
 	/**
@@ -148,7 +159,8 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * @generated NOT
 	 */
 	public void calculer(EList<Signal> p_signals, EList<Porte> p_portes, int nbEntree, int nbSortie ) {
-		
+		nbEntrees = nbEntree;
+		nbSorties = nbSortie;
 		TreeMap<Integer, Boolean> mapID = new TreeMap<Integer, Boolean>(); 
 		
 		//Map<ID, valeur boolean>
@@ -168,7 +180,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 			}
 		}
 		
-		afficheTable(); 
+		//afficheTable(); 
 		notifier(); 
 	}
 	
@@ -288,8 +300,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void notifier() {
-		System.out.println(listeObs.isEmpty());
+	public void notifier() {		
 		for( Observeur o : listeObs )
 		{		
 			o.update(this);		   
@@ -457,32 +468,30 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 
 				k--;
 			}
-		}
-		
-		//afficheTable(); 		
+		}						
 	}
 	
 	//affiche la table dans la console
-	void afficheTable(){
-		
-		System.out.println("---------------------NEW TABLE---------------------");
-		
-		for(String s : nomColonne){
-			System.out.print(s + " ");
-		}
-
-		
-		System.out.println();
-		
-		for(int i = 0; i < table.size(); ++i){
-			for(int j = 0; j < table.get(i).size() ; ++j){
-				if(table.get(i).get(j) == true) System.out.print("1 ");
-				else System.out.print("0 ");
-			}
-				System.out.println("\n");
-		}
-		
-	}
+//	void afficheTable(){
+//		
+//		System.out.println("---------------------NEW TABLE---------------------");
+//		
+//		for(String s : nomColonne){
+//			System.out.print(s + " ");
+//		}
+//
+//		
+//		System.out.println();
+//		
+//		for(int i = 0; i < table.size(); ++i){
+//			for(int j = 0; j < table.get(i).size() ; ++j){
+//				if(table.get(i).get(j) == true) System.out.print("1 ");
+//				else System.out.print("0 ");
+//			}
+//				System.out.println("\n");
+//		}
+//		
+//	}
 
 
 	
