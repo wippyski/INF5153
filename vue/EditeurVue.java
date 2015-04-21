@@ -247,6 +247,7 @@ public class EditeurVue extends JFrame implements Serializable {
 							.showMessageDialog(frmEditeurDeCircuit,
 									"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
 				}
+				updateScrollList(myCombo);
 
 			}
 		});
@@ -283,6 +284,7 @@ public class EditeurVue extends JFrame implements Serializable {
 									"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
 
 				}
+				updateScrollList(myCombo);
 			}
 
 		});
@@ -371,6 +373,7 @@ public class EditeurVue extends JFrame implements Serializable {
 									"Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
 
 				}
+				updateScrollList(myCombo);
 			}
 
 		});
@@ -397,7 +400,7 @@ public class EditeurVue extends JFrame implements Serializable {
 									"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 
 				}
-
+				updateScrollList(myCombo);
 			}
 		});
 
@@ -423,6 +426,7 @@ public class EditeurVue extends JFrame implements Serializable {
 									"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 
 				}
+				updateScrollList(myCombo);
 			}
 
 		});
@@ -448,6 +452,7 @@ public class EditeurVue extends JFrame implements Serializable {
 							.showMessageDialog(frmEditeurDeCircuit,
 									"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 				}
+				updateScrollList(myCombo);
 			}
 
 		});
@@ -484,6 +489,7 @@ public class EditeurVue extends JFrame implements Serializable {
 							.showMessageDialog(frmEditeurDeCircuit,
 									"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
 				}
+				updateScrollList(myCombo);
 			}
 
 		});
