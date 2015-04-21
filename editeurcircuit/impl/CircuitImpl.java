@@ -575,7 +575,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 									v_compteur_entree++;
 							}
 							
-							if (v_compteur_entree != 1){
+							if (v_compteur_entree > 1){
 								v_valide = false;
 								break;	
 							}
@@ -592,6 +592,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				
 				
 		 } // Fin si v_valide == true
+		
+		if (v_valide == true)
+			 System.out.println("valide = vrai");
+		else
+			System.out.println("valide = faux");
 			
 		this.setValide(v_valide);
 		
