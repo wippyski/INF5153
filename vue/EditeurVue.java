@@ -1,7 +1,5 @@
 package vue;
 
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -32,7 +30,6 @@ import editeurcircuit.impl.Porte_ANDImpl;
 import editeurcircuit.impl.Porte_NOTImpl;
 import editeurcircuit.impl.Porte_ORImpl;
 
-
 public class EditeurVue extends JFrame implements Serializable {
 
 	/**
@@ -41,19 +38,18 @@ public class EditeurVue extends JFrame implements Serializable {
 	private static final long serialVersionUID = 593727486073662800L;
 
 	public JFrame frmEditeurDeCircuit;
-	private JTable table;	
+	private JTable table;
 	private JButton btnCalculer;
 	public Circuit v_circuit;
-	JComboBox<String> myCombo = new JComboBox<String> ();
+	JComboBox<String> myCombo = new JComboBox<String>();
 	int caseVide;
-	
-	Historique historique = new Historique();
 
+	Historique historique = new Historique();
 
 	/**
 	 * Create the application.
 	 */
-	public EditeurVue() {		
+	public EditeurVue() {
 		initialize();
 	}
 
@@ -61,168 +57,172 @@ public class EditeurVue extends JFrame implements Serializable {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		v_circuit = EditeurcircuitFactory.eINSTANCE.createCircuit();
 		v_circuit.setSauvegarder(true);
-		
+
 		// Ajout des signaux réglementaires
 		v_circuit.AjouterSignal(TypeSignal.ENTREE);
 		v_circuit.AjouterSignal(TypeSignal.ENTREE);
 		v_circuit.AjouterSignal(TypeSignal.SORTIE);
 		updateScrollList(myCombo); // Faire la liste déroulante
-				
+
 		frmEditeurDeCircuit = new JFrame();
 		frmEditeurDeCircuit.setTitle("\u00C9diteur de circuit");
 		frmEditeurDeCircuit.setBounds(100, 100, 694, 526);
 		frmEditeurDeCircuit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frmEditeurDeCircuit.setJMenuBar(menuBar);
-		
+
 		JMenu mnFichier = new JMenu("Fichier");
 		menuBar.add(mnFichier);
-		
-		//Bouton pour charger un nouveau circuit vierge
+
+		// Bouton pour charger un nouveau circuit vierge
 		JMenuItem mntmNouveauCircuit = new JMenuItem("Nouveau circuit");
 		mnFichier.add(mntmNouveauCircuit);
-		mntmNouveauCircuit.addActionListener( new ActionListener() {
+		mntmNouveauCircuit.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {	
-				
-				
-				if(!v_circuit.isSauvegarder()){
-					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continuer ?",
-							"alert", JOptionPane.OK_CANCEL_OPTION);
-					if(result != 0) return;
+			public void actionPerformed(ActionEvent e) {
+
+				if (!v_circuit.isSauvegarder()) {
+					int result = JOptionPane
+							.showConfirmDialog(
+									frmEditeurDeCircuit,
+									"Attention, le circuit n'a pas été sauvegardé. Voulez-vous continuer ?",
+									"alert", JOptionPane.OK_CANCEL_OPTION);
+					if (result != 0)
+						return;
 				}
-				
+
 				CommandeNouveau command_new = new CommandeNouveau(v_circuit);
 				v_circuit = command_new.execute2();
-				
+
 				clearTable();
-				updateScrollList(myCombo); 
-				FenetreTableVerite.getInstance().changementCircuit();	
-				estValide(v_circuit);
-			}
-
-		}
-		);
-		
-		
-		//Bouton du menu pour charger un circuit
-		JMenuItem mntmChargerCircuit = new JMenuItem("Charger circuit");
-		mnFichier.add(mntmChargerCircuit);
-		mntmChargerCircuit.addActionListener( new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {		
-				
-				if(!v_circuit.isSauvegarder()){
-					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continuer ?",
-							"alert", JOptionPane.OK_CANCEL_OPTION);
-					if(result != 0) return;
-				}
-				
-				JFileChooser fc = new JFileChooser();
-				
-				if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-					File file = fc.getSelectedFile();
-					CommandeCharger command_load = new CommandeCharger(v_circuit);
-					v_circuit = command_load.execute2(file);	
-					
-					updateScrollList(myCombo);
-					chargerTable();
-					FenetreTableVerite.getInstance().changementCircuit();	
-					estValide(v_circuit);
-				}			
-
-			}
-
-		}
-		);
-		
-		//Bouton du menu pour sauvegarder le circuit
-		JMenuItem mntmSauvegarderCircuit = new JMenuItem("Sauvegarder circuit");
-		mnFichier.add(mntmSauvegarderCircuit);
-		mntmSauvegarderCircuit.addActionListener( new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {	
-				faireLesLiens();
-				Commande command_save = new CommandeSauvegarder(v_circuit);
-				command_save.execute();				
-
-			}
-
-		}
-		);
-		
-		//Quitter l'application
-		JMenuItem mntmQuitter = new JMenuItem("Quitter");
-		mnFichier.add(mntmQuitter);
-		mntmQuitter.addActionListener( new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {	
-				
-				if(!v_circuit.isSauvegarder()){
-					int result = JOptionPane.showConfirmDialog(frmEditeurDeCircuit, "Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
-							"alert", JOptionPane.OK_CANCEL_OPTION);
-					if(result != 0) return;
-				}
-				
-				Commande command_quit = new CommandeQuitter();
-				command_quit.execute();				
-
-			}
-
-		}
-		);
-		
-		JMenu mnEditer = new JMenu("\u00C9diter");
-		menuBar.add(mnEditer);
-		
-		
-		JMenuItem mntmAnnuler = new JMenuItem("Annuler");
-		mnEditer.add(mntmAnnuler);
-		mntmAnnuler.addActionListener( new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {				
-				
-				Commande command_undo = new CommandeUndo(v_circuit, historique);
-				command_undo.execute();	
+				updateScrollList(myCombo);
 				FenetreTableVerite.getInstance().changementCircuit();
 				estValide(v_circuit);
-				updateScrollList(myCombo); 
+			}
+
+		});
+
+		// Bouton du menu pour charger un circuit
+		JMenuItem mntmChargerCircuit = new JMenuItem("Charger circuit");
+		mnFichier.add(mntmChargerCircuit);
+		mntmChargerCircuit.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				if (!v_circuit.isSauvegarder()) {
+					int result = JOptionPane
+							.showConfirmDialog(
+									frmEditeurDeCircuit,
+									"Attention, le circuit n'a pas été sauvegardé. Voulez-vous continuer ?",
+									"alert", JOptionPane.OK_CANCEL_OPTION);
+					if (result != 0)
+						return;
+				}
+
+				JFileChooser fc = new JFileChooser();
+
+				if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+					CommandeCharger command_load = new CommandeCharger(
+							v_circuit);
+					v_circuit = command_load.execute2(file);
+
+					updateScrollList(myCombo);
+					chargerTable();
+					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
+				}
 
 			}
 
-		}
-		);
-		
+		});
+
+		// Bouton du menu pour sauvegarder le circuit
+		JMenuItem mntmSauvegarderCircuit = new JMenuItem("Sauvegarder circuit");
+		mnFichier.add(mntmSauvegarderCircuit);
+		mntmSauvegarderCircuit.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				faireLesLiens();
+				Commande command_save = new CommandeSauvegarder(v_circuit);
+				command_save.execute();
+
+			}
+
+		});
+
+		// Quitter l'application
+		JMenuItem mntmQuitter = new JMenuItem("Quitter");
+		mnFichier.add(mntmQuitter);
+		mntmQuitter.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				if (!v_circuit.isSauvegarder()) {
+					int result = JOptionPane
+							.showConfirmDialog(
+									frmEditeurDeCircuit,
+									"Attention, le circuit n'a pas été sauvegardé. Voulez-vous continué ?",
+									"alert", JOptionPane.OK_CANCEL_OPTION);
+					if (result != 0)
+						return;
+				}
+
+				Commande command_quit = new CommandeQuitter();
+				command_quit.execute();
+
+			}
+
+		});
+
+		JMenu mnEditer = new JMenu("\u00C9diter");
+		menuBar.add(mnEditer);
+
+		JMenuItem mntmAnnuler = new JMenuItem("Annuler");
+		mnEditer.add(mntmAnnuler);
+		mntmAnnuler.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				Commande command_undo = new CommandeUndo(v_circuit, historique);
+				command_undo.execute();
+				FenetreTableVerite.getInstance().changementCircuit();
+				estValide(v_circuit);
+				updateScrollList(myCombo);
+
+			}
+
+		});
+
 		JMenuItem mntmRefaire = new JMenuItem("Refaire");
 		mnEditer.add(mntmRefaire);
-		mntmRefaire.addActionListener( new ActionListener() {
+		mntmRefaire.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
-				
+			public void actionPerformed(ActionEvent e) {
+
 				Commande command_redo = new CommandeRedo(v_circuit, historique);
-				command_redo.execute();	
-				FenetreTableVerite.getInstance().changementCircuit();	
+				command_redo.execute();
+				FenetreTableVerite.getInstance().changementCircuit();
 				estValide(v_circuit);
-				updateScrollList(myCombo); 
+				updateScrollList(myCombo);
 
 			}
 
-		}
-		);
+		});
 		frmEditeurDeCircuit.getContentPane().setLayout(null);
-		
-		//Bouton Ajouter Entrée
+
+		// Bouton Ajouter Entrée
 		JButton btnAjouterEntree = new JButton("Ajouter Entr\u00E9e");
 		btnAjouterEntree.setBounds(500, 26, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterEntree);
 		btnAjouterEntree.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int v_nb_entree = 0;
 
 				// Comptage du nombre de signal Entree
@@ -231,29 +231,34 @@ public class EditeurVue extends JFrame implements Serializable {
 					if (s.getType() == TypeSignal.ENTREE)
 						v_nb_entree++;
 				}
-				
-				if(v_nb_entree < 5 ){
-					Commande command_ajoutEntree = new CommandeAjouterEntree(v_circuit, historique);								
-					command_ajoutEntree.execute();	
-					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
+
+				if (v_nb_entree < 5) {
+					Commande command_ajoutEntree = new CommandeAjouterEntree(
+							v_circuit, historique);
+					command_ajoutEntree.execute();
+					myCombo.addItem(v_circuit.getEstDefinitPar()
+							.get(v_circuit.getEstDefinitPar().size() - 1)
+							.getNom());
 					updateScrollList(myCombo);
-					FenetreTableVerite.getInstance().changementCircuit();	
+					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");					
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");
 				}
 
 			}
 		});
-		
-		//Bouton Ajouter Sortie
+
+		// Bouton Ajouter Sortie
 		JButton btnAjouterSortie = new JButton("Ajouter Sortie");
 		btnAjouterSortie.setBounds(500, 47, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterSortie);
 		btnAjouterSortie.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int v_nb_sortie = 0;
 
 				// Comptage du nombre de signal Sortie
@@ -262,165 +267,192 @@ public class EditeurVue extends JFrame implements Serializable {
 					if (s.getType() == TypeSignal.SORTIE)
 						v_nb_sortie++;
 				}
-				
-				if(v_nb_sortie < 5){
-					Commande command_ajoutSortie = new CommandeAjouterSortie(v_circuit, historique);								
-					command_ajoutSortie.execute();	
-					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
+
+				if (v_nb_sortie < 5) {
+					Commande command_ajoutSortie = new CommandeAjouterSortie(
+							v_circuit, historique);
+					command_ajoutSortie.execute();
+					myCombo.addItem(v_circuit.getEstDefinitPar()
+							.get(v_circuit.getEstDefinitPar().size() - 1)
+							.getNom());
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
-					
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
+
 				}
 			}
 
-		}
-		);
-		
-		//Bouton Supprimer Signal (entree ou sortie)
-		JButton btnSupprimerEntreeSortie = new JButton("Supprimer Entr\u00E9e/Sortie");
+		});
+
+		// Bouton Supprimer Signal (entree ou sortie)
+		JButton btnSupprimerEntreeSortie = new JButton(
+				"Supprimer Entr\u00E9e/Sortie");
 		btnSupprimerEntreeSortie.setBounds(500, 69, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnSupprimerEntreeSortie);
 		btnSupprimerEntreeSortie.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-					int id;
-					String nomSignal = null;
-					if(table.getSelectedRow() != -1) {						
-						if(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != null){
-							nomSignal = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+				int id;
+				String nomSignal = null;
+				if (table.getSelectedRow() != -1) {
+					if (table.getValueAt(table.getSelectedRow(),
+							table.getSelectedColumn()) != null) {
+						nomSignal = table.getValueAt(table.getSelectedRow(),
+								table.getSelectedColumn()).toString();
+					}
+				}
+
+				if (nomSignal != null
+						&& (v_circuit.getTypeObjet(nomSignal) == CircuitImpl.typeObject.Signal_ENTREE || v_circuit
+								.getTypeObjet(nomSignal) == CircuitImpl.typeObject.Signal_SORTIE)) {
+
+					// Validation qu'il reste plus d'une entree/sortie
+					Signal v_sig_to_del = v_circuit
+							.RechercherSignalParNom(nomSignal);
+
+					// Sortie
+					if (v_sig_to_del.getType() == TypeSignal.SORTIE) {
+						int v_nb_sortie = 0;
+
+						// Comptage du nombre de signal Sortie
+						for (Signal s : v_circuit.getEstDefinitPar()) {
+
+							if (s.getType() == TypeSignal.SORTIE)
+								v_nb_sortie++;
+						}
+
+						if (v_nb_sortie > 1) {
+							id = v_sig_to_del.getID();
+							Commande command_supprSortie = new CommandeSupprimerSignal(
+									v_circuit, id);
+							command_supprSortie.execute();
+							FenetreTableVerite.getInstance()
+									.changementCircuit();
+							estValide(v_circuit);
+						} else {
+							JOptionPane
+									.showMessageDialog(frmEditeurDeCircuit,
+											"Erreur. Il doit rester au moins une sortie dans le circuit.");
 						}
 					}
-					
-					if(nomSignal != null && (v_circuit.getTypeObjet(nomSignal) == CircuitImpl.typeObject.Signal_ENTREE || 
-											 v_circuit.getTypeObjet(nomSignal) == CircuitImpl.typeObject.Signal_SORTIE)){	
-						
-						//Validation qu'il reste plus d'une entree/sortie
-						Signal v_sig_to_del = v_circuit.RechercherSignalParNom(nomSignal); 
-						
-						//Sortie
-						if(v_sig_to_del.getType() == TypeSignal.SORTIE){
-							int v_nb_sortie = 0;
-							
-							// Comptage du nombre de signal Sortie
-							for (Signal s : v_circuit.getEstDefinitPar()) {
-	
-								if (s.getType() == TypeSignal.SORTIE)
-									v_nb_sortie++;
-							}
-							
-							if(v_nb_sortie > 1){
-								id = v_sig_to_del.getID();
-								supprimerSignal(id, nomSignal);
-								FenetreTableVerite.getInstance().changementCircuit();
-								estValide(v_circuit);
-							} else {
-								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une sortie dans le circuit.");
-							}
+
+					// Entree
+					else {
+						int v_nb_entree = 0;
+
+						// Comptage du nombre de signal Sortie
+						for (Signal s : v_circuit.getEstDefinitPar()) {
+
+							if (s.getType() == TypeSignal.ENTREE)
+								v_nb_entree++;
 						}
-						
-						//Entree
-						else {
-							int v_nb_entree = 0;
-							
-							// Comptage du nombre de signal Sortie
-							for (Signal s : v_circuit.getEstDefinitPar()) {
-	
-								if (s.getType() == TypeSignal.ENTREE)
-									v_nb_entree++;
-							}
-							
-							if(v_nb_entree > 1){
-								id = v_sig_to_del.getID();
-								supprimerSignal(id, nomSignal);
-								FenetreTableVerite.getInstance().changementCircuit();
-								estValide(v_circuit);
-							} else {
-								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une entree dans le circuit.");
-							}
-						}				
-						
-						
-					} else {
-						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
-						
-					}					
+
+						if (v_nb_entree > 1) {
+							id = v_sig_to_del.getID();
+							Commande command_supprEntree = new CommandeSupprimerSignal(
+									v_circuit, id);
+							command_supprEntree.execute();
+							FenetreTableVerite.getInstance()
+									.changementCircuit();
+							estValide(v_circuit);
+						} else {
+							JOptionPane
+									.showMessageDialog(frmEditeurDeCircuit,
+											"Erreur. Il doit rester au moins une entree dans le circuit.");
+						}
+					}
+
+				} else {
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"Ceci n'est pas un signal valide. Sélectionner un signal dans le tableau.");
+
+				}
 			}
 
-		}
-		);
-		
-		
-		
-		//Bouton Ajouter Porte AND
+		});
+
+		// Bouton Ajouter Porte AND
 		JButton btnAjouterPorteAnd = new JButton("Ajouter Porte AND");
 		btnAjouterPorteAnd.setBounds(500, 114, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterPorteAnd);
 		btnAjouterPorteAnd.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
-				if(v_circuit.getEstCompose().size() < 50){
-					Commande command_ajoutPorteAND = new CommandeAjouterPorteAnd(v_circuit, historique);								
-					command_ajoutPorteAND.execute();		
-					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+
+				if (v_circuit.getEstCompose().size() < 50) {
+					Commande command_ajoutPorteAND = new CommandeAjouterPorteAnd(
+							v_circuit, historique);
+					command_ajoutPorteAND.execute();
+					myCombo.addItem(v_circuit.getEstCompose()
+							.get(v_circuit.getEstCompose().size() - 1).getNom());
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
-					
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+
 				}
 
-		}
+			}
 		});
-		
-		//Bouton Ajouter Porte OR
+
+		// Bouton Ajouter Porte OR
 		JButton btnAjouterPorteOr = new JButton("Ajouter Porte OR");
 		btnAjouterPorteOr.setBounds(500, 136, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterPorteOr);
 		btnAjouterPorteOr.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
-				if(v_circuit.getEstCompose().size() < 50){
-					Commande command_ajoutPorteOR = new CommandeAjouterPorteOr(v_circuit, historique);								
-					command_ajoutPorteOR.execute();	
-					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+
+				if (v_circuit.getEstCompose().size() < 50) {
+					Commande command_ajoutPorteOR = new CommandeAjouterPorteOr(
+							v_circuit, historique);
+					command_ajoutPorteOR.execute();
+					myCombo.addItem(v_circuit.getEstCompose()
+							.get(v_circuit.getEstCompose().size() - 1).getNom());
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
-					
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+
 				}
 			}
 
-		}
-		);
-		
-		//Bouton Ajouter Porte NOT
+		});
+
+		// Bouton Ajouter Porte NOT
 		JButton btnAjouterPorteNot = new JButton("Ajouter Porte NOT");
 		btnAjouterPorteNot.setBounds(500, 159, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnAjouterPorteNot);
 		btnAjouterPorteNot.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
-				if(v_circuit.getEstCompose().size() < 50){
-					Commande command_ajoutPorteNOT = new CommandeAjouterPorteNot(v_circuit, historique);								
+
+				if (v_circuit.getEstCompose().size() < 50) {
+					Commande command_ajoutPorteNOT = new CommandeAjouterPorteNot(
+							v_circuit, historique);
 					command_ajoutPorteNOT.execute();
-					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+					myCombo.addItem(v_circuit.getEstCompose()
+							.get(v_circuit.getEstCompose().size() - 1).getNom());
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 				}
 			}
 
-		}
-		);
-		
-		//Bouton Supprimer Porte
+		});
+
+		// Bouton Supprimer Porte
 		JButton btnSupprimerPorte = new JButton("Supprimer Porte");
 		btnSupprimerPorte.setBounds(500, 203, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnSupprimerPorte);
@@ -429,301 +461,319 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				int id;
 				String nomPorte = null;
-				if(table.getSelectedRow() != -1) {						
-					if(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != null){
-						nomPorte = table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString();
+				if (table.getSelectedRow() != -1) {
+					if (table.getValueAt(table.getSelectedRow(),
+							table.getSelectedColumn()) != null) {
+						nomPorte = table.getValueAt(table.getSelectedRow(),
+								table.getSelectedColumn()).toString();
 					}
 				}
-				
-				if(nomPorte != null && (v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_AND || 
-										 v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_OR ||
-										 v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_NOT)){						
+
+				if (nomPorte != null
+						&& (v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_AND
+								|| v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_OR || v_circuit
+								.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_NOT)) {
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
-					supprimerPorte(id, nomPorte);
+					Commande command_supprimerPorte = new CommandeSupprimerPorteNot(
+							v_circuit, historique, id);
+					command_supprimerPorte.execute();
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				} else {
-					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");					
-				}					
+					JOptionPane
+							.showMessageDialog(frmEditeurDeCircuit,
+									"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");
+				}
 			}
 
-		}
-		);
-		
-		//Renommer un signal
+		});
+
+		// Renommer un signal
 		JButton btnRenameSignal = new JButton("Renommer Entree/Sortie");
 		btnRenameSignal.setBounds(500, 181, 178, 23);
 		btnRenameSignal.setEnabled(true);
 		frmEditeurDeCircuit.getContentPane().add(btnRenameSignal);
-		btnRenameSignal.addActionListener( new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e){
-				
-				Signal v_Signal = null; 
-				String v_oldName = ""; 
-				String v_newName = ""; 
-				
-				boolean v_valideName = false; 
-				
-				while(!v_valideName){
-				
-					v_oldName = (String)JOptionPane.showInputDialog(
-		                    frmEditeurDeCircuit,
-		                    "Quelle entree/sortie souhaitez-vous renommé ?",
-		                    "Entree/Sortie a renommé",
-		                    JOptionPane.PLAIN_MESSAGE,
-		                    null,
-		                    null,
-		                    "");
-					
-					if(v_oldName == null) return; 
-					
-					for(Signal s : v_circuit.getEstDefinitPar()){
-						
-						if(s.getNom().compareTo(v_oldName) == 0){
-							v_valideName = true; 
-							v_Signal = s; 
+		btnRenameSignal.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				Signal v_Signal = null;
+				String v_oldName = "";
+				String v_newName = "";
+				int v_id = 0;
+
+				boolean v_valideName = false;
+
+				while (!v_valideName) {
+
+					v_oldName = (String) JOptionPane.showInputDialog(
+							frmEditeurDeCircuit,
+							"Quelle entree/sortie souhaitez-vous renommé ?",
+							"Entree/Sortie a renommé",
+							JOptionPane.PLAIN_MESSAGE, null, null, "");
+
+					if (v_oldName == null)
+						return;
+
+					for (Signal s : v_circuit.getEstDefinitPar()) {
+
+						if (s.getNom().compareTo(v_oldName) == 0) {
+							v_valideName = true;
+							v_Signal = s;
 						}
 					}
-					
-					if(!v_valideName){
-						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nom d'entree/sortie introuvable");
+
+					if (!v_valideName) {
+						JOptionPane.showMessageDialog(frmEditeurDeCircuit,
+								"ERREUR : Nom d'entree/sortie introuvable");
 
 					}
 				}
-				
-				
+
 				v_valideName = false;
-				while(!v_valideName){
-					
+				while (!v_valideName) {
+
 					v_valideName = true;
-					v_newName = (String)JOptionPane.showInputDialog(
-		                    frmEditeurDeCircuit,
-		                    "Quelle nouveau nom souhaitz-vous donner à " + v_oldName,
-		                    "Entree/Sortie a renommé",
-		                    JOptionPane.PLAIN_MESSAGE,
-		                    null,
-		                    null,
-		                    "");
-					
-					if(v_newName == null) return; 
-					
-					for(Signal s : v_circuit.getEstDefinitPar()){
-						
-						if(s.getNom().compareTo(v_newName) == 0){
-							v_valideName = false; 
-							JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Le nom " + v_newName + " existe déjà !");
+					v_newName = (String) JOptionPane.showInputDialog(
+							frmEditeurDeCircuit,
+							"Quelle nouveau nom souhaitz-vous donner à "
+									+ v_oldName, "Entree/Sortie a renommé",
+							JOptionPane.PLAIN_MESSAGE, null, null, "");
+
+					if (v_newName == null)
+						return;
+
+					for (Signal s : v_circuit.getEstDefinitPar()) {
+
+						if (s.getNom().compareTo(v_newName) == 0) {
+							v_valideName = false;
+							JOptionPane.showMessageDialog(frmEditeurDeCircuit,
+									"Le nom " + v_newName + " existe déjà !");
 						}
 					}
-					
-					if(v_newName.length() > 5){
-						v_valideName = false; 
-						JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Le nom d'une entree/sortie ne doit pas être de plus de 5 charactères alphanumériques.");
+
+					if (v_newName.length() > 5) {
+						v_valideName = false;
+						JOptionPane
+								.showMessageDialog(
+										frmEditeurDeCircuit,
+										"Le nom d'une entree/sortie ne doit pas être de plus de 5 charactères alphanumériques.");
 
 					}
 				}
-				
+
+				v_id = s.getID();
+				Commande command_renommerSignal = new CommandeModifierNom(
+						v_circuit, historique, v_id, v_newName);
+				command_supprimerPorte.execute();
 				v_Signal.setNom(v_newName);
 
 				updateScrollList(myCombo);
 			}
-			
-			
+
 		});
-		
-		//Mettre à jour les liens du circuit
+
+		// Mettre à jour les liens du circuit
 		JButton btnMiseAJour = new JButton("Mise a jour des liens");
-		btnMiseAJour.setBounds(500, 245, 178, 23);		
+		btnMiseAJour.setBounds(500, 245, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnMiseAJour);
 		btnMiseAJour.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-					faireLesLiens();
-					estValide(v_circuit);
+				faireLesLiens();
+				estValide(v_circuit);
 			}
 
-		}
-		);
+		});
 
-		//Calculer la table de vérité
+		// Calculer la table de vérité
 		btnCalculer = new JButton("Calculer la table");
-		btnCalculer.setBounds(500, 290, 178, 23);		
+		btnCalculer.setBounds(500, 290, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnCalculer);
 		estValide(v_circuit);
 		btnCalculer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-					faireLesLiens();
-					CommandeCalculer command_calcul = new CommandeCalculer(v_circuit);
-					command_calcul.execute();
-					
+				faireLesLiens();
+				CommandeCalculer command_calcul = new CommandeCalculer(
+						v_circuit);
+				command_calcul.execute();
+
 			}
 
-		}
-		);
-		
-					    
-				    JScrollPane scrollPane = new JScrollPane();
-				    scrollPane.setBounds(22, 11, 452, 427);
-				    frmEditeurDeCircuit.getContentPane().add(scrollPane);
-				    table = new JTable();				   
-				    table.setModel(new DefaultTableModel(
-				    	new Object[100][100],
-				    	new String[] {
-				    		"Source", "Destination"
-				    	}
-				    ));	    	
-			    	
-			    	table.getColumn("Destination").setCellEditor(new DefaultCellEditor(myCombo));
-			    	table.getColumn("Source").setCellEditor(new DefaultCellEditor(myCombo));
-				    
-				    scrollPane.setViewportView(table);
+		});
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(22, 11, 452, 427);
+		frmEditeurDeCircuit.getContentPane().add(scrollPane);
+		table = new JTable();
+		table.setModel(new DefaultTableModel(new Object[100][100],
+				new String[] { "Source", "Destination" }));
+
+		table.getColumn("Destination").setCellEditor(
+				new DefaultCellEditor(myCombo));
+		table.getColumn("Source").setCellEditor(new DefaultCellEditor(myCombo));
+
+		scrollPane.setViewportView(table);
 	}
-	
-	private void updateScrollList(JComboBox<String> p_myCombo){
-		
+
+	private void updateScrollList(JComboBox<String> p_myCombo) {
+
 		p_myCombo.removeAllItems();
-		
-		for(int i = 0; i < v_circuit.getEstCompose().size(); ++i){
-		
-			p_myCombo.addItem(v_circuit.getEstCompose().get(i).getNom()); 
+
+		for (int i = 0; i < v_circuit.getEstCompose().size(); ++i) {
+
+			p_myCombo.addItem(v_circuit.getEstCompose().get(i).getNom());
 		}
-		
-		for(int i = 0; i < v_circuit.getEstDefinitPar().size(); ++i){
-			
-			p_myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom()); 
+
+		for (int i = 0; i < v_circuit.getEstDefinitPar().size(); ++i) {
+
+			p_myCombo.addItem(v_circuit.getEstDefinitPar().get(i).getNom());
 		}
-		
+
 		p_myCombo.addItem(null);
-	
-	
+
 	}
-	
-	private void chargerTable(){
+
+	private void chargerTable() {
 		CircuitImpl.typeObject typePorte;
 		int id_entree1 = -2;
 		int id_entree2 = -2;
-		int id_sortie1 = -2;	
+		int id_sortie1 = -2;
 		String nomPorte;
-		
-		for(int i= 0; i < v_circuit.getEstCompose().size(); ++i){
-			typePorte = v_circuit.getTypeObjet(v_circuit.getEstCompose().get(i).getNom());
-			
-			if (typePorte == CircuitImpl.typeObject.Porte_AND){
-				Porte_ANDImpl p = (Porte_ANDImpl) v_circuit.getEstCompose().get(i);
+
+		for (int i = 0; i < v_circuit.getEstCompose().size(); ++i) {
+			typePorte = v_circuit.getTypeObjet(v_circuit.getEstCompose().get(i)
+					.getNom());
+
+			if (typePorte == CircuitImpl.typeObject.Porte_AND) {
+				Porte_ANDImpl p = (Porte_ANDImpl) v_circuit.getEstCompose()
+						.get(i);
 				id_entree1 = p.getEntree1();
 				id_entree2 = p.getEntree2();
-				id_sortie1 = p.getSortie1();	
+				id_sortie1 = p.getSortie1();
 				nomPorte = p.getNom();
-			} else if (typePorte == CircuitImpl.typeObject.Porte_OR){
-				Porte_ORImpl p = (Porte_ORImpl) v_circuit.getEstCompose().get(i);
+			} else if (typePorte == CircuitImpl.typeObject.Porte_OR) {
+				Porte_ORImpl p = (Porte_ORImpl) v_circuit.getEstCompose()
+						.get(i);
 				id_entree1 = p.getEntree1();
 				id_entree2 = p.getEntree2();
 				id_sortie1 = p.getSortie1();
 				nomPorte = p.getNom();
 			} else {
-				Porte_NOTImpl p = (Porte_NOTImpl) v_circuit.getEstCompose().get(i);
-				id_entree1 = p.getEntree1();				
+				Porte_NOTImpl p = (Porte_NOTImpl) v_circuit.getEstCompose()
+						.get(i);
+				id_entree1 = p.getEntree1();
 				id_sortie1 = p.getSortie1();
 				id_entree2 = -2;
 				nomPorte = p.getNom();
 			}
-			
-			for(int j = 0; j < v_circuit.getEstDefinitPar().size(); ++j){
+
+			for (int j = 0; j < v_circuit.getEstDefinitPar().size(); ++j) {
 				int caseVide = caseVide();
-				if(v_circuit.getEstDefinitPar().get(j).getID() == id_entree1){
-					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 0);
+				if (v_circuit.getEstDefinitPar().get(j).getID() == id_entree1) {
+					table.setValueAt(v_circuit.getEstDefinitPar().get(j)
+							.getNom(), caseVide, 0);
 					table.setValueAt(nomPorte, caseVide, 1);
-				} else if(v_circuit.getEstDefinitPar().get(j).getID() == id_entree2){
-					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 0);
+				} else if (v_circuit.getEstDefinitPar().get(j).getID() == id_entree2) {
+					table.setValueAt(v_circuit.getEstDefinitPar().get(j)
+							.getNom(), caseVide, 0);
 					table.setValueAt(nomPorte, caseVide, 1);
-				} else if(v_circuit.getEstDefinitPar().get(j).getID() == id_sortie1){
+				} else if (v_circuit.getEstDefinitPar().get(j).getID() == id_sortie1) {
 					table.setValueAt(nomPorte, caseVide, 0);
-					table.setValueAt(v_circuit.getEstDefinitPar().get(j).getNom(), caseVide, 1);
+					table.setValueAt(v_circuit.getEstDefinitPar().get(j)
+							.getNom(), caseVide, 1);
 				}
 			}
-			
-			for(int j = 0; j < v_circuit.getEstCompose().size(); ++j){
+
+			for (int j = 0; j < v_circuit.getEstCompose().size(); ++j) {
 				int caseVide = caseVide();
-				if(v_circuit.getEstCompose().get(j).getID() == id_entree1){
-					table.setValueAt(v_circuit.getEstCompose().get(j).getNom(), caseVide, 0);
+				if (v_circuit.getEstCompose().get(j).getID() == id_entree1) {
+					table.setValueAt(v_circuit.getEstCompose().get(j).getNom(),
+							caseVide, 0);
 					table.setValueAt(nomPorte, caseVide, 1);
-				} else if(v_circuit.getEstCompose().get(j).getID() == id_entree2){
-					table.setValueAt(v_circuit.getEstCompose().get(j).getNom(), caseVide, 0);
+				} else if (v_circuit.getEstCompose().get(j).getID() == id_entree2) {
+					table.setValueAt(v_circuit.getEstCompose().get(j).getNom(),
+							caseVide, 0);
 					table.setValueAt(nomPorte, caseVide, 1);
-				} 
+				}
 			}
-		}			
+		}
 	}
-	
-	private int caseVide(){
-		for(caseVide = 0; table.getValueAt(caseVide, 0) != null; ++caseVide){
-			
+
+	private int caseVide() {
+		for (caseVide = 0; table.getValueAt(caseVide, 0) != null; ++caseVide) {
+
 		}
 		return caseVide;
 	}
-	
-	private void clearTable(){
-	    for (int i = 0; i < table.getRowCount(); i++) {
-	        for (int j = 0; j < table.getColumnCount(); j++) {
-	            table.setValueAt(null, i, j);
-	        }
-	    }
+
+	private void clearTable() {
+		for (int i = 0; i < table.getRowCount(); i++) {
+			for (int j = 0; j < table.getColumnCount(); j++) {
+				table.setValueAt(null, i, j);
+			}
+		}
 	}
-	
-	private void faireLesLiens(){
-		for(int i = 0; i < table.getRowCount(); ++i){
-			if(table.getValueAt(i, 0) != null){
-				if(table.getValueAt(i, 1) != null){
-					Commande command_ajoutLien = new CommandeAjouterLien(v_circuit, historique, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
+
+	private void faireLesLiens() {
+		for (int i = 0; i < table.getRowCount(); ++i) {
+			if (table.getValueAt(i, 0) != null) {
+				if (table.getValueAt(i, 1) != null) {
+					Commande command_ajoutLien = new CommandeAjouterLien(
+							v_circuit, historique, table.getValueAt(i, 0)
+									.toString(), table.getValueAt(i, 1)
+									.toString());
 					command_ajoutLien.execute();
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
 				}
 			}
-		}	
+		}
 	}
 
-	private void supprimerSignal(int idSignal, String nomSignal){
-		Commande command_suppSignal = new CommandeSupprimerSignal(v_circuit, historique, idSignal);						
+	private void supprimerSignal(int idSignal, String nomSignal) {
+		Commande command_suppSignal = new CommandeSupprimerSignal(v_circuit,
+				historique, idSignal);
 		command_suppSignal.execute();
-		for(int i = 0; i < table.getRowCount(); ++i){
-			if(table.getValueAt(i, 0) !=null){
-				if(table.getValueAt(i, 0).toString() == nomSignal){
+		for (int i = 0; i < table.getRowCount(); ++i) {
+			if (table.getValueAt(i, 0) != null) {
+				if (table.getValueAt(i, 0).toString() == nomSignal) {
 					table.setValueAt(null, i, 0);
 				}
 			}
-			if(table.getValueAt(i, 1) !=null){
-				if(table.getValueAt(i, 1).toString() == nomSignal){
-					table.setValueAt(null, i, 1);	
+			if (table.getValueAt(i, 1) != null) {
+				if (table.getValueAt(i, 1).toString() == nomSignal) {
+					table.setValueAt(null, i, 1);
 				}
 			}
 		}
-		updateScrollList(myCombo);		
-				
+		updateScrollList(myCombo);
+
 	}
-	
-	private void supprimerPorte(int idPorte, String nomPorte){
-		Commande command_suppPorte = new CommandeSupprimerPorte(v_circuit, historique, idPorte);						
+
+	private void supprimerPorte(int idPorte, String nomPorte) {
+		Commande command_suppPorte = new CommandeSupprimerPorte(v_circuit,
+				historique, idPorte);
 		command_suppPorte.execute();
-		for(int i = 0; i < table.getRowCount(); ++i){
-			if(table.getValueAt(i, 0) !=null){
-				if(table.getValueAt(i, 0).toString() == nomPorte){
+		for (int i = 0; i < table.getRowCount(); ++i) {
+			if (table.getValueAt(i, 0) != null) {
+				if (table.getValueAt(i, 0).toString() == nomPorte) {
 					table.setValueAt(null, i, 0);
 				}
 			}
-			if(table.getValueAt(i, 1) !=null){
-				if(table.getValueAt(i, 1).toString() == nomPorte){
-					table.setValueAt(null, i, 1);	
+			if (table.getValueAt(i, 1) != null) {
+				if (table.getValueAt(i, 1).toString() == nomPorte) {
+					table.setValueAt(null, i, 1);
 				}
 			}
 		}
-		updateScrollList(myCombo);		
-				
+		updateScrollList(myCombo);
+
 	}
-	
-	private void estValide(Circuit v_circuit){
-		if(v_circuit.isValide()){
+
+	private void estValide(Circuit v_circuit) {
+		if (v_circuit.isValide()) {
 			btnCalculer.setEnabled(true);
 		} else {
 			btnCalculer.setEnabled(false);
