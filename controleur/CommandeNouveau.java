@@ -26,7 +26,7 @@ public class CommandeNouveau implements Commande{
 			circuit.AjouterSignal(TypeSignal.ENTREE);
 			circuit.AjouterSignal(TypeSignal.ENTREE);
 			circuit.AjouterSignal(TypeSignal.SORTIE);
-			
+			circuit.reconstruireTable();
 			return circuit; 
 	}
 

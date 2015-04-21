@@ -99,8 +99,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				v_circuit = command_new.execute2();
 
 				clearTable();
-				updateScrollList(myCombo);
-				FenetreTableVerite.getInstance().changementCircuit();
+				updateScrollList(myCombo);				
 				estValide(v_circuit);
 			}
 
@@ -239,8 +238,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					myCombo.addItem(v_circuit.getEstDefinitPar()
 							.get(v_circuit.getEstDefinitPar().size() - 1)
 							.getNom());
-					updateScrollList(myCombo);
-					FenetreTableVerite.getInstance().changementCircuit();
+					updateScrollList(myCombo);					
 					estValide(v_circuit);
 				} else {
 					JOptionPane
@@ -332,6 +330,7 @@ public class EditeurVue extends JFrame implements Serializable {
 							FenetreTableVerite.getInstance()
 									.changementCircuit();
 							estValide(v_circuit);
+							supprimerSignal(id, nomSignal);
 						} else {
 							JOptionPane
 									.showMessageDialog(frmEditeurDeCircuit,
@@ -358,6 +357,7 @@ public class EditeurVue extends JFrame implements Serializable {
 							FenetreTableVerite.getInstance()
 									.changementCircuit();
 							estValide(v_circuit);
+							supprimerSignal(id, nomSignal);
 						} else {
 							JOptionPane
 									.showMessageDialog(frmEditeurDeCircuit,
@@ -479,6 +479,7 @@ public class EditeurVue extends JFrame implements Serializable {
 					command_supprimerPorte.execute();
 					FenetreTableVerite.getInstance().changementCircuit();
 					estValide(v_circuit);
+					supprimerPorte(id, nomPorte);
 				} else {
 					JOptionPane
 							.showMessageDialog(frmEditeurDeCircuit,
@@ -733,9 +734,6 @@ public class EditeurVue extends JFrame implements Serializable {
 	}
 
 	private void supprimerSignal(int idSignal, String nomSignal) {
-		Commande command_suppSignal = new CommandeSupprimerSignal(v_circuit,
-				historique, idSignal);
-		command_suppSignal.execute();
 		for (int i = 0; i < table.getRowCount(); ++i) {
 			if (table.getValueAt(i, 0) != null) {
 				if (table.getValueAt(i, 0).toString() == nomSignal) {
@@ -753,9 +751,6 @@ public class EditeurVue extends JFrame implements Serializable {
 	}
 
 	private void supprimerPorte(int idPorte, String nomPorte) {
-		Commande command_suppPorte = new CommandeSupprimerPorte(v_circuit,
-				historique, idPorte);
-		command_suppPorte.execute();
 		for (int i = 0; i < table.getRowCount(); ++i) {
 			if (table.getValueAt(i, 0) != null) {
 				if (table.getValueAt(i, 0).toString() == nomPorte) {

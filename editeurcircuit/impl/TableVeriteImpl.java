@@ -42,6 +42,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	
 	private int nbEntrees;
 	private int nbSorties;
+	private boolean etatValide;
 	
 	/**
 	 * The cached value of the '{@link #getListe() <em>Liste</em>}' attribute.
@@ -99,6 +100,10 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	
 	public int getNbSorties(){
 		return nbSorties; 
+	}
+	
+	public boolean getEtatValide(){
+		return etatValide; 
 	}
 
 	/**
@@ -161,6 +166,7 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 	public void calculer(EList<Signal> p_signals, EList<Porte> p_portes, int nbEntree, int nbSortie ) {
 		nbEntrees = nbEntree;
 		nbSorties = nbSortie;
+		etatValide = true;
 		TreeMap<Integer, Boolean> mapID = new TreeMap<Integer, Boolean>(); 
 		
 		//Map<ID, valeur boolean>
@@ -179,8 +185,17 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 				it.setValue(null); 
 			}
 		}
+				
+		notifier(); 
+	}
+	
+	public void reconstruireTable(EList<Signal> p_signals, int nbEntree, int nbSortie){
+		nbEntrees = nbEntree;
+		nbSorties = nbSortie;
+		etatValide = false;
 		
-		//afficheTable(); 
+		construct(nbEntree, nbSortie, p_signals);
+						
 		notifier(); 
 	}
 	

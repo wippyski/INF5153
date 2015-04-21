@@ -22,7 +22,7 @@ public class CommandeUndo implements Commande {
 			MementoCommande lastMemento = historique.getPileUndo().pop();
 			Commande lastCommande = lastMemento.getAction();
 			historique.getPileRedo().add(lastMemento);
-			lastCommande.unexecute();
+			lastCommande.unexecute();			
 		}
 	}
 

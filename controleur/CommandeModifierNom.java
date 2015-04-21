@@ -29,6 +29,7 @@ public class CommandeModifierNom implements Commande {
 		memento.setAction(this);
 		historique.getPileUndo().add(memento);
 		circuit.setSauvegarder(false);
+		circuit.reconstruireTable();
 	}
 	
 	
@@ -36,11 +37,13 @@ public class CommandeModifierNom implements Commande {
 		this.oldnom = circuit.RechercherSignalParID(this.id).getNom();
 		circuit.RechercherSignalParID(this.id).setNom(this.newnom);			
 		circuit.setSauvegarder(false);
+		circuit.reconstruireTable();
 	}
 
 	@Override
 	public void unexecute() {
 		circuit.RechercherSignalParID(this.id).setNom(this.oldnom);
+		circuit.reconstruireTable();
 	}
 
 }
