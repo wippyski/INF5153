@@ -34,12 +34,14 @@ public class CommandeAjouterSortie implements Commande {
 		}
 		circuit.setSauvegarder(false);
 		circuit.Valider();
+		circuit.reconstruireTable();
 	}
 
 	@Override
 	public void unexecute() {
 		circuit.SupprimerSignal(this.id);
 		circuit.Valider();
+		circuit.reconstruireTable();
 	}
 
 	

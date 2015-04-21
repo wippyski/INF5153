@@ -34,6 +34,7 @@ public class CommandeSupprimerSignal implements Commande {
 		historique.getPileUndo().add(memento);
 		circuit.setSauvegarder(false);
 		circuit.Valider();
+		circuit.reconstruireTable();
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class CommandeSupprimerSignal implements Commande {
 			}
 		}
 		circuit.Valider();
+		circuit.reconstruireTable();
 	}
 
 	

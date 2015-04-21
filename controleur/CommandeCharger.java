@@ -30,10 +30,7 @@ public class CommandeCharger implements Commande {
 
 	@Override
 	public void execute() {
-		try{
-			
-			//ne modifie pas le circuit dans la vue ?!
-			
+		try{			
 		  	Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map<String,Object> m = reg.getExtensionToFactoryMap();
 			m.put("editeurcircuit", new XMIResourceFactoryImpl());
@@ -43,6 +40,7 @@ public class CommandeCharger implements Commande {
 			circuit = (Circuit)v_circuitResource.getContents().get(0);			
 			circuit.setSauvegarder(true);	
 			circuit.Valider();
+			circuit.reconstruireTable();
 			for(int i = 0; i<circuit.getEstDefinitPar().size(); ++i){
 				System.out.println(circuit.getEstDefinitPar().get(i).toString());
 			}
@@ -64,6 +62,7 @@ public class CommandeCharger implements Commande {
 			circuit = (Circuit)v_circuitResource.getContents().get(0);			
 			circuit.setSauvegarder(true);	
 			circuit.Valider();
+			circuit.reconstruireTable();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog( (Component) null,"ERREUR : Nom de fichier invalide.");
 		}

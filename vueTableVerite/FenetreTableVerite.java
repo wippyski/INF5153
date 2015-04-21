@@ -105,9 +105,9 @@ public class FenetreTableVerite extends JFrame implements Observeur {
 						data[i][j]= "0";
 					}
 				}					
-			}
-			
-			table.setModel(new DefaultTableModel(data, nomCol));    
+			}			
+			table.setModel(new DefaultTableModel(data, nomCol));  
+			if(!t.getEtatValide()) changementCircuit();
         }      
 	}
 	

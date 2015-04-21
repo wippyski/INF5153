@@ -57,6 +57,7 @@ public class CommandeSupprimerPorte implements Commande {
 		circuit.SupprimerPorte(porte_id);
 		circuit.setSauvegarder(false);
 		circuit.Valider();
+		circuit.reconstruireTable();
 		MementoCommande memento = new MementoCommande();
 		memento.setAction(this);
 		historique.getPileUndo().add(memento);
@@ -179,6 +180,7 @@ public class CommandeSupprimerPorte implements Commande {
 			}
 		}
 		circuit.Valider();
+		circuit.reconstruireTable();
 	}
 
 	

@@ -34,7 +34,7 @@ public class CommandeRedo implements Commande {
 				}
 			}
 	
-			historique.getPileUndo().add(nextMemento);
+			historique.getPileUndo().add(nextMemento);			
 		}
 
 	}

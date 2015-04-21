@@ -1435,6 +1435,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			
 			TableVeriteImpl.getInstance().calculer(estDefinitPar, estCompose, this.getNbEntree(), this.getNbSortie()); 
 		}
+		
+		public void reconstruireTable(){
+			
+			TableVeriteImpl.getInstance().reconstruireTable(estDefinitPar, this.getNbEntree(), this.getNbSortie()); 
+		}
 	 
 	
 } // CircuitImpl
