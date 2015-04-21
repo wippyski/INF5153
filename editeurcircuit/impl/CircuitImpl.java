@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import vueTableVerite.Observeur;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -174,8 +175,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 */
 
 	protected TableVeriteObserver newEReference3;
-	
-	
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -191,8 +191,11 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				EditeurcircuitPackage.CIRCUIT__EST_DEFINIT_PAR);
 		estCompose = new EObjectContainmentEList<Porte>(Porte.class, this,
 				EditeurcircuitPackage.CIRCUIT__EST_COMPOSE);
-				
-			
+
+		/*
+		 * // Ajout des signals réglementaires AjouterSignal(TypeSignal.ENTREE);
+		 * AjouterSignal(TypeSignal.ENTREE); AjouterSignal(TypeSignal.SORTIE);
+		 */
 	}
 
 	/**
@@ -388,220 +391,14 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	public void Valider() {
-		
-		boolean  v_valide = true;
-		int 	 v_compteur_sortie = 0;        
-		int 	 v_compteur_entree = 0;
-		int 	 v_porte_id = -1;
-		
-		// Boucle pour parcourir les Entrées et Sorties
-		for (Iterator<Signal> iterSignal = estDefinitPar.listIterator(); iterSignal.hasNext();)
-		{
-			Signal s = iterSignal.next();
-			
-			// vérifier si tous les liens sont remplis 			
-			if (s.getLien() == -1){
-				v_valide = false;
-				break;
-				}	
-			
-			if(v_valide == true) {	
-
-				// Trouver la destination et vérifier si le lien est valide dans la table des portes.
-				for (Iterator<Porte> iterPorteDest = estCompose.listIterator(); iterPorteDest.hasNext();)
-				{
-					Porte v_porteDest = iterPorteDest.next();										
-			    										
-						if (v_porteDest instanceof Porte_NOTImpl){
-							if  (((Porte_NOTImpl) v_porteDest).getID() == s.getLien()
-							  && ((Porte_NOTImpl) v_porteDest).getEntree1() != s.getID()
-							  && ((Porte_NOTImpl) v_porteDest).getSortie1() != s.getID()) {						
-								v_valide = false;
-								break;
-							}
-						}
-						else if (v_porteDest instanceof Porte_ANDImpl) {
-							if  (((Porte_ANDImpl) v_porteDest).getID() == s.getLien()
-							  && ((Porte_ANDImpl) v_porteDest).getEntree1() != s.getID()
-							  && ((Porte_ANDImpl) v_porteDest).getEntree2() != s.getID() 
-							  && ((Porte_ANDImpl) v_porteDest).getSortie1() != s.getID()) {
-										v_valide = false;
-										break;
-									}
-						}
-						else if (v_porteDest instanceof Porte_ORImpl) {
-							if  (((Porte_ORImpl) v_porteDest).getID() == s.getLien()
-							  && ((Porte_ORImpl) v_porteDest).getEntree1() != s.getID()
-							  && ((Porte_ORImpl) v_porteDest).getEntree2() != s.getID() 
-							  && ((Porte_ORImpl) v_porteDest).getSortie1() != s.getID()) {
-									   v_valide = false;
-									   break;
-									}
-						
-						} // Fin si					
-			    
-				} // Fin boucle des portes pour la destination des Entrées/Sortie
-				
-
-				if(v_valide == true) {	
-					
-				
-					// Vérifier que les signaux de type sortie soient associés à une seule porte
-					v_compteur_sortie = 0;
-					if (s.getType() == TypeSignal.SORTIE){
-											
-						for (Iterator<Porte> iterPorte = estCompose.listIterator(); iterPorte.hasNext();)
-						{
-							Porte v_porte = iterPorte.next();	
-							
-							if (v_porte instanceof Porte_NOTImpl){
-								if (((Porte_NOTImpl) v_porte).getSortie1() == s.getID()) {						
-									v_compteur_sortie++;	
-								}
-							}
-							else if (v_porte instanceof Porte_ORImpl){
-								if (((Porte_ORImpl) v_porte).getSortie1() == s.getID()) {						
-									v_compteur_sortie++;	
-								}
-							}						
-							else if (v_porte instanceof Porte_ANDImpl){
-								if (((Porte_ANDImpl) v_porte).getSortie1() == s.getID()) {						
-									v_compteur_sortie++;	
-								}
-							}
-						
-																	
-						}		
-						if (v_compteur_sortie > 1 || v_compteur_sortie == 0)
-							v_valide = false;
-
-					} // Fin si v_valide == true
-				} // Fin si typeSignal == SORTIE
-				
-			} // Fin si v_valide == true
-					
-		 } // Fin de la boucle des signaux
-		 
-			   
-		if(v_valide == true) {
-			
-				// Vérifier que toutes les entree1, entree2 et sortie1 soient différents et non null
-			    for (Iterator<Porte> iterP = estCompose.listIterator(); iterP.hasNext();)
-				{
-					Porte v_porte_null = iterP.next();	
-								    	
-			    	// Vérifier les nulls
-					if (v_porte_null instanceof Porte_NOTImpl){
-						if   (((Porte_NOTImpl) v_porte_null).getEntree1() == -1 
-						  ||  ((Porte_NOTImpl) v_porte_null).getSortie1() == -1
-						  ||  ((Porte_NOTImpl) v_porte_null).getEntree1() == ((Porte_NOTImpl) v_porte_null).getSortie1())
-						{						
-							v_valide = false;						
-							break;	
-						}
-					}
-					else if (v_porte_null instanceof Porte_ORImpl){
-						if   (((Porte_ORImpl) v_porte_null).getEntree1() == -1 
-						  ||  ((Porte_ORImpl) v_porte_null).getEntree2() == -1
-						  ||  ((Porte_ORImpl) v_porte_null).getSortie1() == -1
-						  ||  ((Porte_ORImpl) v_porte_null).getEntree1() == ((Porte_ORImpl) v_porte_null).getSortie1()
-						  ||  ((Porte_ORImpl) v_porte_null).getEntree2() == ((Porte_ORImpl) v_porte_null).getSortie1()
-						  ||  ((Porte_ORImpl) v_porte_null).getEntree1() == ((Porte_ORImpl) v_porte_null).getEntree2())
-						{
-							v_valide = false;													
-							break;	
-						}
-					}						
-					else if (v_porte_null instanceof Porte_ANDImpl){
-						if   (((Porte_ANDImpl) v_porte_null).getEntree1() == -1 
-						  ||  ((Porte_ANDImpl) v_porte_null).getEntree2() == -1
-						  ||  ((Porte_ANDImpl) v_porte_null).getSortie1() == -1
-						  ||  ((Porte_ANDImpl) v_porte_null).getEntree1() == ((Porte_ANDImpl) v_porte_null).getSortie1()
-						  ||  ((Porte_ANDImpl) v_porte_null).getEntree2() == ((Porte_ANDImpl) v_porte_null).getSortie1()
-						  ||  ((Porte_ANDImpl) v_porte_null).getEntree1() == ((Porte_ANDImpl) v_porte_null).getEntree2())
-						{
-							v_valide = false;													
-							break;	
-						}
-					}
-					
-					
-					if (v_valide == true){
-						// Si c'est toujours valide, vérifier que pour chaque porte, elle ne se retrouve pas plus d'une fois 
-						// dans les entrées des autres portes.
-						
-						v_compteur_entree = 0;
-						if (v_porte_null instanceof Porte_NOTImpl)
-							v_porte_id = ((Porte_NOTImpl) v_porte_null).getID();
-						else if (v_porte_null instanceof Porte_ORImpl)
-							v_porte_id = ((Porte_ORImpl) v_porte_null).getID();
-						else if (v_porte_null instanceof Porte_ANDImpl)
-							v_porte_id = ((Porte_ANDImpl) v_porte_null).getID();
-													
-						
-						for (Iterator<Porte> iterEntreeP = estCompose.listIterator(); iterEntreeP.hasNext();)
-						{
-							Porte v_porte_entree = iterEntreeP.next();	
-						
-							// Compter le nombre de fois qu'il y a une référence de type "Entree" à la porte
-							// afin de s'assurer qu'il n'y ait seulement une sortie par porte.
-
-							// Porte NOT
-							if (v_porte_entree instanceof Porte_NOTImpl){								
-								if   (((Porte_NOTImpl) v_porte_entree).getEntree1() == v_porte_id)
-									v_compteur_entree++;
-							}
-							
-							// Porte OR
-							if (v_porte_entree instanceof Porte_ORImpl){								
-								if   (((Porte_ORImpl) v_porte_entree).getEntree1() == v_porte_id)
-									v_compteur_entree++;
-							}							 
-							if (v_porte_entree instanceof Porte_ORImpl){								
-								if   (((Porte_ORImpl) v_porte_entree).getEntree2() == v_porte_id)
-									v_compteur_entree++;
-							}
-							
-							// Porte AND
-							if (v_porte_entree instanceof Porte_ANDImpl){								
-								if   (((Porte_ANDImpl) v_porte_entree).getEntree1() == v_porte_id)
-									v_compteur_entree++;
-							}							 
-							if (v_porte_entree instanceof Porte_ANDImpl){								
-								if   (((Porte_ANDImpl) v_porte_entree).getEntree2() == v_porte_id)
-									v_compteur_entree++;
-							}
-							
-							if (v_compteur_entree > 1){
-								v_valide = false;
-								break;	
-							}
-							
-						} // Fin boucle des autres portes (iterEntreeP)
-						
-						
-					 } // Fin si v_valide == true				
-					
-					if (v_valide == false)													
-						break;		
-					
-				} // Fin boucle FOR
-				
-				
-		 } // Fin si v_valide == true
-		
-		if (v_valide == true)
-			 System.out.println("valide = vrai");
-		else
-			System.out.println("valide = faux");
-			
-		this.setValide(v_valide);
-		
-		
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -712,8 +509,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			v_SignalToAdd.setType(TypeSignal.ENTREE);
 
 			v_SignalToAdd.setNom("E" + v_SignalToAdd.getID());
-			
-			estDefinitPar.add(v_nb_entree, v_SignalToAdd);
+
+			estDefinitPar.add(v_SignalToAdd);
 			id = v_SignalToAdd.getID();
 		}
 		// Creation d'un signal sortie
@@ -741,10 +538,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				System.out
 						.println("ERREUR : Nombre d'entrees limite atteint. L'ajout d'une entree est annulée.");
 		}
-		
-		
-		TableVeriteImpl.getInstance().construct(getNbEntree(), getNbSortie(), estDefinitPar);
-		
 		return id;
 	}
 
@@ -822,8 +615,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				iter.remove();
 			}
 		}
-		
-		TableVeriteImpl.getInstance().construct(getNbEntree(), getNbSortie(), estDefinitPar);
 		// throw new UnsupportedOperationException();
 	}
 
@@ -1151,8 +942,152 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				porte_gauche_not.setSortie1(signal_droite3.getID());
 				signal_droite3.setLien(porte_gauche_not.getID());
 				break;
-			default:
-				System.out.println("DEBUG");
+			}
+
+		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+
+	public void supprimerLien(String p_Gauche, String p_Droite) {
+		typeObject type_gauche = this.getTypeObjet(p_Gauche);
+		typeObject type_droite = this.getTypeObjet(p_Droite);
+
+		// Entree - Sortie
+		if ((type_gauche == typeObject.Signal_ENTREE)
+				&& (type_droite == typeObject.Signal_SORTIE)) {
+			Signal signal_gauche = (Signal) this
+					.RechercherSignalParNom(p_Gauche);
+			Signal signal_droite = (Signal) this
+					.RechercherSignalParNom(p_Droite);
+			signal_gauche.setLien(0);
+			signal_droite.setLien(0);
+		}
+
+		// Entree - Porte
+		if ((type_gauche == typeObject.Signal_ENTREE)
+				&& ((type_droite == typeObject.Porte_AND)
+						|| (type_droite == typeObject.Porte_OR) || (type_droite == typeObject.Porte_NOT))) {
+			Signal signal_gauche = (Signal) this
+					.RechercherSignalParNom(p_Gauche);
+			int id_gauche = signal_gauche.getID();
+			switch (type_droite) {
+			case Porte_NOT:
+				Porte_NOTImpl porte_droite_not = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Droite);
+				porte_droite_not.setEntree1(0);
+				break;
+			case Porte_OR:
+				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Droite);
+				if (porte_droite_or.getEntree1() == id_gauche) {
+					porte_droite_or.setEntree1(0);
+				} else {
+					porte_droite_or.setEntree2(0);
+				}
+				break;
+			case Porte_AND:
+				Porte_AND porte_droite_and = (Porte_AND) this
+						.RechercherPorteParNom(p_Droite);
+				if (porte_droite_and.getEntree1() == id_gauche) {
+					porte_droite_and.setEntree1(0);
+				} else {
+					porte_droite_and.setEntree2(0);
+				}
+				break;
+			}
+
+			signal_gauche.setLien(0);
+		}
+
+		// Porte - Porte
+		if (((type_gauche == typeObject.Porte_AND)
+				|| (type_gauche == typeObject.Porte_OR) || (type_gauche == typeObject.Porte_NOT))
+				&& ((type_droite == typeObject.Porte_AND)
+						|| (type_droite == typeObject.Porte_OR) || (type_droite == typeObject.Porte_NOT))) {
+			Porte porte_gauche = this.RechercherPorteParNom(p_Gauche);
+			int id_gauche = porte_gauche.getID();
+
+			switch (type_droite) {
+			case Porte_NOT:
+				Porte_NOTImpl porte_droite_not = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Droite);
+				porte_droite_not.setEntree1(0);
+				break;
+			case Porte_OR:
+				Porte_ORImpl porte_droite_or = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Droite);
+				int id_droite_or = porte_droite_or.getID();
+				if (porte_droite_or.getEntree1() == id_gauche) {
+					porte_droite_or.setEntree1(0);
+				} else {
+					porte_droite_or.setEntree2(0);
+				}
+				break;
+			case Porte_AND:
+				Porte_AND porte_droite_and = (Porte_AND) this
+						.RechercherPorteParNom(p_Droite);
+				int id_droite_and = porte_droite_and.getID();
+				if (porte_droite_and.getEntree1() == id_gauche) {
+					porte_droite_and.setEntree1(0);
+				} else {
+					porte_droite_and.setEntree2(0);
+				}
+				break;
+			}
+
+			if ((type_gauche == typeObject.Porte_AND)) {
+				Porte_AND porte_gauche1 = (Porte_AND) this
+						.RechercherPorteParNom(p_Gauche);							
+				porte_gauche1.setSortie1(0);
+			}
+
+			if ((type_gauche == typeObject.Porte_OR)) {
+				Porte_ORImpl porte_gauche1 = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Gauche);								
+				porte_gauche1.setSortie1(0);
+			}
+
+			if ((type_gauche == typeObject.Porte_NOT)) {
+				Porte_NOTImpl porte_gauche1 = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Gauche);							
+				porte_gauche1.setSortie1(0);
+			}
+		}
+
+		// Porte - Sortie
+		if (((type_gauche == typeObject.Porte_AND)
+				|| (type_gauche == typeObject.Porte_OR) || (type_gauche == typeObject.Porte_NOT))
+				&& (type_droite == typeObject.Signal_SORTIE)) {
+			switch (type_gauche) {
+			case Porte_AND:
+				Porte_AND porte_gauche_and = (Porte_AND) this
+						.RechercherPorteParNom(p_Gauche);
+				Signal signal_droite1 = (Signal) this
+						.RechercherSignalParNom(p_Droite);
+				porte_gauche_and.setSortie1(0);
+				signal_droite1.setLien(0);
+				break;
+			case Porte_OR:
+				Porte_ORImpl porte_gauche_or = (Porte_ORImpl) this
+						.RechercherPorteParNom(p_Gauche);
+				Signal signal_droite2 = (Signal) this
+						.RechercherSignalParNom(p_Droite);
+				porte_gauche_or.setSortie1(0);
+				signal_droite2.setLien(0);
+				break;
+			case Porte_NOT:
+				Porte_NOTImpl porte_gauche_not = (Porte_NOTImpl) this
+						.RechercherPorteParNom(p_Gauche);
+				Signal signal_droite3 = (Signal) this
+						.RechercherSignalParNom(p_Droite);
+				porte_gauche_not.setSortie1(0);
+				signal_droite3.setLien(0);
 				break;
 			}
 
@@ -1257,41 +1192,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			}
 		}
 		return null;
-	}
-	
-	public int getNbEntree(){
-	
-			int v_nb_entree = 0;
-	
-			// Comptage du nombre de signal Entree
-			for (Signal s : getEstDefinitPar()) {
-	
-				if (s.getType() == TypeSignal.ENTREE)
-					v_nb_entree++;
-			}
-			
-			return v_nb_entree; 
-	
-	}
-
-	public int getNbSortie(){
-			
-			int v_nb_sortie = 0;
-		
-			// Comptage du nombre de signal Entree
-			for (Signal s : getEstDefinitPar()) {
-		
-				if (s.getType() == TypeSignal.SORTIE)
-					v_nb_sortie++;
-			}
-			
-			return v_nb_sortie; 
-		
-	}
-	
-	public void calculerTable(){
-		
-		TableVeriteImpl.getInstance().calculer(estDefinitPar, estCompose, this.getNbEntree(), this.getNbSortie()); 
 	}
 
 } // CircuitImpl
