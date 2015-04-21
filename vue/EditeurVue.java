@@ -608,7 +608,7 @@ public class EditeurVue extends JFrame implements Serializable {
 		scrollPane.setBounds(22, 11, 452, 427);
 		frmEditeurDeCircuit.getContentPane().add(scrollPane);
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[100][100],
+		table.setModel(new DefaultTableModel(new Object[110][110],
 				new String[] { "Source", "Destination" }));
 
 		table.getColumn("Destination").setCellEditor(
