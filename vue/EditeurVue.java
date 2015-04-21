@@ -20,11 +20,11 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import vueTableVerite.FenetreTableVerite;
 import controleur.*;
 import editeurcircuit.Circuit;
 import editeurcircuit.EditeurcircuitFactory;
 import editeurcircuit.Historique;
-import editeurcircuit.Porte;
 import editeurcircuit.Signal;
 import editeurcircuit.TypeSignal;
 import editeurcircuit.impl.CircuitImpl;
@@ -42,7 +42,7 @@ public class EditeurVue extends JFrame implements Serializable {
 
 	public JFrame frmEditeurDeCircuit;
 	private JTable table;	
-	
+	private JButton btnCalculer;
 	public Circuit v_circuit;
 	JComboBox<String> myCombo = new JComboBox<String> ();
 	int caseVide;
@@ -70,8 +70,7 @@ public class EditeurVue extends JFrame implements Serializable {
 		v_circuit.AjouterSignal(TypeSignal.ENTREE);
 		v_circuit.AjouterSignal(TypeSignal.SORTIE);
 		updateScrollList(myCombo); // Faire la liste déroulante
-		
-		
+				
 		frmEditeurDeCircuit = new JFrame();
 		frmEditeurDeCircuit.setTitle("\u00C9diteur de circuit");
 		frmEditeurDeCircuit.setBounds(100, 100, 694, 526);
@@ -102,7 +101,8 @@ public class EditeurVue extends JFrame implements Serializable {
 				
 				clearTable();
 				updateScrollList(myCombo); 
-				
+				FenetreTableVerite.getInstance().changementCircuit();	
+				estValide(v_circuit);
 			}
 
 		}
@@ -131,6 +131,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					
 					updateScrollList(myCombo);
 					chargerTable();
+					FenetreTableVerite.getInstance().changementCircuit();	
+					estValide(v_circuit);
 				}			
 
 			}
@@ -185,7 +187,9 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {				
 				
 				Commande command_undo = new CommandeUndo(v_circuit, historique);
-				command_undo.execute();				
+				command_undo.execute();	
+				FenetreTableVerite.getInstance().changementCircuit();
+				estValide(v_circuit);
 
 			}
 
@@ -199,7 +203,9 @@ public class EditeurVue extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent e) {				
 				
 				Commande command_redo = new CommandeRedo(v_circuit, historique);
-				command_redo.execute();				
+				command_redo.execute();	
+				FenetreTableVerite.getInstance().changementCircuit();	
+				estValide(v_circuit);
 
 			}
 
@@ -229,6 +235,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					command_ajoutEntree.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
 					updateScrollList(myCombo);
+					FenetreTableVerite.getInstance().changementCircuit();	
+					estValide(v_circuit);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre d'entree limite atteint. L'ajout d'une entree est annulée.");					
 				}
@@ -257,6 +265,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					Commande command_ajoutSortie = new CommandeAjouterSortie(v_circuit, historique);								
 					command_ajoutSortie.execute();	
 					myCombo.addItem(v_circuit.getEstDefinitPar().get(v_circuit.getEstDefinitPar().size()-1).getNom());
+					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de sortie limite atteint. L'ajout d'une sortie est annulée.");
 					
@@ -301,6 +311,8 @@ public class EditeurVue extends JFrame implements Serializable {
 							if(v_nb_sortie > 1){
 								id = v_sig_to_del.getID();
 								supprimerSignal(id, nomSignal);
+								FenetreTableVerite.getInstance().changementCircuit();
+								estValide(v_circuit);
 							} else {
 								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une sortie dans le circuit.");
 							}
@@ -320,6 +332,8 @@ public class EditeurVue extends JFrame implements Serializable {
 							if(v_nb_entree > 1){
 								id = v_sig_to_del.getID();
 								supprimerSignal(id, nomSignal);
+								FenetreTableVerite.getInstance().changementCircuit();
+								estValide(v_circuit);
 							} else {
 								JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Erreur. Il doit rester au moins une entree dans le circuit.");
 							}
@@ -349,6 +363,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					Commande command_ajoutPorteAND = new CommandeAjouterPorteAnd(v_circuit, historique);								
 					command_ajoutPorteAND.execute();		
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 					
@@ -369,6 +385,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					Commande command_ajoutPorteOR = new CommandeAjouterPorteOr(v_circuit, historique);								
 					command_ajoutPorteOR.execute();	
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 					
@@ -390,6 +408,8 @@ public class EditeurVue extends JFrame implements Serializable {
 					Commande command_ajoutPorteNOT = new CommandeAjouterPorteNot(v_circuit, historique);								
 					command_ajoutPorteNOT.execute();
 					myCombo.addItem(v_circuit.getEstCompose().get(v_circuit.getEstCompose().size()-1).getNom());
+					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"ERREUR : Nombre de porte limite atteint. L'ajout d'une porte est annulée.");
 				}
@@ -418,6 +438,8 @@ public class EditeurVue extends JFrame implements Serializable {
 										 v_circuit.getTypeObjet(nomPorte) == CircuitImpl.typeObject.Porte_NOT)){						
 					id = v_circuit.RechercherPorteParNom(nomPorte).getID();
 					supprimerPorte(id, nomPorte);
+					FenetreTableVerite.getInstance().changementCircuit();
+					estValide(v_circuit);
 				} else {
 					JOptionPane.showMessageDialog(frmEditeurDeCircuit,"Ceci n'est pas une porte valide. Sélectionner une porte dans le tableau.");					
 				}					
@@ -515,6 +537,7 @@ public class EditeurVue extends JFrame implements Serializable {
 
 			public void actionPerformed(ActionEvent e) {
 					faireLesLiens();
+					estValide(v_circuit);
 			}
 
 		}
@@ -523,9 +546,10 @@ public class EditeurVue extends JFrame implements Serializable {
 		//Afficherlien
 		
 		//Calculer la table de vérité
-		JButton btnCalculer = new JButton("Calculer la table");
+		btnCalculer = new JButton("Calculer la table");
 		btnCalculer.setBounds(500, 290, 178, 23);		
 		frmEditeurDeCircuit.getContentPane().add(btnCalculer);
+		estValide(v_circuit);
 		btnCalculer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -653,6 +677,7 @@ public class EditeurVue extends JFrame implements Serializable {
 				if(table.getValueAt(i, 1) != null){
 					Commande command_ajoutLien = new CommandeAjouterLien(v_circuit, historique, table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString());						
 					command_ajoutLien.execute();
+					FenetreTableVerite.getInstance().changementCircuit();
 				}
 			}
 		}	
@@ -694,6 +719,14 @@ public class EditeurVue extends JFrame implements Serializable {
 		}
 		updateScrollList(myCombo);		
 				
+	}
+	
+	private void estValide(Circuit v_circuit){
+		if(v_circuit.isValide()){
+			btnCalculer.setEnabled(true);
+		} else {
+			btnCalculer.setEnabled(false);
+		}
 	}
 
 }

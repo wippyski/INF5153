@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import editeurcircuit.TableVeriteObserver;
 import editeurcircuit.impl.TableVeriteImpl;
@@ -25,13 +26,26 @@ public class FenetreTableVerite extends JFrame implements Observeur {
 	 */	
 	
 	private JTable table;
+	private int nbSorties;
+	private static volatile FenetreTableVerite instance = null;
 
 	/**
 	 * Create the application.
 	 */
-	public FenetreTableVerite() {
+	private FenetreTableVerite() {
 		initialize();
 	}
+	
+	public final static FenetreTableVerite getInstance() {        
+        if (FenetreTableVerite.instance == null) {           
+           synchronized(FenetreTableVerite.class) {
+             if (FenetreTableVerite.instance == null) {
+            	 FenetreTableVerite.instance = new FenetreTableVerite();
+             }
+           }
+        }
+        return FenetreTableVerite.instance;
+    }
 
 	/**
 	 * Initialize the contents of the frame.
@@ -61,6 +75,7 @@ public class FenetreTableVerite extends JFrame implements Observeur {
 				"E1", "E2", "S1"
 			}
 		));
+		nbSorties = 1;
 		scrollPane.setViewportView(table);
 	}
 	
@@ -74,7 +89,7 @@ public class FenetreTableVerite extends JFrame implements Observeur {
 			Map<Integer, ArrayList<Boolean>> tablemap = t.getTable();
 			String[] nomCol = new String[nbCol];
 			Object[][] data = new Object[(int) Math.pow(2, t.getNbEntrees())][nbCol];			
-						
+			nbSorties = nbCol - t.getNbEntrees();			
 			
 			//Set les noms des colonnes du tableau
 			for(int i = 0; i < nbCol ; ++i){
@@ -96,5 +111,13 @@ public class FenetreTableVerite extends JFrame implements Observeur {
         }      
 	}
 	
+	public void changementCircuit(){
+		int nbCol = table.getColumnCount();
+		for(int i = nbCol - nbSorties ; i <= nbCol-1 ; ++i){
+			for(int j = 0; j < Math.pow(2, nbCol - nbSorties); ++j){
+				table.setValueAt("ND", j, i);
+			}			
+		}		
+	}
 }
 

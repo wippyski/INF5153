@@ -31,7 +31,7 @@ public class Main {
 					EditeurcircuitPackage.eINSTANCE.eClass();					
 					EditeurVue window = new EditeurVue();
 					window.frmEditeurDeCircuit.setVisible(true);
-					FenetreTableVerite affichage = new FenetreTableVerite();
+					FenetreTableVerite affichage = FenetreTableVerite.getInstance();
 					TableVeriteImpl tableVerite = TableVeriteImpl.getInstance(); 						
 					tableVerite.attacher(affichage); //l'affichage de la table de vérité sera avertie des changements à la table					
 					affichage.setVisible(true);
