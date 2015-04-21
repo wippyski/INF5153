@@ -275,5 +275,7 @@ public interface Circuit extends EObject {
 	 * @generated NOT
 	 */
 	typeObject getTypeObjet(String p_Nom);
+	
+	void calculerTable(); 
 
 } // Circuit
