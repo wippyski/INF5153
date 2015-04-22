@@ -590,14 +590,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 				
 				
 		 } // Fin si v_valide == true
-		
-		if (v_valide == true)
-			 System.out.println("valide = vrai");
-		else
-			System.out.println("valide = faux");
-			
-		this.setValide(v_valide);
-		
+				
+		this.setValide(v_valide);		
 		
 	}
 
