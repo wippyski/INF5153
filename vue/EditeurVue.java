@@ -490,7 +490,7 @@ public class EditeurVue extends JFrame implements Serializable {
 		});
 
 		// Renommer un signal
-		JButton btnRenameSignal = new JButton("Renommer Entree/Sortie");
+		JButton btnRenameSignal = new JButton("Renommer Entr\u00E9e/Sortie");
 		btnRenameSignal.setBounds(500, 181, 178, 23);
 		btnRenameSignal.setEnabled(true);
 		frmEditeurDeCircuit.getContentPane().add(btnRenameSignal);
@@ -573,9 +573,9 @@ public class EditeurVue extends JFrame implements Serializable {
 			}
 
 		});
-
+		
 		// Mettre à jour les liens du circuit
-		JButton btnMiseAJour = new JButton("Mise a jour des liens");
+		JButton btnMiseAJour = new JButton("Mise \u00E0 jour des liens");
 		btnMiseAJour.setBounds(500, 245, 178, 23);
 		frmEditeurDeCircuit.getContentPane().add(btnMiseAJour);
 		btnMiseAJour.addActionListener(new ActionListener() {
