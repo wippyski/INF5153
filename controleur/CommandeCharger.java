@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
 import editeurcircuit.Circuit;
+import editeurcircuit.impl.CircuitImpl; 
 
 
 public class CommandeCharger implements Commande {
@@ -38,7 +39,8 @@ public class CommandeCharger implements Commande {
 			URI fileURI = URI.createFileURI(file.getAbsolutePath());
 			Resource v_circuitResource = resSet.getResource(fileURI,true);
 			circuit = (Circuit)v_circuitResource.getContents().get(0);			
-			circuit.setSauvegarder(true);	
+			circuit.setSauvegarder(true);
+			((CircuitImpl) circuit).resetID();
 			circuit.Valider();
 			circuit.reconstruireTable();
 			for(int i = 0; i<circuit.getEstDefinitPar().size(); ++i){
@@ -61,6 +63,7 @@ public class CommandeCharger implements Commande {
 			Resource v_circuitResource = resSet.getResource(fileURI,true);
 			circuit = (Circuit)v_circuitResource.getContents().get(0);			
 			circuit.setSauvegarder(true);	
+			circuit.resetID();
 			circuit.Valider();
 			circuit.reconstruireTable();
 		} catch (Exception e) {

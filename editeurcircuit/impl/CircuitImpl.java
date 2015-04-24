@@ -1448,6 +1448,27 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			
 			TableVeriteImpl.getInstance().reconstruireTable(estDefinitPar, this.getNbEntree(), this.getNbSortie()); 
 		}
+		
+		//A appeler APRÈS avoir loader un circuit
+		public void resetID(){
+			int v_id = 0;
+			
+			for(Signal s : estDefinitPar){
+				if(s.getID() > v_id){
+					v_id = s.getID(); 
+				}
+			}
+				
+			for(Porte p : estCompose){
+				if(p.getID() > v_id){
+					v_id = p.getID(); 
+				}
+			}
+			
+			this.portE_COMPTEUR = v_id + 1;
+		
+			System.out.println("AA");
+		}
 	 
 	
 } // CircuitImpl

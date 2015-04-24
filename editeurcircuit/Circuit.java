@@ -280,4 +280,6 @@ public interface Circuit extends EObject {
 	
 	void reconstruireTable();
 
+	void resetID();
+
 } // Circuit
