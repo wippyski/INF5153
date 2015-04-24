@@ -401,7 +401,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			Signal s = iterSignal.next();
 			
 			// vérifier si tous les liens sont remplis 			
-			if (s.getLien() == -1){
+			if (s.getLien() < 1){
 				v_valide = false;
 				break;
 				}	
@@ -473,11 +473,24 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 						
 																	
 						}		
-						if (v_compteur_sortie > 1 || v_compteur_sortie == 0)
+						if (v_compteur_sortie > 1)
 							v_valide = false;
 
-					} // Fin si v_valide == true
-				} // Fin si typeSignal == SORTIE
+					} // Fin si typeSignal == SORTIE  
+				
+				} // Fin si v_valide == true				
+				
+				// Vérifier que les entrées ne pointe pas sur une autre entrées
+				// et qu'une sortie de pointe pas sur une autre sortie
+				if(v_valide == true) {					
+						
+					 Signal v_signal_dest = (Signal) this.RechercherSignalParID(s.getLien());
+					 if (v_signal_dest != null && v_signal_dest.getType() == s.getType())
+							 v_valide = false;				 							 					
+					
+					
+				} // Fin si v_valide == true
+				
 				
 			} // Fin si v_valide == true
 					
@@ -1315,7 +1328,8 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @generated NOT
 	 */
 	public Signal RechercherSignalParID(int p_ID) {
-		for (int i = 0; i <= this.getEstDefinitPar().size(); i++) {
+		
+		for (int i = 0; i < this.getEstDefinitPar().size(); i++) {
 			if (this.getEstDefinitPar().get(i).getID() == p_ID) {
 				return this.getEstDefinitPar().get(i);
 			}
@@ -1329,7 +1343,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @generated NOT
 	 */
 	public Porte RechercherPorteParNom(String p_Nom) {
-		for (int i = 0; i <= this.getEstCompose().size(); i++) {
+		for (int i = 0; i < this.getEstCompose().size(); i++) {
 			if (this.getEstCompose().get(i).getNom().equals(p_Nom)) {
 				return this.getEstCompose().get(i);
 			}
@@ -1343,7 +1357,7 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 	 * @generated NOT
 	 */
 	public Signal RechercherSignalParNom(String p_Nom) {
-		for (int i = 0; i <= this.getEstDefinitPar().size(); i++) {
+		for (int i = 0; i < this.getEstDefinitPar().size(); i++) {
 			if (this.getEstDefinitPar().get(i).getNom().equals(p_Nom)) {
 				return this.getEstDefinitPar().get(i);
 			}
