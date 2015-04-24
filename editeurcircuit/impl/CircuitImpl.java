@@ -1466,8 +1466,6 @@ public class CircuitImpl extends MinimalEObjectImpl.Container implements
 			}
 			
 			this.portE_COMPTEUR = v_id + 1;
-		
-			System.out.println("AA");
 		}
 	 
 	
