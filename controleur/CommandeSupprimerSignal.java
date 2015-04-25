@@ -13,7 +13,7 @@ public class CommandeSupprimerSignal implements Commande {
 	private int signal_id;
 	private Historique historique;
 	private String nom;
-	private int port;
+	private int port = -1;
 	private TypeSignal type;
 
 	public CommandeSupprimerSignal(Circuit v_circuit, Historique v_historique,
@@ -25,7 +25,6 @@ public class CommandeSupprimerSignal implements Commande {
 
 	@Override
 	public void execute() {
-		historique.getPileRedo().clear();
 		this.nom = circuit.RechercherSignalParID(signal_id).getNom();
 		this.port = circuit.RechercherSignalParID(signal_id).getLien();
 		this.type = circuit.RechercherSignalParID(signal_id).getType();
@@ -35,7 +34,6 @@ public class CommandeSupprimerSignal implements Commande {
 		historique.getPileUndo().add(memento);
 		circuit.setSauvegarder(false);
 		circuit.Valider();
-		circuit.reconstruireTable();
 	}
 
 	@Override
@@ -47,26 +45,26 @@ public class CommandeSupprimerSignal implements Commande {
 		circuit.RechercherSignalParID(this.signal_id).setNom(this.nom);
 		circuit.RechercherSignalParID(this.signal_id).setType(this.type);
 		circuit.RechercherSignalParID(this.signal_id).setLien(this.port);
-		if (this.type.equals(typeObject.Signal_SORTIE)) {
-			if (circuit.RechercherPorteParID(this.port) != null) {
-				lien = circuit.RechercherPorteParID(this.port).getNom();
-				circuit.ajouterLien(lien, this.nom);
+				if (this.port != 0) {
+			if (this.type.equals(typeObject.Signal_SORTIE)) {
+				if (circuit.RechercherPorteParID(this.port) != null) {
+					lien = circuit.RechercherPorteParID(this.port).getNom();
+					circuit.ajouterLien(lien, this.nom);
+				} else {
+					lien = circuit.RechercherSignalParID(this.port).getNom();
+					circuit.ajouterLien(lien, this.nom);
+				}
 			} else {
-				lien = circuit.RechercherSignalParID(this.port).getNom();
-				circuit.ajouterLien(lien, this.nom);
-			}
-		} else {
-			if (circuit.RechercherPorteParID(this.port) != null) {
-				lien = circuit.RechercherPorteParID(this.port).getNom();
-				circuit.ajouterLien(this.nom, lien);
-			} else {
-				lien = circuit.RechercherSignalParID(this.port).getNom();
-				circuit.ajouterLien(this.nom, lien);
+				if (circuit.RechercherPorteParID(this.port) != null) {
+					lien = circuit.RechercherPorteParID(this.port).getNom();
+					circuit.ajouterLien(this.nom, lien);
+				} else {
+					lien = circuit.RechercherSignalParID(this.port).getNom();
+					circuit.ajouterLien(this.nom, lien);
+				}
 			}
 		}
 		circuit.Valider();
-		circuit.reconstruireTable();
 	}
 
-	
 }
