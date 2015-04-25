@@ -19,6 +19,7 @@ public class CommandeAjouterPorteNot implements Commande {
 
 	@Override
 	public void execute() {
+		historique.getPileRedo().clear();
 		int tempid;
 		if (this.id == 0) {
 			this.id = circuit.AjouterPorte(TypePorte.NOT);
@@ -43,5 +44,4 @@ public class CommandeAjouterPorteNot implements Commande {
 		circuit.reconstruireTable();
 	}
 
-	
 }

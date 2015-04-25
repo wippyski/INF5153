@@ -19,6 +19,7 @@ public class CommandeAjouterPorteOr implements Commande {
 
 	@Override
 	public void execute() {
+		historique.getPileRedo().clear();
 		int tempid;
 		if (this.id == 0) {
 			this.id = circuit.AjouterPorte(TypePorte.OR);

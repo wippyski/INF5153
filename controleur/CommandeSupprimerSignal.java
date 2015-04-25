@@ -25,6 +25,7 @@ public class CommandeSupprimerSignal implements Commande {
 
 	@Override
 	public void execute() {
+		historique.getPileRedo().clear();
 		this.nom = circuit.RechercherSignalParID(signal_id).getNom();
 		this.port = circuit.RechercherSignalParID(signal_id).getLien();
 		this.type = circuit.RechercherSignalParID(signal_id).getType();

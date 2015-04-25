@@ -20,6 +20,7 @@ public class CommandeAjouterPorteAnd implements Commande {
 	@Override
 	public void execute() {
 		int tempid;
+		historique.getPileRedo().clear();
 		if (this.id == 0) {
 			this.id = circuit.AjouterPorte(TypePorte.AND);
 			this.nom = circuit.RechercherPorteParID(this.id).getNom();			

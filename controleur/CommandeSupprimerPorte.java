@@ -17,9 +17,9 @@ public class CommandeSupprimerPorte implements Commande {
 	private int porte_id;
 	private typeObject type;
 	private String nom;
-	private int entree1 = -11;
-	private int entree2 = -11;
-	private int sortie = -11;
+	private int entree1 = -1;
+	private int entree2 = -1;
+	private int sortie = -1;
 
 	public CommandeSupprimerPorte(Circuit v_circuit, Historique v_historique,
 			int id) {
@@ -57,7 +57,6 @@ public class CommandeSupprimerPorte implements Commande {
 		circuit.SupprimerPorte(porte_id);
 		circuit.setSauvegarder(false);
 		circuit.Valider();
-		circuit.reconstruireTable();
 		MementoCommande memento = new MementoCommande();
 		memento.setAction(this);
 		historique.getPileUndo().add(memento);
@@ -75,8 +74,8 @@ public class CommandeSupprimerPorte implements Commande {
 			newPorte.setEntree1(this.entree1);
 			newPorte.setEntree2(this.entree2);
 			newPorte.setSortie1(this.sortie);
-			newPorte.setNom(this.nom);
-			if (this.entree1 != 0) {
+			newPorte.setNom(this.nom);			
+			if (this.entree1 != -1) {
 				if (circuit.RechercherPorteParID(this.entree1) != null) {
 					lien = circuit.RechercherPorteParID(this.entree1).getNom();
 					circuit.ajouterLien(lien, this.nom);
@@ -85,7 +84,7 @@ public class CommandeSupprimerPorte implements Commande {
 					circuit.ajouterLien(lien, this.nom);
 				}
 			}
-			if (this.entree2 != 0) {
+			if (this.entree2 != -1) {
 				if (circuit.RechercherPorteParID(this.entree2) != null) {
 					lien = circuit.RechercherPorteParID(this.entree2).getNom();
 					circuit.ajouterLien(lien, this.nom);
@@ -94,7 +93,7 @@ public class CommandeSupprimerPorte implements Commande {
 					circuit.ajouterLien(lien, this.nom);
 				}
 			}
-			if (this.sortie != 0) {
+			if (this.sortie != -1) {
 				if (circuit.RechercherPorteParID(this.sortie) != null) {
 					lien = circuit.RechercherPorteParID(this.sortie).getNom();
 					circuit.ajouterLien(this.nom, lien);
@@ -114,7 +113,7 @@ public class CommandeSupprimerPorte implements Commande {
 				newPorte.setEntree2(this.entree2);
 				newPorte.setSortie1(this.sortie);
 				newPorte.setNom(this.nom);
-				if (this.entree1 != 0) {
+				if (this.entree1 != -1) {
 					if (circuit.RechercherPorteParID(this.entree1) != null) {
 						lien = circuit.RechercherPorteParID(this.entree1)
 								.getNom();
@@ -125,7 +124,7 @@ public class CommandeSupprimerPorte implements Commande {
 						circuit.ajouterLien(lien, this.nom);
 					}
 				}
-				if (this.entree2 != 0) {
+				if (this.entree2 != -1) {
 					if (circuit.RechercherPorteParID(this.entree2) != null) {
 						lien = circuit.RechercherPorteParID(this.entree2)
 								.getNom();
@@ -136,7 +135,7 @@ public class CommandeSupprimerPorte implements Commande {
 						circuit.ajouterLien(lien, this.nom);
 					}
 				}
-				if (this.sortie != 0) {
+				if (this.sortie != -1) {
 					if (circuit.RechercherPorteParID(this.sortie) != null) {
 						lien = circuit.RechercherPorteParID(this.sortie)
 								.getNom();
@@ -155,7 +154,7 @@ public class CommandeSupprimerPorte implements Commande {
 				newPorte.setEntree1(this.entree1);
 				newPorte.setSortie1(this.sortie);
 				newPorte.setNom(this.nom);
-				if (this.entree1 != 0) {
+				if (this.entree1 != -1) {
 					if (circuit.RechercherPorteParID(this.entree1) != null) {
 						lien = circuit.RechercherPorteParID(this.entree1)
 								.getNom();
@@ -166,7 +165,7 @@ public class CommandeSupprimerPorte implements Commande {
 						circuit.ajouterLien(lien, this.nom);
 					}
 				}
-				if (this.sortie != 0) {
+				if (this.sortie != -1) {
 					if (circuit.RechercherPorteParID(this.sortie) != null) {
 						lien = circuit.RechercherPorteParID(this.sortie)
 								.getNom();
@@ -180,8 +179,6 @@ public class CommandeSupprimerPorte implements Commande {
 			}
 		}
 		circuit.Valider();
-		circuit.reconstruireTable();
 	}
 
-	
 }
