@@ -23,7 +23,6 @@ public class CommandeModifierNom implements Commande {
 
 	@Override
 	public void execute() {
-		historique.getPileRedo().clear();
 		this.oldnom = circuit.RechercherSignalParID(this.id).getNom();
 		circuit.RechercherSignalParID(this.id).setNom(this.newnom);
 		MementoCommande memento = new MementoCommande();
@@ -34,7 +33,6 @@ public class CommandeModifierNom implements Commande {
 	}
 
 	public void redo() {
-		historique.getPileRedo().clear();
 		this.oldnom = circuit.RechercherSignalParID(this.id).getNom();
 		circuit.RechercherSignalParID(this.id).setNom(this.newnom);
 		circuit.setSauvegarder(false);

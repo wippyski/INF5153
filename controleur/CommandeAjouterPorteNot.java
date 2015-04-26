@@ -18,8 +18,7 @@ public class CommandeAjouterPorteNot implements Commande {
 	}
 
 	@Override
-	public void execute() {
-		historique.getPileRedo().clear();
+	public void execute() {		
 		int tempid;
 		if (this.id == 0) {
 			this.id = circuit.AjouterPorte(TypePorte.NOT);

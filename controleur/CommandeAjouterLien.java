@@ -20,8 +20,7 @@ public class CommandeAjouterLien implements Commande {
 	}
 
 	@Override
-	public void execute() {
-		historique.getPileRedo().clear();
+	public void execute() {		
 		circuit.ajouterLien(aGauche, aDroite);
 		circuit.setSauvegarder(false);
 		circuit.Valider();
@@ -30,8 +29,7 @@ public class CommandeAjouterLien implements Commande {
 		historique.getPileUndo().add(memento);
 	}
 
-	public void redo() {
-		historique.getPileRedo().clear();
+	public void redo() {		
 		circuit.ajouterLien(aGauche, aDroite);
 		circuit.setSauvegarder(false);
 		circuit.Valider();

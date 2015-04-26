@@ -19,8 +19,7 @@ public class CommandeAjouterEntree implements Commande {
 	}
 
 	@Override
-	public void execute() {
-		historique.getPileRedo().clear();
+	public void execute() {		
 		int tempid;
 		if (this.id == 0) {
 			this.id = circuit.AjouterSignal(TypeSignal.ENTREE);			
