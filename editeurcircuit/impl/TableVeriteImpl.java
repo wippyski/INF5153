@@ -240,16 +240,6 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 				j++; 
 			}
 		}
-		
-		/*for(Map.Entry<Integer, Boolean> it : mapID.entrySet()){
-			int id = it.getKey(); 
-			
-			for(Signal s : p_signals){
-				if( id == s.getID()){
-					ligne.set(j, it.getValue());
-				}
-			}
-		}*/
 	}
 	
 	private boolean getPrecedentValue(int precedentID, EList<Signal> p_signals, EList<Porte> p_portes, Map<Integer, Boolean> mapID){
@@ -484,30 +474,5 @@ public class TableVeriteImpl extends MinimalEObjectImpl.Container implements Tab
 				k--;
 			}
 		}						
-	}
-	
-	//affiche la table dans la console
-//	void afficheTable(){
-//		
-//		System.out.println("---------------------NEW TABLE---------------------");
-//		
-//		for(String s : nomColonne){
-//			System.out.print(s + " ");
-//		}
-//
-//		
-//		System.out.println();
-//		
-//		for(int i = 0; i < table.size(); ++i){
-//			for(int j = 0; j < table.get(i).size() ; ++j){
-//				if(table.get(i).get(j) == true) System.out.print("1 ");
-//				else System.out.print("0 ");
-//			}
-//				System.out.println("\n");
-//		}
-//		
-//	}
-
-
-	
+	}	
 } //TableVeriteImpl

@@ -533,7 +533,6 @@ public class EditeurVue extends JFrame implements Serializable {
 					if (!v_valideName) {
 						JOptionPane.showMessageDialog(frmEditeurDeCircuit,
 								"ERREUR : Nom d'entree/sortie introuvable");
-
 					}
 				}
 
@@ -565,7 +564,6 @@ public class EditeurVue extends JFrame implements Serializable {
 								.showMessageDialog(
 										frmEditeurDeCircuit,
 										"Le nom d'une entree/sortie ne doit pas être de plus de 5 charactères alphanumériques.");
-
 					}
 				}
 
